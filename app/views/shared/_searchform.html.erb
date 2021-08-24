@@ -1,0 +1,23 @@
+<%= form_tag offers_path, method: :get do %>
+  <%= text_field_tag :query,
+    params[:query],
+    class: "form-control",
+    placeholder: "Find a offer"
+  %>
+  <%= submit_tag "Search", class: "btn btn-primary" %>
+<% end %>
+
+<%#  -  ajouter recherche par alentour en fonction de l'adresse notée
+     -  ajouter recherche par âge %>
+<%#
+<div class="container">
+  <div class="form_search">
+    <%= simple_form_for :search, url: offers_path, method: :get do |f| %>
+      <%# <div class="questions">
+        <%= f.input :query, params[:query], label: "Où souhaitez-vous aller ?", label_html: {id:"address-input"} %>
+        <%# <%= f.input :min_age, collection: 0..12, label: "Quel est l'âge de votre enfant ?" %>
+      <%# </div>
+      <%= f.submit "Trouver votre activité", class: "btn btn-primary" %>
+    <%# <% end %>
+  <%# </div> %>
+<%# </div> %>

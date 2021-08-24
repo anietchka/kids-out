@@ -1,7 +1,4 @@
 class ReviewsController < ApplicationController
-  def index
-    @reviews = policy_scope(Review)
-  end
 
   def new
     @offer = Offer.find(params[:offer_id])
@@ -15,10 +12,9 @@ class ReviewsController < ApplicationController
     @offer = Offer.find(params[:offer_id])
     @user = current_user
     @review = Review.new(reviews_params)
-
     @review.offer = @offer
     @review.user = @user
-     authorize @review
+    authorize @review
     @review.save
     redirect_to offer_path(@offer)
   end
@@ -26,6 +22,7 @@ class ReviewsController < ApplicationController
   def destroy
     @offer = Offer.find(params[:offer_id])
     @review = Review.find(params[:id])
+    authorize @review
     @review.destroy
     redirect_to offer_path(@offer)
   end
