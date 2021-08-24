@@ -1,0 +1,22 @@
+<%= simple_form_for(@offer) do |f| %>
+  <%= f.input :name %>
+  <%= f.input :address %>
+  <%= f.input :min_age %>
+
+  <%= f.input :max_age %>
+  <%= f.input :url %>
+  <%= f.input :description %>
+  <%= f.input :permanent %>
+  <%= f.input :start_date %>
+  <%= f.input :end_date %>
+  <%= f.input :schedule %>
+
+  <%# Table columns not yet added in the form %>
+  <%# t.bigint "user_id", null: false
+  t.datetime "created_at", precision: 6, null: false
+  t.datetime "updated_at", precision: 6, null: false
+  t.float "latitude"
+  t.float "longitude"
+  t.string "photo" %>
+  <%= f.submit %>
+<% end %>

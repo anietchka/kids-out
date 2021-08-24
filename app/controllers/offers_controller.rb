@@ -7,12 +7,12 @@ class OffersController < ApplicationController
   end
 
   def create
-    @user = User.find(params[:user_id])
     @offer = Offer.new(offers_params)
-    @offer.user = @user
+    @offer.user = current_user
     authorize @offer
+
     @offer.save
-    redirect_to root_path
+    redirect_to offer_path(@offer)
   end
 
   def index

@@ -13,15 +13,19 @@ class OfferPolicy < ApplicationPolicy
     true
   end
 
+  def new?
+    true
+  end
+
+  def create?
+    record.user == user
+  end
+
   def update?
     record.user == user
   end
 
   def destroy?
-    record.user == user
-  end
-
-  def my_gnomes
     record.user == user
   end
 end
