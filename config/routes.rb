@@ -2,8 +2,11 @@ Rails.application.routes.draw do
   devise_for :users
   root to: 'pages#home'
 
+
   resources :offers, only: [:index, :show] do
     resources :bookmarks, only: [:new, :create, :index]
+    resources :reviews, only: [:index, :new, :create]
+
   end
 
 

@@ -7,6 +7,7 @@ class User < ApplicationRecord
          validates :first_name, presence: true
          validates :last_name, presence: true
          validates :email, presence: true, uniqueness: true
+         validates :nickname, presence: true
          has_many :bookmarks
          has_many :offers
          has_many :reviews

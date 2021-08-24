@@ -1,0 +1,7 @@
+<div class="container">
+  <h1>Avis</h1>
+  <% @reviews.each do |review| %>
+    <p> <%= review.user.nickname %> a noté <%= review.rating %>/5 </p>
+    <p><%= review.comment %></p>
+  <% end %>
+</div>
