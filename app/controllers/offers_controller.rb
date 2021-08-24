@@ -17,7 +17,11 @@ class OffersController < ApplicationController
 
   def index
     @offers = policy_scope(Offer)
-
+    if params[:query].present?
+      @offers = Offer.where("address ILIKE ?", "%#{params[:query]}%")
+    else
+      @offers = Offer.all
+    end
     # the `geocoded` scope filters only offers with coordinates (latitude & longitude)
     @markers = @offers.geocoded.map do |offer|
       {
