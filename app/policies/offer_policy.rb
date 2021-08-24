@@ -14,7 +14,7 @@ class OfferPolicy < ApplicationPolicy
   end
 
   def new?
-    record.user == user
+    true
   end
 
   def create?
