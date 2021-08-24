@@ -2,8 +2,7 @@ class BookmarksController < ApplicationController
 
   def index
     @bookmarks = policy_scope(Bookmark)
-    # PUNDIT > scope > resolve
-    Scope.where(user: user)
+    
   end
 
   def new
