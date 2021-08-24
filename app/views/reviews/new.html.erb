@@ -1,0 +1,7 @@
+<div class="container">
+  <%= simple_form_for [ @offer, @review ] do |f| %>
+      <%= f.input :comment %>
+      <%= f.input :rating, collection: 1..5 %>
+      <%= f.submit "Submit" %>
+    <% end %>
+</div>
