@@ -17,6 +17,9 @@ class OffersController < ApplicationController
 
   def index
     @offers = policy_scope(Offer)
+    #  A tester
+    # @offers = @offers.where(min_age: params.dig(:search, :min_age)) if params.dig(:search, :min_age) && params.dig(:search, :min_age) != ""
+    # @offers = Offer.where("address ILIKE ?", "%#{params[:query]}%") if params[:query].present? != ""
     if params[:query].present?
       @offers = Offer.where("address ILIKE ?", "%#{params[:query]}%")
     else
