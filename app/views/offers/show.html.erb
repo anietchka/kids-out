@@ -1,13 +1,46 @@
 <div class="container">
-  <div class="offer-presentation">
-    <div class="offer-detail">
-    </div>
-    <div class="offer-detail">
-      <h1><%= @offer.name %></h1>
-      <br>
-      <p><%= @offer.min_age %></p>
-      <br>
-      <p><%= @offer.address %></p>
+  <div >
+    <h1><%= @offer.name %></h1>
+    <%= image_tag(@offer.photo) %>
+    <p>A partir de <%= @offer.min_age %>ans</p>
+    <p>Addresse : <%= @offer.address %></p>
+  </div>
+
+  <div>
+  <% if current_user.bookmarks.where(offer: @offer).any? %>
+    <%= link_to(offer_bookmark_path(@offer, current_user.bookmarks.where(offer: @offer).first), method: :delete) do  %>
+      <i class="fas fa-heart"></i>
+    <% end %>
+  <% else %>
+    <%= link_to(offer_bookmarks_path(@offer,), method: :post) do  %>
+      <i class="far fa-heart"></i>
+    <% end %>
+  <% end %>
+  </div>
+
+  <div>
+    <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+      Commenter et noter l'activité
+    </a>
+    <div class="collapse" id="collapseExample">
+      <div class="card card-body">
+         <%= simple_form_for [ @offer, @review ] do |f| %>
+          <%= f.input :comment %>
+          <%= f.input :rating, collection: 1..5 %>
+          <%= f.submit "Submit" %>
+        <% end %>
+      </div>
     </div>
   </div>
+  <div>
+    <% @offer.reviews.each do |review| %>
+      <p> <%= review.user.nickname %> a noté <%= review.rating %>/5 </p>
+      <p><%= review.comment %></p>
+      <%= link_to(offer_review_path(@offer, review), method: :delete) do %>
+        <i class="far fa-trash-alt"></i>
+      <% end %>
+    <% end %>
+  </div>
+  <%= link_to "Revenir à la recherche", offers_path %>
+
 </div>

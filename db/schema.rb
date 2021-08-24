@@ -10,17 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_24_121258) do
+ActiveRecord::Schema.define(version: 2021_08_24_145657) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "bookmarks", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.string "offer"
-    t.string "references"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "offer_id"
+    t.index ["offer_id"], name: "index_bookmarks_on_offer_id"
     t.index ["user_id"], name: "index_bookmarks_on_user_id"
   end
 
@@ -65,9 +65,9 @@ ActiveRecord::Schema.define(version: 2021_08_24_121258) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "photo"
     t.float "latitude"
     t.float "longitude"
-    t.string "photo"
     t.index ["user_id"], name: "index_offers_on_user_id"
   end
 
@@ -97,6 +97,7 @@ ActiveRecord::Schema.define(version: 2021_08_24_121258) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "bookmarks", "offers"
   add_foreign_key "bookmarks", "users"
   add_foreign_key "meetups", "offers"
   add_foreign_key "meetups", "users"
