@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   resources :offers, only: [:index, :show] do
     resources :bookmarks, only: [:new, :create, :index]
-    resources :reviews, only: [:index, :new, :create]
+    resources :reviews, only: [:index, :new, :create, :destroy]
 
   end
 

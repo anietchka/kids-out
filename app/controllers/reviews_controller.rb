@@ -4,21 +4,29 @@ class ReviewsController < ApplicationController
   end
 
   def new
-    @offer = Offer.find(params[:offre_id])
+    @offer = Offer.find(params[:offer_id])
     @user = current_user
-    @review = review.new
-    authorize @review
-    skip_authorisation
+    @review = Review.new
+
+    skip_authorization
   end
 
   def create
     @offer = Offer.find(params[:offer_id])
     @user = current_user
     @review = Review.new(reviews_params)
-    authorize @review
+
     @review.offer = @offer
     @review.user = @user
+     authorize @review
     @review.save
+    redirect_to offer_path(@offer)
+  end
+
+  def destroy
+    @offer = Offer.find(params[:offer_id])
+    @review = Review.find(params[:id])
+    @review.destroy
     redirect_to offer_path(@offer)
   end
 
