@@ -9,10 +9,10 @@ Offer.destroy_all
 User.destroy_all
 
 puts 'Creating a lot of User'
-User.create!(email: 'anna.bozio@gmail.com', password: '123456', first_name: 'Anna', last_name: 'Bozio')
-User.create!(email: 'migatsar@gmail.com', password: '123456', first_name: 'Mica', last_name: 'Gaspar')
-User.create!(email: 'estelle.cirilo@gmail.com', password: '123456', first_name: 'Estelle', last_name: 'Cirilo')
-User.create!(email: 'barois.anne@orange.fr', password: '123456', first_name: 'Anne', last_name: 'Barois')
+User.create!(email: 'anna.bozio@gmail.com', nickname: "anietchka", password: '123456', first_name: 'Anna', last_name: 'Bozio')
+User.create!(email: 'migatsar@gmail.com', nickname: "migasar", password: '123456', first_name: 'Mica', last_name: 'Gaspar')
+User.create!(email: 'estelle.cirilo@gmail.com', nickname: "ecirilo1", password: '123456', first_name: 'Estelle', last_name: 'Cirilo')
+User.create!(email: 'barois.anne@orange.fr', nickname: "oslanne", password: '123456', first_name: 'Anne', last_name: 'Barois')
 puts 'Users Created!'
 
 Offer.create!(name: "Expo Harry Potter - Retour à Poudlard",address: "Rue du 8 Mai 1945, 75010 Paris" ,url: "https://www.facebook.com/events/521401079177879/",start_date: "2021-08-07" ,end_date: "2021-08-30", permanent: false, description: "Tous les ans, le 1er septembre signifie 'fin des vacances' pour les enfants. Mais pour les fans d'Harry Potter, c'est surtout le rendez-vous incontournable de la saga : le \"Retour à Poudlard\" !

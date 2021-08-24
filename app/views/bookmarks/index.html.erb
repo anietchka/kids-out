@@ -1,2 +1,8 @@
 <div class="container">
+  <h1>Mes favoris</h1>
+
+    <% @bookmarks.each do |bookmark| %>
+    <%= bookmark.offer.name %>
+    <%= bookmark.offer.photo %>
+    <% end %>
 </div>
