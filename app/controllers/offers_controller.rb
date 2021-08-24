@@ -3,18 +3,20 @@ class OffersController < ApplicationController
 
   def new
     @offer = Offer.new
+    authorize @offer
   end
 
   def create
     @user = User.find(params[:user_id])
     @offer = Offer.new(offers_params)
     @offer.user = @user
+    authorize @offer
     @offer.save
     redirect_to root_path
   end
 
   def index
-    @offers = Offer.all
+    @offers = policy_scope(Offer)
 
     # the `geocoded` scope filters only offers with coordinates (latitude & longitude)
     @markers = @offers.geocoded.map do |offer|
@@ -24,7 +26,7 @@ class OffersController < ApplicationController
       }
     end
   end
-  
+
   def show
     @offer = Offer.find(params[:id])
     authorize @offer
