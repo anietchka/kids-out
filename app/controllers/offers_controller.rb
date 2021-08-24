@@ -1,4 +1,6 @@
 class OffersController < ApplicationController
+  skip_before_action :authenticate_user!, only: :show
+
   def new
     @offer = Offer.new
   end
@@ -22,11 +24,17 @@ class OffersController < ApplicationController
       }
     end
   end
+  
+  def show
+    @offer = Offer.find(params[:id])
+    authorize @offer
+  end
 
   private
 
   def offers_params
     params.require(:offer).permit(:name, :address, :start_date, :end_date, :url, :permanent, :description, :min_age, :max_age, :schedule, :longitude, :latitude, :user_id )
   end
+
 
 end
