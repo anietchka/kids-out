@@ -5,4 +5,5 @@ class OffersController < ApplicationController
     @offer = Offer.find(params[:id])
     authorize @offer
   end
+
 end
