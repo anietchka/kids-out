@@ -1,5 +1,6 @@
 require 'open-uri'
 require 'json'
+require 'nokogiri'
 Review.destroy_all
 Bookmark.destroy_all
 OfferCategory.destroy_all
@@ -45,12 +46,16 @@ Offer.create!(name: "Ferme de Paris", theme: "exterieure", address: "Route du Pe
 # #Offer.create!(name: , address: , url: , start_date: , end_date: , permanent: , description: , min_age: , max_age: , schedule: , user: User.all.sample, photo:)
 
 
-endpoint = 'https://opendata.paris.fr/api/records/1.0/search/?dataset=espaces_verts&q=&rows=300&facet=type_ev&facet=categorie&facet=adresse_codepostal&facet=ouvert_ferme'
+endpoint = 'https://opendata.paris.fr/api/records/1.0/search/?dataset=espaces_verts&q=&rows=100&facet=type_ev&facet=categorie&facet=adresse_codepostal&facet=presence_cloture&facet=ouvert_ferme&exclude.categorie=Talus&exclude.categorie=Arboretum&exclude.categorie=Archipel&exclude.categorie=Cimeti%C3%A8re&exclude.categorie=Decoration&exclude.categorie=Jardin+d%27immeubles&exclude.categorie=Jardin+partage&exclude.categorie=Jardini%C3%A8re&exclude.categorie=Mail&exclude.categorie=Murs+vegetalises&exclude.categorie=Plate-bande&exclude.categorie=Terre-plein&exclude.categorie=Jardinet'
 data = JSON.parse(URI.open(endpoint).read)
-EXCLUSION = ["Mail", "Talus", "Jardiniere", "Pelouse", "Plate-bande", "Murs vegetalises", "Decoration", "Cimetière"]
+EXCLUSION = ["Mail", "Talus", "Jardiniere", "Pelouse", "Plate-bande", "Murs vegetalises", "Decoration", "Cimetière", "Jardin d'immeubles","Jardinet","Terre-plein"]
 data['records'].each do |record|
   unless record['fields']['nom_ev'] == 'Talus' || EXCLUSION.include?(record['fields']['categorie'])
     address = "#{record['fields']['adresse_numero']}, #{record['fields']['adresse_typevoie']} #{record['fields']['adresse_libellevoie']} #{record['fields']['adresse_codepostal']}"
+    # url_search = "https://www.google.com/search?q=#{record['fields']['nom_ev'].gsub(" ","+")}"
+    # html_file = URI.open(url_search).read
+    # html_doc = Nokogiri::HTML(html_file)
+    # html_doc.at('.zloOqf').text
     offer = Offer.new(
       name: record['fields']['nom_ev'],
       address: address,
@@ -72,4 +77,68 @@ data['records'].each do |record|
 
     OfferCategory.create(offer: offer, category: category)
   end
+end
+
+url_sortir_a_paris = "https://opendata.paris.fr/api/records/1.0/search/?dataset=que-faire-a-paris-&q=&rows=40&facet=category&facet=tags&facet=address_name&facet=address_zipcode&facet=address_city&facet=pmr&facet=price_type&refine.tags=Enfants&refine.category=Expositions+"
+data = JSON.parse(URI.open(url_sortir_a_paris).read)
+data['records'].each do |record|
+
+  offer = Offer.new(
+      name: record['fields']['title'],
+      address: record['fields']['address_street'],
+      url: record['fields']['contact_url'],
+      start_date: record['fields']['date_start'],
+      end_date: record['fields']['date_end'],
+      permanent: false,
+      description: record['fields']['description'],
+      #schedule: ,
+      photo: record['fields']['cover_url'],
+      theme: "interieure",
+      user: User.find_by(email: 'ville-de-paris@gmail.com')
+    )
+    offer.save
+    if record['fields']['description'].scan(/(partir de \d+ ans)/).first
+      offer[min_age: record['fields']['description'].scan(/(partir de \d+ ans)/).first.first.scan(/(\d+)/).first.first.to_i]
+    elsif record['fields']['description'].scan(/(moins de \d+ ans)/).first
+      offer[max_age: record['fields']['description'].scan(/(moins de \d+ ans)/).first.first.scan(/(\d+)/).first.first.to_i]
+    end
+    category = Category.find_by(name: record['fields']['category'])
+
+    unless category
+      category = Category.create(name: record['fields']['category'])
+    end
+
+    OfferCategory.create(offer: offer, category: category)
+end
+
+url_sortir_a_paris = "https://opendata.paris.fr/api/records/1.0/search/?dataset=que-faire-a-paris-&q=&rows=40&facet=category&facet=tags&facet=address_name&facet=address_zipcode&facet=address_city&facet=pmr&facet=price_type&refine.tags=Enfants&refine.category=Concerts+"
+data = JSON.parse(URI.open(url_sortir_a_paris).read)
+data['records'].each do |record|
+
+  offer = Offer.new(
+      name: record['fields']['title'],
+      address: record['fields']['address_street'],
+      url: record['fields']['contact_url'],
+      start_date: record['fields']['date_start'],
+      end_date: record['fields']['date_end'],
+      permanent: false,
+      description: record['fields']['description'],
+      #schedule: ,
+      photo: record['fields']['cover_url'],
+      theme: "interieure",
+      user: User.find_by(email: 'ville-de-paris@gmail.com')
+    )
+    offer.save
+    if record['fields']['description'].scan(/(partir de \d+ ans)/).first
+      offer[min_age: record['fields']['description'].scan(/(partir de \d+ ans)/).first.first.scan(/(\d+)/).first.first.to_i]
+    elsif record['fields']['description'].scan(/(moins de \d+ ans)/).first
+      offer[max_age: record['fields']['description'].scan(/(moins de \d+ ans)/).first.first.scan(/(\d+)/).first.first.to_i]
+    end
+    category = Category.find_by(name: record['fields']['category'])
+
+    unless category
+      category = Category.create(name: record['fields']['category'])
+    end
+
+    OfferCategory.create(offer: offer, category: category)
 end
