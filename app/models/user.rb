@@ -7,10 +7,10 @@ class User < ApplicationRecord
          validates :first_name, presence: true
          validates :last_name, presence: true
          validates :email, presence: true, uniqueness: true
-         validates :nickname, presence: true
-         has_many :bookmarks
+         validates :nickname, presence: true, uniqueness: true
+         has_many :bookmarks, dependent: :destroy
          has_many :offers
-         has_many :reviews
+         has_many :reviews, dependent: :destroy
          has_many :participants
          has_many :meetups
          has_many :participants_as_owner, through: :meetups, source: :participants
