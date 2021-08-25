@@ -82,10 +82,10 @@ end
 url_sortir_a_paris = "https://opendata.paris.fr/api/records/1.0/search/?dataset=que-faire-a-paris-&q=&rows=40&facet=category&facet=tags&facet=address_name&facet=address_zipcode&facet=address_city&facet=pmr&facet=price_type&refine.tags=Enfants&refine.category=Expositions+"
 data = JSON.parse(URI.open(url_sortir_a_paris).read)
 data['records'].each do |record|
-
+  address = "#{record['fields']['address_street']}, #{record['fields']['address_city']}"
   offer = Offer.new(
       name: record['fields']['title'],
-      address: record['fields']['address_street'],
+      address: address,
       url: record['fields']['contact_url'],
       start_date: record['fields']['date_start'],
       end_date: record['fields']['date_end'],
@@ -114,10 +114,10 @@ end
 url_sortir_a_paris = "https://opendata.paris.fr/api/records/1.0/search/?dataset=que-faire-a-paris-&q=&rows=40&facet=category&facet=tags&facet=address_name&facet=address_zipcode&facet=address_city&facet=pmr&facet=price_type&refine.tags=Enfants&refine.category=Concerts+"
 data = JSON.parse(URI.open(url_sortir_a_paris).read)
 data['records'].each do |record|
-
+  address = "#{record['fields']['address_street']}, #{record['fields']['address_city']}"
   offer = Offer.new(
       name: record['fields']['title'],
-      address: record['fields']['address_street'],
+      address: address,
       url: record['fields']['contact_url'],
       start_date: record['fields']['date_start'],
       end_date: record['fields']['date_end'],
