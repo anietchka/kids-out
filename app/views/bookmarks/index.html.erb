@@ -1,8 +1,16 @@
 <div class="container">
   <h1>Mes favoris</h1>
-
-    <% @bookmarks.each do |bookmark| %>
-    <%= bookmark.offer.name %>
-    <%= bookmark.offer.photo %>
-    <% end %>
+  <% @bookmarks.each do |bookmark| %>
+  <div class = "card-index d-flex">
+    <div class="img-card"><%= image_tag bookmark.offer.photo %></div>
+    <div class ="card-descript p-2" >
+        <div class=" "><%= bookmark.offer.name %></div>
+        <div class="card-favoris">
+          <%= link_to(offer_bookmark_path(bookmark.offer, bookmark), method: :delete) do  %>
+              <i class="fas fa-heart"></i>
+          <% end %>
+        </div>
+    </div>
+  </div>
+  <% end %>
 </div>
