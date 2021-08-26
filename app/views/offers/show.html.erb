@@ -1,22 +1,48 @@
 <div class="container">
+  <h1><%= @offer.name %></h1>
   <div >
-    <h1><%= @offer.name %></h1>
-    <%= image_tag(@offer.photo) %>
-    <p>A partir de <%= @offer.min_age %>ans</p>
+  <div class="card-show-image-favoris d-flex justify-content-between">
+    <div class="img-card">
+      <%= image_tag(@offer.photo)%>
+    </div>
+    <div class="card-favoris">
+    <% if current_user.bookmarks.where(offer: @offer).any? %>
+      <%= link_to(offer_bookmark_path(@offer, current_user.bookmarks.where(offer: @offer).first), method: :delete) do  %>
+        <i class="fas fa-heart"></i>
+      <% end %>
+    <% else %>
+      <%= link_to(offer_bookmarks_path(@offer,), method: :post) do  %>
+        <i class="far fa-heart"></i>
+      <% end %>
+    <% end %>
+    </div>
+  </div>
+    <% if @offer.min_age %>
+      <% if @offer.max_age %>
+      <p>Pour les <%= @offer.min_age %>-<%= @offer.max_age %>ans</p>
+        <% else  %>
+      <p>A partir de <%= @offer.min_age %>ans</p>
+      <% end %>
+    <% end %>
+    <% if @offer.start_date && @offer.end_date %>
+      <p>Du <%= @offer.start_date %> au <%= @offer.end_date %></p>
+    <% end %>
+    <% if @offer.description %>
+      <p><%= @offer.description.html_safe %></p>
+    <% end %>
     <p>Addresse : <%= @offer.address %></p>
+    <% if @offer.schedule %>
+      <p>Horaires d'ouverture :<%= @offer.schedule %></p>
+    <% end %>
+    <% if @offer.url %>
+    <%= link_to(@offer.url) do %>
+      <p>Plus d'informations</p>
+      <% end %>
+    <% end %>
+
+
   </div>
 
-  <div>
-  <% if current_user.bookmarks.where(offer: @offer).any? %>
-    <%= link_to(offer_bookmark_path(@offer, current_user.bookmarks.where(offer: @offer).first), method: :delete) do  %>
-      <i class="fas fa-heart"></i>
-    <% end %>
-  <% else %>
-    <%= link_to(offer_bookmarks_path(@offer,), method: :post) do  %>
-      <i class="far fa-heart"></i>
-    <% end %>
-  <% end %>
-  </div>
 
   <div>
     <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
