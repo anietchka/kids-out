@@ -8,16 +8,30 @@
     <ul class="navbar-nav mr-auto">
       <% if user_signed_in? %>
         <li class="nav-item d-flex flex-column align-items-center active ">
-            <i class="fas fa-search"></i>
-            <%= link_to "Explorer", root_path, class: "nav-link" %>
+
+            <%= link_to root_path, class: "nav-link" do%>
+              <div class="d-flex flex-column align-items-center">
+                <i class="fas fa-search pt-2"></i>
+                <p class="pt-2">Explorer</p>
+              </div>
+            <% end %>
          </li>
         <li class="nav-item d-flex flex-column align-items-center">
-          <i class="far fa-heart"></i>
-          <%= link_to "favoris",  bookmarks_path, class: "nav-link" %>
+
+          <%= link_to bookmarks_path, class: "nav-link" do%>
+            <div class="d-flex flex-column align-items-center">
+              <i class="far fa-heart pt-2"></i>
+              <p class="pt-2">Favoris</p>
+            </div>
+          <% end %>
         </li>
         <li class="nav-item d-flex flex-column align-items-center">
-          <i class="far fa-user-circle"></i>
-          <%= link_to "profil", "#", class: "nav-link" %>
+          <%= link_to  "#", class: "nav-link" do%>
+          <div class="d-flex flex-column align-items-center">
+            <i class="far fa-user-circle pt-2"></i>
+            <p class="pt-2">Profil</p>
+          </div>
+          <% end %>
         </li>
         </li>
       <% else %>

@@ -1,10 +1,13 @@
 
 <div class = "card-index-pop d-flex">
-  <div class="img-card"><%= image_tag offer.photo %></div>
-  <div class ="card-descript-pop p-2" >
-    <div class="esp-card titre"><%= offer.name %></div>
-    <div class="esp-card address"><%= offer.address %></div>
-    <div class="esp-card"><%= link_to "Plus d'info", (offer_path(offer)) %></div>
-    <div class="esp-card card-favoris">
-  </div>
-</div>
+
+    <div class="img-card"><%= image_tag offer.photo %></div>
+    <div class ="card-descript-pop p-2" >
+        <div class="esp-card titre"><%= offer.name %></div>
+        <div class="esp-card address"><%= image_tag("icons/address.png", class: "icons mr-2") %><%= offer.address %></div>
+        <div class="esp-card"><%= link_to "Plus d'info", (offer_path(offer)) %></div>
+        <div class="esp-card card-favoris">
+
+        </div>
+    </div>
+
