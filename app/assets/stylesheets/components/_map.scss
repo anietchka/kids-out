@@ -1,8 +1,45 @@
 .mapboxgl-popup {
-  max-width: 200px;
+  width: 90vw;
+  max-width: unset !important;
+  height: 125px;
+  bottom: 50px !important;
+  top: auto !important;
+  transform: none !important;
+  display: block !important;
 }
 
 .mapboxgl-popup-content {
-  text-align: center;
-  font-family: 'Open Sans', sans-serif;
+   text-align: center;
+   font-family: 'Open Sans', sans-serif;
+   background: transparent !important;
+   box-shadow: none !important;
+   padding: 0 !important;
+   bottom: 0px !important;
+   left: 5% !important;
+ }
+
+ .mapboxgl-popup-tip {
+   display: none !important;
+ }
+
+ .card-descript-pop {
+    text-align: center;
+    position: relative;
+    min-width: 215px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.card-descript-pop .titre {
+  font-weight: bold;
+}
+
+.card-index-pop {
+    width: 90vw;
+    height: 125px;
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.1);
+    margin-top: 20px;
 }

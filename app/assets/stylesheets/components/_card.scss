@@ -1,0 +1,93 @@
+.card-index {
+  width: 357px;
+  height: 125px;
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.1);
+  margin-top: 20px;
+}
+
+.img-card {
+  width: 125px;
+  height: 125px;
+}
+.img-card img {
+  height: 100%;
+  width: 125px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.card-favoris i {
+  color: #D94A64;
+  font-size: 25px;
+}
+
+.card-trash i {
+  color: black;
+  font-size: 20px;
+  opacity: 0.1;
+}
+
+.card-trash:hover i {
+  opacity: 0.8;
+}
+.card-descript {
+  text-align: center;
+  position: relative;
+}
+
+.card-descript .esp-card {
+  margin-top: 3px;
+}
+
+.card-descript .titre {
+  font-weight: bold;
+}
+
+.esp-card a {
+  text-decoration: none;
+  color: #06AEBF;
+}
+
+.esp-card:hover a {
+  text-decoration: none;
+  color: #06AEBF;
+  text-decoration: underline;
+}
+
+.card-descript .card-trash {
+  position: absolute;
+  right: 16px;
+}
+
+.titre-card {
+  color: #F2884B;
+}
+
+.card-review{
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  .fa-star{
+    color: #F2C94B;
+  }
+  .card-nickname{
+    p{
+    font-size: 12px;
+    }
+  }
+  h6{
+    font-weight: bold;
+    font-size: 18px;
+  }
+}
+
+.card-show{
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+.card-show-description{
+  font-weight: lighter;
+}

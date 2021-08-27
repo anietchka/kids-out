@@ -4,6 +4,7 @@ require 'nokogiri'
 Review.destroy_all
 Bookmark.destroy_all
 OfferCategory.destroy_all
+Category.destroy_all
 Offer.destroy_all
 User.destroy_all
 puts 'Creating a lot of User'
@@ -68,7 +69,16 @@ data['records'].each do |record|
       user: User.find_by(email: 'ville-de-paris@gmail.com')
     )
 
-    offer.save
+    if record['fields']['categorie'] == "Parc" || record['fields']['categorie'] == "Jardin" || record['fields']['categorie'] == "Pelouse"
+      offer.photo = "https://image.freepik.com/vecteurs-libre/parc-ville-arbres-verts-herbe-banc-bois-lanternes-batiments-ville-toits_107791-5378.jpg"
+    elsif record['fields']['categorie'] == "Bois"
+      offer.photo = "https://image.freepik.com/vecteurs-libre/fond-foret-dessin-anime-paysage-parc-naturel_107791-2040.jpg"
+    elsif record['fields']['categorie'] == "Square"
+      offer.photo = "https://image.freepik.com/vecteurs-libre/aire-jeux-pour-enfants-dans-parc-ete-carrousel_107791-1361.jpg"
+    elsif record['fields']['categorie'] == "Petanque"
+      offer.photo = "https://www.sortiraparis.com/images/1001/40234/196532-ou-jouer-a-la-petanque-a-paris.jpg"
+    end
+    offer.save!
     category = Category.find_by(name: record['fields']['categorie'])
 
     unless category
@@ -79,66 +89,39 @@ data['records'].each do |record|
   end
 end
 
-url_sortir_a_paris = "https://opendata.paris.fr/api/records/1.0/search/?dataset=que-faire-a-paris-&q=&rows=40&facet=category&facet=tags&facet=address_name&facet=address_zipcode&facet=address_city&facet=pmr&facet=price_type&refine.tags=Enfants&refine.category=Expositions+"
+url_sortir_a_paris = "https://opendata.paris.fr/api/records/1.0/search/?dataset=que-faire-a-paris-&q=&rows=200&facet=category&facet=tags&facet=address_name&facet=address_zipcode&facet=address_city&facet=pmr&facet=price_type&refine.tags=Enfants"
 data = JSON.parse(URI.open(url_sortir_a_paris).read)
 data['records'].each do |record|
   address = "#{record['fields']['address_street']}, #{record['fields']['address_city']}"
-  offer = Offer.new(
-      name: record['fields']['title'],
-      address: address,
-      url: record['fields']['contact_url'],
-      start_date: record['fields']['date_start'],
-      end_date: record['fields']['date_end'],
-      permanent: false,
-      description: record['fields']['description'],
-      #schedule: ,
-      photo: record['fields']['cover_url'],
-      theme: "interieure",
-      user: User.find_by(email: 'ville-de-paris@gmail.com')
-    )
-    offer.save
-    if record['fields']['description'].scan(/(partir de \d+ ans)/).first
-      offer[min_age: record['fields']['description'].scan(/(partir de \d+ ans)/).first.first.scan(/(\d+)/).first.first.to_i]
-    elsif record['fields']['description'].scan(/(moins de \d+ ans)/).first
-      offer[max_age: record['fields']['description'].scan(/(moins de \d+ ans)/).first.first.scan(/(\d+)/).first.first.to_i]
-    end
-    category = Category.find_by(name: record['fields']['category'])
+  if !record['fields']['title'].nil?
+    offer = Offer.new(
+        name: record['fields']['title'],
+        address: address,
+        url: record['fields']['contact_url'],
+        start_date: record['fields']['date_start'],
+        end_date: record['fields']['date_end'],
+        permanent: false,
+        description: record['fields']['description'],
+        #schedule: ,
+        photo: record['fields']['cover_url'],
+        theme: "interieure",
+        user: User.find_by(email: 'ville-de-paris@gmail.com')
+      )
 
-    unless category
-      category = Category.create(name: record['fields']['category'])
+    if !record['fields']['description'].nil? && record['fields']['description'].scan(/(partir de \d+ ans)/).first
+      offer.min_age = record['fields']['description'].scan(/(partir de \d+ ans)/).first.first.scan(/(\d+)/).first.first.to_i
+    elsif !record['fields']['description'].nil? && record['fields']['description'].scan(/(moins de \d+ ans)/).first
+      offer.max_age = record['fields']['description'].scan(/(moins de \d+ ans)/).first.first.scan(/(\d+)/).first.first.to_i
+    elsif !record['fields']['tags'].nil? && record['fields']['tags'].scan(/Plein air/i).first
+     offer.theme = "exterieure"
     end
-
+    offer.save!
+    if !record['fields']['category'].nil?
+      category = Category.find_by(name: record['fields']['category'].scan(/([A-Z])\w/i).first)
+      unless category
+        category = Category.create(name: record['fields']['category'].scan(/([A-Z])\w/i).first)
+      end
+    end
     OfferCategory.create(offer: offer, category: category)
-end
-
-url_sortir_a_paris = "https://opendata.paris.fr/api/records/1.0/search/?dataset=que-faire-a-paris-&q=&rows=40&facet=category&facet=tags&facet=address_name&facet=address_zipcode&facet=address_city&facet=pmr&facet=price_type&refine.tags=Enfants&refine.category=Concerts+"
-data = JSON.parse(URI.open(url_sortir_a_paris).read)
-data['records'].each do |record|
-  address = "#{record['fields']['address_street']}, #{record['fields']['address_city']}"
-  offer = Offer.new(
-      name: record['fields']['title'],
-      address: address,
-      url: record['fields']['contact_url'],
-      start_date: record['fields']['date_start'],
-      end_date: record['fields']['date_end'],
-      permanent: false,
-      description: record['fields']['description'],
-      #schedule: ,
-      photo: record['fields']['cover_url'],
-      theme: "interieure",
-      user: User.find_by(email: 'ville-de-paris@gmail.com')
-    )
-    offer.save
-    if record['fields']['description'].scan(/(partir de \d+ ans)/).first
-      offer[min_age: record['fields']['description'].scan(/(partir de \d+ ans)/).first.first.scan(/(\d+)/).first.first.to_i]
-    elsif record['fields']['description'].scan(/(moins de \d+ ans)/).first
-      offer[max_age: record['fields']['description'].scan(/(moins de \d+ ans)/).first.first.scan(/(\d+)/).first.first.to_i]
-    end
-    category = Category.find_by(name: record['fields']['category'])
-
-    unless category
-      category = Category.create(name: record['fields']['category'])
-    end
-
-    OfferCategory.create(offer: offer, category: category)
+  end
 end
