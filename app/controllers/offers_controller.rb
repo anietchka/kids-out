@@ -23,15 +23,15 @@ class OffersController < ApplicationController
     @markers = @offers.geocoded.map do |offer|
       icon_filename = "#{offer.categories.first&.name&.parameterize}.png"
 
-      unless Rails.application.assets.find_asset(icon_filename)
-        icon_filename = 'marker.png'
-      end
+      # unless Rails.application.assets.find_asset(icon_filename)
+      #   icon_filename = 'marker.png'
+      # end
 
       {
         lat: offer.latitude,
         lng: offer.longitude,
         info_window: render_to_string(partial: "info_window", locals: { offer: offer }),
-        icon: helpers.asset_url(icon_filename)
+        icon: helpers.asset_url(offer.categories.first.name.downcase)
       }
     end
   end
