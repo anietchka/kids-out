@@ -17,6 +17,8 @@
 
 .margin-navbar{
   margin-bottom: 70px;
+
+  position: relative;
 }
 
 .navbar {
@@ -26,4 +28,14 @@
 
 .navbar-nav {
   margin-top: 5px !important;
+}
+
+.back{
+  position: absolute;
+  top:10px;
+  left: 10px;
+  z-index: 1;
+  a{
+    color:black;
+  }
 }
