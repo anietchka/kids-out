@@ -31,7 +31,7 @@ class OffersController < ApplicationController
         lat: offer.latitude,
         lng: offer.longitude,
         info_window: render_to_string(partial: "info_window", locals: { offer: offer }),
-        icon: helpers.asset_url(offer.categories.first.name.downcase)
+        icon: helpers.asset_url("#{offer.categories.first.name.parameterize}.png")
       }
     end
   end
