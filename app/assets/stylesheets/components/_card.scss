@@ -18,6 +18,10 @@
   border-radius: 4px;
 }
 
+.icons{
+  width: 22px;
+  height: 22px;
+}
 .card-favoris i {
   color: #D94A64;
   font-size: 25px;
@@ -92,6 +96,14 @@
   font-weight: lighter;
 }
 
-h1{
-  font-size: 24px;
+.card-show-bold{
+  font-weight: bold;
+}
+.card-show-offer{
+  margin-top: 15px;
+  h1{
+    font-size: 24px;
+    color: #F2C94B;
+    text-align: center;
+  }
 }

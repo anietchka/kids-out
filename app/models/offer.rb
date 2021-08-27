@@ -7,6 +7,7 @@ class Offer < ApplicationRecord
   validates :address, presence: true
   validates :theme, inclusion: { in: THEME }
   has_many :offer_categories
+  has_many :categories, through: :offer_categories
   has_many :reviews
   has_many :meetups
   has_many :bookmarks
