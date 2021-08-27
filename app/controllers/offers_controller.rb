@@ -17,20 +17,17 @@ class OffersController < ApplicationController
 
   def index
     @offers = policy_scope(Offer)
-    #  A tester
-    # @offers = @offers.where(min_age: params.dig(:search, :min_age)) if params.dig(:search, :min_age) && params.dig(:search, :min_age) != ""
-    # @offers = Offer.where("address ILIKE ?", "%#{params[:query]}%") if params[:query].present? != ""
     if params[:query].present?
       @offers = Offer.where("address ILIKE ?", "%#{params[:query]}%")
     else
       @offers = Offer.all
     end
-    # the `geocoded` scope filters only offers with coordinates (latitude & longitude)
     @markers = @offers.geocoded.map do |offer|
       {
         lat: offer.latitude,
         lng: offer.longitude,
-        info_window: render_to_string(partial: "info_window", locals: { offer: offer })
+        info_window: render_to_string(partial: "info_window", locals: { offer: offer }),
+        icon: helpers.asset_url("#{offer.categories.first&.name.parameterize}.png" || 'marker.png')
       }
     end
   end
