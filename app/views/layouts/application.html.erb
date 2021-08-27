@@ -19,11 +19,13 @@
 
       <%= render 'shared/flashes' %>
     <div class="margin-navbar">
-      <div class="back">
-        <%= link_to :back do %>
-          <i class="fas fa-undo-alt"></i>
-        <% end %>
-      </div>
+    <% unless request.url == "#{request.base_url}/" %>
+        <div class="back">
+          <%= link_to :back do %>
+            <i class="fas fa-arrow-left"></i>
+          <% end %>
+        </div>
+    <% end %>
       <%= yield %>
     </div>
     <%= render 'shared/navbar' %>
