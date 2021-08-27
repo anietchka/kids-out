@@ -1,13 +1,13 @@
 const initCurrentPosition = () => {
-  const inputLongitude = document.querySelector("#coordinates_longitude")
-  const inputLatitude = document.querySelector("#coordinates_latitude")
+  const inputLongitude = document.querySelector("#search_longitude")
+  const inputLatitude = document.querySelector("#search_latitude")
   const form = document.querySelector("form")
 
   navigator.geolocation.getCurrentPosition((data) => {
     inputLongitude.value = data.coords.longitude;
     inputLatitude.value = data.coords.latitude;
+    document.getElementById('search_address').value = '';
     form.submit();
-    console.log(inputLongitude);
   });
 };
 

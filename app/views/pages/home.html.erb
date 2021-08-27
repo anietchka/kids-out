@@ -1,16 +1,27 @@
 <div>
   <div class="top">
     <div class="container">
-      <div class="Title"><h1>Kid's Out</h1></div>
+      <div class="Title">
+        <h1>Kid's Out</h1>
+      </div>
       <div class="d-flex flex-column">
-        <div class="buttons"><%= link_to "Où souhaitez-vous aller ?", new_offer_path %></div>
-        <div class="buttons" id="current-position-form">
-          <%= simple_form_for :coordinates, url: offers_path, method: :get do |f| %>
-            <%= f.input :longitude %>
-            <%= f.input :latitude %>
-            <%= f.submit "Trouver autour de moi" %>
+
+        <div class="buttons">
+          <%= simple_form_for :search, url: offers_path, method: :get do |f| %>
+            <div class="bg-white">
+              <%= f.input :address %>
+              <%= f.input :min_age %>
+              <%= f.input :theme, as: :radio_buttons, collection: ["interieure", "exterieure"]%>
+              <%= f.input :longitude, :as => :hidden %>
+              <%= f.input :latitude, :as => :hidden %>
+              <%= f.submit "Où souhaitez-vous aller ?" %>
+            </div>
+            <div class="buttons">
+              <%= button_tag "Trouver autour de moi", id: "current-position" %>
+            </div>
           <% end  %>
-        <%= button_tag "Trouver autour de moi", id: "current-position" %></div>
+
+        </div>
       </div>
     </div>
   </div>

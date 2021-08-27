@@ -1,11 +1,3 @@
-<%= simple_form_for :query, url: offers_path do |f| %>
-  <%= f.input :address %>
-  <%= f.input :min_age %>
-  <%= f.input :theme, as: :radio_buttons, collection: ["interieure", "exterieure"] %>
-  <%#= f.input :name, input_html: {value: ""} %>
-  <%= f.submit "Recherche", class: "btn btn-primary" %>
-<% end %>
-
 <div id="map"
      style="width: 100%; height: 670px;"
      data-markers="<%= @markers.to_json %>"

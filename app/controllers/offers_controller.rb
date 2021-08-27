@@ -7,21 +7,15 @@ class OffersController < ApplicationController
   def index
     @offers = policy_scope(Offer)
 
-    # Get results near given coordinates
-    if params[:coordinates].present?
-      @offers = Offer.near([params[:coordinates][:longitude], params[:coordinates][:latitude]], 5, units: :km)
-      # Call custom_search instead of all if they are params of a query
-      # elsif params[:query].present?
-      #   sql_query = "title ILIKE :query OR synopsis ILIKE :query"
-      #   @movies = Movie.where(sql_query, query: "%#{params[:query]}%")
-      #   sql_query = " \
-      #     offers.address @@ :query \
-      #     OR offers.min_age @@ :query \
-      #     OR offers.theme @@ :query \
-      #   "
-      #   @offers = Offer.where(sql_query, query: "%#{params[:query]}%")
-    else
-      @offers = Offer.all
+    # Start by fetching all records and filter out records
+    @offers = Offer.all
+
+    # Filter to results near given coordinates
+    if !params[:search][:latitude].empty?
+      @offers = @offers.near([params[:search][:latitude], params[:search][:longitude]], 1)
+    end
+    if !params[:search][:address].empty?
+      @offers = @offers.near(params[:search][:address], 1)
     end
 
     # Create markers out of resulting offers from query
