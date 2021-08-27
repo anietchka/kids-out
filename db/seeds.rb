@@ -117,9 +117,9 @@ data['records'].each do |record|
     end
     offer.save!
     if !record['fields']['category'].nil?
-      category = Category.find_by(name: record['fields']['category'].scan(/([A-Z])\w/i).first)
+      category = Category.find_by(name: record['fields']['category'].split(" ").first)
       unless category
-        category = Category.create(name: record['fields']['category'].scan(/([A-Z])\w/i).first)
+        category = Category.create(name: record['fields']['category'].split(" ").first)
       end
     end
     OfferCategory.create(offer: offer, category: category)
