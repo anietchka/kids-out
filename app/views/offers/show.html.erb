@@ -1,22 +1,23 @@
 <div class="container">
   <h1><%= @offer.name %></h1>
-  <div >
-  <div class="card-show-image-favoris d-flex justify-content-between">
-    <div class="img-card">
-      <%= image_tag(@offer.photo)%>
-    </div>
-    <div class="card-favoris">
-    <% if current_user.bookmarks.where(offer: @offer).any? %>
-      <%= link_to(offer_bookmark_path(@offer, current_user.bookmarks.where(offer: @offer).first), method: :delete) do  %>
-        <i class="fas fa-heart"></i>
+
+  <div class="card-show">
+    <div class="card-show-image-favoris d-flex justify-content-between">
+      <div class="img-card">
+        <%= image_tag(@offer.photo)%>
+      </div>
+      <div class="card-favoris">
+      <% if current_user.bookmarks.where(offer: @offer).any? %>
+        <%= link_to(offer_bookmark_path(@offer, current_user.bookmarks.where(offer: @offer).first), method: :delete) do  %>
+          <i class="fas fa-heart"></i>
+        <% end %>
+      <% else %>
+        <%= link_to(offer_bookmarks_path(@offer,), method: :post) do  %>
+          <i class="far fa-heart"></i>
+
       <% end %>
-    <% else %>
-      <%= link_to(offer_bookmarks_path(@offer), method: :post) do  %>
-        <i class="far fa-heart"></i>
-      <% end %>
-    <% end %>
+      </div>
     </div>
-  </div>
     <% if @offer.min_age %>
       <% if @offer.max_age %>
       <p>Pour les <%= @offer.min_age %>-<%= @offer.max_age %>ans</p>
@@ -39,8 +40,6 @@
       <p>Plus d'informations</p>
       <% end %>
     <% end %>
-
-
   </div>
 
 
@@ -58,15 +57,30 @@
       </div>
     </div>
   </div>
-  <div>
-    <% @offer.reviews.each do |review| %>
-      <p> <%= review.user.nickname %> a noté <%= review.rating %>/5 </p>
-      <p><%= review.comment %></p>
-      <%= link_to(offer_review_path(@offer, review), method: :delete) do %>
-        <i class="far fa-trash-alt"></i>
-      <% end %>
-    <% end %>
+  <% @offer.reviews.each do |review| %>
+  <div class="card-review bg-white py-3 my-3">
+    <div class="container">
+      <div class="card-nickname-rating d-flex justify-content-between">
+        <div class="card-nickname">
+          <h6><%= review.user.nickname %></h6>
+          <p>Le <%= review.created_at.strftime("%d/%m/%y") %></p>
+        </div>
+        <div class="card-star">
+          <% review.rating.times do%>
+            <i class="fas fa-star"></i>
+          <% end %>
+          <% (5-review.rating).times do %>
+            <i class="far fa-star"></i>
+          <% end %>
+        </div>
+      </div>
+        <p class="fst-italic"><%= review.comment %></p>
+        <%= link_to(offer_review_path(@offer, review), method: :delete) do %>
+          <i class="far fa-trash-alt"></i>
+        <% end %>
+    </div>
   </div>
+  <% end %>
   <%= link_to "Revenir à la recherche", offers_path %>
 
 </div>
