@@ -7,18 +7,19 @@ class OffersController < ApplicationController
   def index
     @offers = policy_scope(Offer)
 
-    # Call custom_search instead of all if they are params of a query
-    if params[:query].present?
-
-      sql_query = "title ILIKE :query OR synopsis ILIKE :query"
-      @movies = Movie.where(sql_query, query: "%#{params[:query]}%")
-
-      sql_query = " \
-        offers.address @@ :query \
-        OR offers.min_age @@ :query \
-        OR offers.theme @@ :query \
-      "
-      @offers = Offer.where(sql_query, query: "%#{params[:query]}%")
+    # Get results near given coordinates
+    if params[:coordinates].present?
+      @offers = Offer.near([params[:coordinates][:longitude], params[:coordinates][:latitude]], 5, units: :km)
+      # Call custom_search instead of all if they are params of a query
+      # elsif params[:query].present?
+      #   sql_query = "title ILIKE :query OR synopsis ILIKE :query"
+      #   @movies = Movie.where(sql_query, query: "%#{params[:query]}%")
+      #   sql_query = " \
+      #     offers.address @@ :query \
+      #     OR offers.min_age @@ :query \
+      #     OR offers.theme @@ :query \
+      #   "
+      #   @offers = Offer.where(sql_query, query: "%#{params[:query]}%")
     else
       @offers = Offer.all
     end
