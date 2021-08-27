@@ -8,22 +8,22 @@
           <%= simple_form_for :search, url: offers_path, method: :get do |f| %>
             <div class="bg-white">
               <%= f.input :address %>
-              <%= f.input :min_age %>
-              <%= f.input :theme, as: :radio_buttons, collection: ["interieure", "exterieure"]%>
+              <%#= f.input :min_age %>
+              <%#= f.input :theme, as: :radio_buttons, collection: ["interieure", "exterieure"]%>
               <%= f.input :longitude, :as => :hidden %>
               <%= f.input :latitude, :as => :hidden %>
               <%= f.submit "Où souhaitez-vous aller ?" %>
             </div>
-            <div class="buttons">
+            <div class="">
               <%= button_tag "Trouver autour de moi", id: "current-position" %>
             </div>
           <% end  %>
         </div>
-        <div class="icon-position">
+        <!-- <div class="icon-position">
           <%= link_to offers_path do %>
             <i class="fas fa-map-marked-alt"></i>
           <% end %>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
