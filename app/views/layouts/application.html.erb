@@ -16,10 +16,14 @@
   </head>
 
   <body>
-    
+
       <%= render 'shared/flashes' %>
     <div class="margin-navbar">
-
+      <div class="back">
+        <%= link_to :back do %>
+          <i class="fas fa-undo-alt"></i>
+        <% end %>
+      </div>
       <%= yield %>
     </div>
     <%= render 'shared/navbar' %>

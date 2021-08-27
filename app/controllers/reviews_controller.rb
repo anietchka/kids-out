@@ -16,7 +16,7 @@ class ReviewsController < ApplicationController
     @review.user = @user
     authorize @review
     @review.save
-    redirect_to offer_path(@offer)
+    redirect_to offer_path(@offer, anchor: "review-#{@review.id}")
   end
 
   def destroy
@@ -24,7 +24,7 @@ class ReviewsController < ApplicationController
     @review = Review.find(params[:id])
     authorize @review
     @review.destroy
-    redirect_to offer_path(@offer)
+    redirect_to offer_path(@offer, anchor: "btn-review")
   end
 
   private
