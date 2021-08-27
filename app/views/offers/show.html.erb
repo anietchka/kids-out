@@ -1,5 +1,6 @@
 <div class="container">
   <h1><%= @offer.name %></h1>
+
   <div class="card-show">
     <div class="card-show-image-favoris d-flex justify-content-between">
       <div class="img-card">
@@ -13,7 +14,7 @@
       <% else %>
         <%= link_to(offer_bookmarks_path(@offer,), method: :post) do  %>
           <i class="far fa-heart"></i>
-        <% end %>
+
       <% end %>
       </div>
     </div>
