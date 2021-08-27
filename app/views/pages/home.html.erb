@@ -4,7 +4,11 @@
       <div class="Title"><h1>Kid's Out</h1></div>
       <div class="d-flex flex-column">
         <div class="buttons"><%= link_to "Où souhaitez-vous aller ?", new_offer_path %></div>
-        <div class="buttons"><%= link_to "Trouver autour de moi", offers_path %></div>
+        <div class="icon-position">
+          <%= link_to offers_path do %>
+            <i class="fas fa-map-marked-alt"></i>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
