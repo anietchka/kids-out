@@ -12,11 +12,16 @@
               <%= f.input :theme, as: :radio_buttons, collection: ["interieure", "exterieure"]%>
               <%= f.input :longitude, :as => :hidden %>
               <%= f.input :latitude, :as => :hidden %>
-              <%= f.submit "Où souhaitez-vous aller ?" %>
+              <div class="question">
+                <input type="submit" name="commit" value="Où souhaitez-vous aller ?" data-disable-with="Où souhaitez-vous allez ?" style="
+                border-radius: 5px;
+                background-color: #00B7BA;
+                color: #F2C94B;
+                ">
+              </div>
+              
             </div>
-            <div class="buttons">
-              <%= button_tag "Trouver autour de moi", id: "current-position" %>
-            </div>
+
           <% end  %>
         </div>
         <div class="icon-position">
@@ -29,7 +34,7 @@
   </div>
 
   <div class="container">
-    <div class="bg-white border box-shadow-museum p-3 m-3" style="border-radius: 10px;height: 258px;">
+    <div class="suggestion"><div class="bg-white border box-shadow-museum p-3 m-3" style="border-radius: 10px;height: 258px;">
       <h3>Nos suggestions</h3>
       <div class="d-flex align-items-center justify-content-start">
         <div class="museum"> <%= image_tag ("museum.png") %></div>
@@ -38,6 +43,7 @@
       <div class="d-flex align-items-center justify-content-start">
         <div class="museum"> <%= image_tag ("trees.png") %></div>
         <div class="text-padding"><h5>Parc</h5></div>
+    </div>
       </div>
     </div>
   </div>
