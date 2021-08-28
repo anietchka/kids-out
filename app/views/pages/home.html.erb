@@ -8,10 +8,11 @@
           <%= simple_form_for :search, url: offers_path, method: :get do |f| %>
             <div class="bg-white">
               <%= f.input :address %>
-              <%= f.input :min_age %>
-              <%= f.input :theme, as: :radio_buttons, collection: ["interieure", "exterieure"]%>
+              <%#= f.input :min_age %>
+              <%#= f.input :theme, as: :radio_buttons, collection: ["interieure", "exterieure"]%>
               <%= f.input :longitude, :as => :hidden %>
               <%= f.input :latitude, :as => :hidden %>
+
               <div class="question">
                 <input type="submit" name="commit" value="Où souhaitez-vous aller ?" data-disable-with="Où souhaitez-vous allez ?" style="
                 border-radius: 5px;
@@ -19,16 +20,16 @@
                 color: #F2C94B;
                 ">
               </div>
-              
+
             </div>
 
           <% end  %>
         </div>
-        <div class="icon-position">
+        <!-- <div class="icon-position">
           <%= link_to offers_path do %>
             <i class="fas fa-map-marked-alt"></i>
           <% end %>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
