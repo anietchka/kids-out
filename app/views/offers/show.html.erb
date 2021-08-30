@@ -44,8 +44,7 @@
                   <div
                     data-controller="read-more"
                     data-read-more-more-text-value="Lire plus"
-                    data-read-more-less-text-value="Lire moins"
-                  >
+                    data-read-more-less-text-value="Lire moins">
                     <div class="read-more" data-read-more-target="content"><%= @offer.description.html_safe %></div>
 
                     <a data-action="read-more#toggle" href="#">
@@ -127,6 +126,7 @@
                     <div class="card-nickname-rating d-flex justify-content-between">
                       <div class="card-nickname">
                           <h6><%= meetup.user.nickname %></h6>
+                          <p><%= meetup.participants.count %> participants</p>
                           <p><%= meetup.description %></p>
                           <%= meetup.date%>
                           <%= link_to "Plus d'informations",  meetup_path(meetup.id) %>
@@ -134,9 +134,7 @@
                     </div>
                   </div>
                 </div>
-                <% end %>
-
-              </div>
+              <% end %>
             </div>
           </div>
         </div>
