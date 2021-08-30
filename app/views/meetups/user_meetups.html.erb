@@ -1,0 +1,9 @@
+<div class="container">
+  <h1>Mes meetups</h1>
+
+  <% @meetups.each do |meetup| %>
+    <%= meetup.offer.name %>
+    <%= meetup.date %>
+    <%= meetup.description %>
+  <% end %>
+</div>

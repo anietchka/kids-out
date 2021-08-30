@@ -2,8 +2,6 @@
   <p><%= @meetup.user.nickname %> à proposé un Meetup le <%= @meetup.date %></p>
   <p><%= @meetup.description %></p>
 
-  <%= link_to "Je veux participer", meetup_participants_path(@meetup), method: :post %>
-
   <div class="card-participation">
     <% if current_user.participants.where(meetup: @meetup).any? %>
       <%= link_to(participant_path( current_user.participants.where(meetup: @meetup).first), remote: true, method: :delete) do  %>
@@ -22,4 +20,5 @@
     <% end %>
   </ul>
 
+  <%= link_to "Acceder au chat",  chat_meetup_path(@meetup) %>
 </div>

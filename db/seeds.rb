@@ -53,7 +53,7 @@ puts 'Creating a lot of Offers'
 # #Offer.create!(name: , address: , url: , start_date: , end_date: , permanent: , description: , min_age: , max_age: , schedule: , user: User.all.sample, photo:)
 
 
-endpoint = 'https://opendata.paris.fr/api/records/1.0/search/?dataset=espaces_verts&q=&rows=100&facet=type_ev&facet=categorie&facet=adresse_codepostal&facet=presence_cloture&facet=ouvert_ferme&exclude.categorie=Talus&exclude.categorie=Arboretum&exclude.categorie=Archipel&exclude.categorie=Cimeti%C3%A8re&exclude.categorie=Decoration&exclude.categorie=Jardin+d%27immeubles&exclude.categorie=Jardin+partage&exclude.categorie=Jardini%C3%A8re&exclude.categorie=Mail&exclude.categorie=Murs+vegetalises&exclude.categorie=Plate-bande&exclude.categorie=Terre-plein&exclude.categorie=Jardinet'
+endpoint = 'https://opendata.paris.fr/api/records/1.0/search/?dataset=espaces_verts&q=&rows=200&facet=type_ev&facet=categorie&facet=adresse_codepostal&facet=presence_cloture&facet=ouvert_ferme&exclude.categorie=Talus&exclude.categorie=Arboretum&exclude.categorie=Archipel&exclude.categorie=Cimeti%C3%A8re&exclude.categorie=Decoration&exclude.categorie=Jardin+d%27immeubles&exclude.categorie=Jardin+partage&exclude.categorie=Jardiniere&exclude.categorie=Mail&exclude.categorie=Murs+vegetalises&exclude.categorie=Plate-bande&exclude.categorie=Terre-plein&exclude.categorie=Jardinet&exclude.categorie=Ile&exclude.categorie=Promenade&exclude.categorie=Pelouse'
 data = JSON.parse(URI.open(endpoint).read)
 data['records'].each do |record|
   address = "#{record['fields']['adresse_numero']}, #{record['fields']['adresse_typevoie']} #{record['fields']['adresse_libellevoie']} #{record['fields']['adresse_codepostal']}"

@@ -33,6 +33,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 
 // MapBox
 import { initMapbox } from '../plugins/init_mapbox';
+import { initMeetupCable } from '../channels/meetup_channel'
 import { initCurrentPosition } from '../plugins/init_position';
 
 
@@ -40,6 +41,7 @@ document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
   // initSelect2();
   initMapbox();
+  initMeetupCable();
 })
 
 import "controllers"
