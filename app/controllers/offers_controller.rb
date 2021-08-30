@@ -11,11 +11,23 @@ class OffersController < ApplicationController
     @offers = Offer.all
 
     # Filter to results near given coordinates
+    # Geocordinates from text
     if params[:search] && params[:search][:latitude].present?
-      @offers = @offers.near([params[:search][:latitude], params[:search][:longitude]], 10)
+      @offers = @offers.near([params[:search][:latitude], params[:search][:longitude]], 5)
     end
+    # Geocordinates from button
     if params[:search] && params[:search][:address].present?
-      @offers = @offers.near(params[:search][:address], 10)
+      @offers = @offers.near(params[:search][:address], 5)
+    end
+
+    # Filter to results equal to user input on fields
+    # Minimum Age
+    if params[:search] && params[:search][:min_age].present?
+      @offers = @offers.where('min_age <= ?', params[:search][:min_age])
+    end
+    # Indoor / Outdoor
+    if params[:search] && params[:search][:theme].present?
+      @offers = @offers.where('theme = ?', params[:search][:theme])
     end
 
     # Create markers out of resulting offers from query
