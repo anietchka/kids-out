@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :offers, only: [:new, :create, :index, :show] do
     resources :bookmarks, only: [:create, :destroy]
     resources :reviews, only: [:new, :create, :destroy]
-    resources :meetups, only: [:new, :create, :show, :destroy]
+    resources :meetups, only: [:new,:index, :create, :show, :destroy]
   end
 
   resources :bookmarks, only: [:index]

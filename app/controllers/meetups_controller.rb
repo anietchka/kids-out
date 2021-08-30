@@ -6,6 +6,12 @@ class MeetupsController < ApplicationController
     skip_authorization
   end
 
+  def index
+    @meetups = policy_scope(Meetup)
+    @offer = Offer.find(params[:offer_id])
+
+  end
+
   def create
     @offer = Offer.find(params[:offer_id])
     @user = current_user
