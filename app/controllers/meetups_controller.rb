@@ -29,7 +29,6 @@ class MeetupsController < ApplicationController
   end
 
   def destroy
-    @offer = Offer.find(params[:offer_id])
     @meetup = Meetup.find(params[:id])
     authorize @meetup
     @meetup.destroy
