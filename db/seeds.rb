@@ -8,11 +8,15 @@ Category.destroy_all
 Offer.destroy_all
 User.destroy_all
 puts 'Creating a lot of User'
-User.create!(email: 'anna.bozio@gmail.com', nickname: "anietchka", password: '123456', first_name: 'Anna', last_name: 'Bozio')
-User.create!(email: 'migatsar@gmail.com', nickname: "migasar", password: '123456', first_name: 'Mica', last_name: 'Gaspar')
-User.create!(email: 'estelle.cirilo@gmail.com', nickname: "ecirilo1", password: '123456', first_name: 'Estelle', last_name: 'Cirilo')
-User.create!(email: 'barois.anne@orange.fr', nickname: "oslanne", password: '123456', first_name: 'Anne', last_name: 'Barois')
-User.create!(email: 'ville-de-paris@gmail.com', nickname: "VilleDeParis", password: '123456', first_name: 'Ville', last_name: 'de Paris')
+user_1 = User.new(email: 'anna.bozio@gmail.com', nickname: "anietchka", password: '123456', first_name: 'Anna', last_name: 'Bozio')
+user_2 = User.new(email: 'migatsar@gmail.com', nickname: "migasar", password: '123456', first_name: 'Mica', last_name: 'Gaspar')
+user_3 = User.new(email: 'estelle.cirilo@gmail.com', nickname: "ecirilo1", password: '123456', first_name: 'Estelle', last_name: 'Cirilo')
+user_4 = User.new(email: 'barois.anne@orange.fr', nickname: "oslanne", password: '123456', first_name: 'Anne', last_name: 'Barois')
+user_5 = User.new(email: 'ville-de-paris@gmail.com', nickname: "VilleDeParis", password: '123456', first_name: 'Ville', last_name: 'de Paris')
+
+file = URI.open('https://kitt.lewagon.com/placeholder/users/cveneziani')
+user_1.photo.attach(io: file, filename: 'nes.png', content_type: 'image/png')
+user_1.save
 puts 'Users Created!'
 Offer.create!(name: "Expo Harry Potter - Retour à Poudlard", theme: "interieure", address: "Rue du 8 Mai 1945, 75010 Paris" ,url: "https://www.facebook.com/events/521401079177879/",start_date: "2021-08-07" ,end_date: "2021-08-30", permanent: false, description: "Tous les ans, le 1er septembre signifie 'fin des vacances' pour les enfants. Mais pour les fans d'Harry Potter, c'est surtout le rendez-vous incontournable de la saga : le \"Retour à Poudlard\" !
 En préambule, une exposition est organisée tout l'été dans les gares. Du 7 juillet au 30 août, l'expo Harry Potter des illustrations signées Jim Kay est en effet accessibles à Paris Gare de Lyon, Nice, Bordeaux, Poitiers et Limoges. Petits et grands retrouvent les magnifiques dessins des trois premiers tomes de la saga.

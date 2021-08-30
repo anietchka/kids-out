@@ -13,4 +13,6 @@ class User < ApplicationRecord
          has_many :participants
          has_many :meetups
          has_many :participants_as_owner, through: :meetups, source: :participants
+
+         has_one_attached :photo
 end
