@@ -15,4 +15,6 @@ class User < ApplicationRecord
   has_many :owned_meetups, class_name: 'Meetup'
   has_many :messages
   has_many :participants_as_owner, through: :meetups, source: :participants
+
+  has_one_attached :photo
 end

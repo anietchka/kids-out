@@ -2,7 +2,7 @@
   <div class="d-flex username">
     <h1> Bonjour <%= @user.nickname %> </h1>
     <% if current_user.photo.attached? %>
-      <%= cl_image_tag user.photo.key, width: 200, height: 200 %>
+      <%= cl_image_tag @user.photo.key, width: 50, height: 50, style: 'border-radius: 50%;' %>
     <% end %>
   </div>
   <div> 
@@ -28,6 +28,6 @@
       <p>Gérer mon meet-up</p>
     </div>
     <hr>
-    <div></div><a class="btn btn-ghost" style="border: solid 1px grey"href="#">Se déconnecter</a></div>
+    <%= link_to "Se déconnecter", destroy_user_session_path, style: "border: solid 1px grey", method: "delete", class: "btn btn-ghost" %>
   </div>
 </div>

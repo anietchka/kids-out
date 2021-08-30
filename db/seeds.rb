@@ -13,14 +13,14 @@ User.destroy_all
 
 puts 'Creating a lot of User'
 user_1 = User.new(email: 'anna.bozio@gmail.com', nickname: "anietchka", password: '123456', first_name: 'Anna', last_name: 'Bozio')
-user_2 = User.new(email: 'migatsar@gmail.com', nickname: "migasar", password: '123456', first_name: 'Mica', last_name: 'Gaspar')
-user_3 = User.new(email: 'estelle.cirilo@gmail.com', nickname: "ecirilo1", password: '123456', first_name: 'Estelle', last_name: 'Cirilo')
-user_4 = User.new(email: 'barois.anne@orange.fr', nickname: "oslanne", password: '123456', first_name: 'Anne', last_name: 'Barois')
-user_5 = User.new(email: 'ville-de-paris@gmail.com', nickname: "VilleDeParis", password: '123456', first_name: 'Ville', last_name: 'de Paris')
+user_2 = User.create!(email: 'migatsar@gmail.com', nickname: "migasar", password: '123456', first_name: 'Mica', last_name: 'Gaspar')
+user_3 = User.create!(email: 'estelle.cirilo@gmail.com', nickname: "ecirilo1", password: '123456', first_name: 'Estelle', last_name: 'Cirilo')
+user_4 = User.create!(email: 'barois.anne@orange.fr', nickname: "oslanne", password: '123456', first_name: 'Anne', last_name: 'Barois')
+user_5 = User.create!(email: 'ville-de-paris@gmail.com', nickname: "VilleDeParis", password: '123456', first_name: 'Ville', last_name: 'de Paris')
 
 file = URI.open('https://kitt.lewagon.com/placeholder/users/cveneziani')
 user_1.photo.attach(io: file, filename: 'nes.png', content_type: 'image/png')
-user_1.save
+user_1.save!
 
 puts 'Users Created!'
 
@@ -87,6 +87,7 @@ data['records'].each do |record|
     offer.photo = "https://www.sortiraparis.com/images/1001/40234/196532-ou-jouer-a-la-petanque-a-paris.jpg"
   end
   offer.save!
+  puts "Offer #{offer.name} created! youhou"
   category = Category.find_by(name: record['fields']['categorie'])
   unless category
     category = Category.create(name: record['fields']['categorie'])
@@ -111,17 +112,18 @@ data['records'].each do |record|
       photo: record['fields']['cover_url'],
       theme: "interieure",
       user: User.find_by(email: 'ville-de-paris@gmail.com')
-    )
-    if !record['fields']['description'].nil? && record['fields']['description'].scan(/(partir de \d+ ans)/).first
-      offer.min_age = record['fields']['description'].scan(/(partir de \d+ ans)/).first.first.scan(/(\d+)/).first.first.to_i
-    elsif !record['fields']['description'].nil? && record['fields']['description'].scan(/(moins de \d+ ans)/).first
-      offer.max_age = record['fields']['description'].scan(/(moins de \d+ ans)/).first.first.scan(/(\d+)/).first.first.to_i
-    elsif !record['fields']['tags'].nil? && record['fields']['tags'].scan(/Plein air/i).first
-     offer.theme = "exterieure"
-    end
-    offer.save!
-    if !record['fields']['category'].nil?
-      category = Category.find_by(name: record['fields']['category'].split(" ").first)
+      )
+      if !record['fields']['description'].nil? && record['fields']['description'].scan(/(partir de \d+ ans)/).first
+        offer.min_age = record['fields']['description'].scan(/(partir de \d+ ans)/).first.first.scan(/(\d+)/).first.first.to_i
+      elsif !record['fields']['description'].nil? && record['fields']['description'].scan(/(moins de \d+ ans)/).first
+        offer.max_age = record['fields']['description'].scan(/(moins de \d+ ans)/).first.first.scan(/(\d+)/).first.first.to_i
+      elsif !record['fields']['tags'].nil? && record['fields']['tags'].scan(/Plein air/i).first
+        offer.theme = "exterieure"
+      end
+      offer.save!
+      puts "Offer #{offer.name} created! youhou"
+      if !record['fields']['category'].nil?
+        category = Category.find_by(name: record['fields']['category'].split(" ").first)
       unless category
         category = Category.create(name: record['fields']['category'].split(" ").first)
       end
