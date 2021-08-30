@@ -12,6 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2021_08_30_133829) do
 
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -63,6 +64,16 @@ ActiveRecord::Schema.define(version: 2021_08_30_133829) do
     t.index ["user_id"], name: "index_meetups_on_user_id"
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "meetup_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.text "content"
+    t.index ["meetup_id"], name: "index_messages_on_meetup_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
   create_table "offer_categories", force: :cascade do |t|
     t.bigint "category_id", null: false
     t.bigint "offer_id", null: false
@@ -86,9 +97,9 @@ ActiveRecord::Schema.define(version: 2021_08_30_133829) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "photo"
     t.float "latitude"
     t.float "longitude"
+    t.string "photo"
     t.string "theme"
     t.index ["user_id"], name: "index_offers_on_user_id"
   end
@@ -134,6 +145,8 @@ ActiveRecord::Schema.define(version: 2021_08_30_133829) do
   add_foreign_key "bookmarks", "users"
   add_foreign_key "meetups", "offers"
   add_foreign_key "meetups", "users"
+  add_foreign_key "messages", "meetups"
+  add_foreign_key "messages", "users"
   add_foreign_key "offer_categories", "categories"
   add_foreign_key "offer_categories", "offers"
   add_foreign_key "offers", "users"
