@@ -14,10 +14,15 @@
               <i class="fas fa-heart"></i>
             <% end %>
           <% else %>
-            <%= link_to(offer_bookmarks_path(@offer,), method: :post, remote: true) do  %>
+            <%= link_to(offer_bookmarks_path(@offer), method: :post, remote: true) do  %>
               <i class="far fa-heart"></i>
             <% end %>
           <% end %>
+          <div class="card-show-meetup">
+            <%= link_to(new_offer_meetup_path(@offer)) do %>
+              <%= image_tag("icons/meetup.jpg") %>
+            <% end %>
+          </div>
           </div>
         </div>
         <div class="card-show-bold">

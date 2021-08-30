@@ -1,0 +1,7 @@
+<div class="container">
+  <%= simple_form_for [ @offer, @meetup ] do |f| %>
+      <%= f.input :date %>
+      <%= f.input :description %>
+      <%= f.submit "Envoyer" %>
+    <% end %>
+</div>
