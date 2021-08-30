@@ -67,9 +67,9 @@ ActiveRecord::Schema.define(version: 2021_08_30_092244) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "photo"
     t.float "latitude"
     t.float "longitude"
+    t.string "photo"
     t.string "theme"
     t.index ["user_id"], name: "index_offers_on_user_id"
   end
