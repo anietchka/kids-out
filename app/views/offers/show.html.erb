@@ -21,7 +21,7 @@
           <div class="card-show-meetup">
             <%= link_to(new_offer_meetup_path(@offer)) do %>
               <%= image_tag("icons/meetup.jpg") %>
-              <%= link_to "Retrouvez les meetups",(offer_meetups_path(@offer)) %>
+              <%= link_to "Retrouvez les meetups",(offer_meetups_path(@offer.id)) %>
             <% end %>
           </div>
           </div>
