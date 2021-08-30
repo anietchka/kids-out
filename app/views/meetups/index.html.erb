@@ -1,9 +1,12 @@
 <div class="container">
   <% @meetups.each do |meetup| %>
+    <div class="card-index-meetup">
        <%= meetup.date %>
+       <%= meetup.participants.count %> participants
        <%= meetup.description %>
        <%= meetup.user.nickname %>
        <%= link_to "show", meetup_path(meetup) %>
+    </div>
   <% end %>
 
   <%= link_to "Créer un meetup", new_offer_meetup_path(@offer) %>

@@ -2,8 +2,19 @@
   <h1>Mes meetups</h1>
 
   <% @meetups.each do |meetup| %>
-    <%= meetup.offer.name %>
-    <%= meetup.date %>
-    <%= meetup.description %>
+    <div class="card-user-meetup">
+      <div class="card-meetup-left">
+        <h3><%= meetup.offer.name %></h3>
+        <h4>par <strong><%= meetup.user.nickname %></strong></h4>
+        <div class="card-tags">
+          <span><%= meetup.participants.count %> participant(s)</span>
+        </div>
+      </div>
+      <div class="card-meetup-right">
+        <p><%= meetup.date.strftime('%d/%m/%Y') %></p>
+        <h2>à <%= meetup.date.strftime('%Hh%M') %></h2>
+      </div>
+
+    </div>
   <% end %>
 </div>
