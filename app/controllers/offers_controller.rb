@@ -8,7 +8,7 @@ class OffersController < ApplicationController
     @offers = policy_scope(Offer)
 
     # Start by fetching all records and filter out records
-    @offers = Offer.all
+    @offers = Offer.joins(:categories).all
 
     # Filter to results near given coordinates
     # Geocordinates from text
@@ -28,6 +28,10 @@ class OffersController < ApplicationController
     # Indoor / Outdoor
     if params[:search] && params[:search][:theme].present?
       @offers = @offers.where('theme = ?', params[:search][:theme])
+    end
+    # Categories
+    if params[:search] && params[:search][:categories].present?
+      @offers = @offers.where('categories.name = ?', params[:search][:categories])
     end
 
     # Create markers out of resulting offers from query
