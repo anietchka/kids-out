@@ -3,6 +3,8 @@ require 'json'
 require 'nokogiri'
 
 Review.destroy_all
+Participant.destroy_all
+Meetup.destroy_all
 Bookmark.destroy_all
 OfferCategory.destroy_all
 Category.destroy_all
