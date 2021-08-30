@@ -7,7 +7,7 @@
           <%= f.input :address %>
           <%= f.input :min_age %>
           <%= f.input :theme, as: :radio_buttons, collection: ["interieure", "exterieure"] %>
-          <%= f.input :categories, collection: [ "Bois", "Concerts",  "Animations", "Spectacles", "Expositions", "Événements", "Square", "Jardin", "Parc", "Promenade" ] %>
+          <%= f.input :categories, collection: Category.pluck(:name) %>
           <div class="question">
             <input type="submit" name="commit" value="Où souhaitez-vous aller ?"
               data-disable-with="Où souhaitez-vous allez ?"
