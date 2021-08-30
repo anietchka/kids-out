@@ -1,11 +1,10 @@
 <div class="container">
   <% @meetups.each do |meetup| %>
-       <%= meetup.name %>
        <%= meetup.date %>
        <%= meetup.description %>
-       <%= meetup.user.first_name %>
-       <%= meetup.offer.name %>
-       <%= meetup.offer.address %>
+       <%= meetup.user.nickname %>
   <% end %>
+
+  <%= link_to "Créer un meetup", new_offer_meetup_path(@offer) %>
 
 </div>
