@@ -3,6 +3,7 @@
        <%= meetup.date %>
        <%= meetup.description %>
        <%= meetup.user.nickname %>
+       <%= link_to "show", meetup_path(meetup) %>
   <% end %>
 
   <%= link_to "Créer un meetup", new_offer_meetup_path(@offer) %>

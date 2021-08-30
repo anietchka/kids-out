@@ -21,4 +21,8 @@ class MeetupPolicy < ApplicationPolicy
     record.user == user
   end
 
+  def chat?
+    user
+  end
+
 end

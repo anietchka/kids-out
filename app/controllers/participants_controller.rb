@@ -9,7 +9,7 @@ class ParticipantsController < ApplicationController
     @participant.user = current_user
     authorize @participant
     @participant.save
-    redirect_to meetup_path(@meetup.offer, @meetup)
+    redirect_to meetup_path(@meetup)
   end
 
   def destroy

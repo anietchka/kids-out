@@ -20,6 +20,7 @@ class MeetupsController < ApplicationController
     @meetup.user = @user
     authorize @meetup
     @meetup.save
+    @meetup.participants.create(user: current_user)
     redirect_to offer_path(@offer)
   end
 
@@ -33,6 +34,17 @@ class MeetupsController < ApplicationController
     authorize @meetup
     @meetup.destroy
     redirect_to offer_path(@offer)
+  end
+
+  def chat
+    @meetup = Meetup.find(params[:id])
+    @message = Message.new
+    authorize @meetup
+  end
+
+  def user_meetups
+    @meetups = current_user.meetups
+    skip_authorization
   end
 
   private
