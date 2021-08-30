@@ -1,11 +1,6 @@
 class ParticipantsController < ApplicationController
 
-  def new
-    @meetup = Meetup.find(params[:meetup_id])
-    @user = current_user
-    @participant = Participant.new
-    skip_authorization
-  end
+
 
   def create
     @meetup = Meetup.find(params[:meetup_id])
@@ -14,7 +9,7 @@ class ParticipantsController < ApplicationController
     @participant.user = current_user
     authorize @participant
     @participant.save
-    redirect_to meetup_path(@meetup)
+    redirect_to meetup_path(@meetup.offer, @meetup)
   end
 
   def destroy
