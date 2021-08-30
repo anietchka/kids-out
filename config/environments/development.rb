@@ -62,5 +62,7 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   config.hosts << /.*\.ngrok\.io/
+
+  config.active_storage.service = :cloudinary
 end
   
