@@ -1,6 +1,7 @@
 require 'open-uri'
 require 'json'
 require 'nokogiri'
+require 'faker'
 
 Review.destroy_all
 Participant.destroy_all
@@ -21,6 +22,21 @@ user_5 = User.create!(email: 'ville-de-paris@gmail.com', nickname: "VilleDeParis
 file = URI.open('https://i.skyrock.net/4416/47814416/pics/1946552767_small_1.jpg')
 user_1.photo.attach(io: file, filename: 'nes.png', content_type: 'image/png')
 user_1.save!
+
+########################
+# Fake users
+puts 'Creating 50 fake users...'
+50.times do
+  user = User.new(
+    first_name: Faker::Name.first_name,
+    last_name:  Faker::Name.last_name,
+    nickname: Faker::Internet.username,
+    email: Faker::Internet.email,
+    password: Faker::Internet.password
+  )
+  user.save!
+end
+
 puts 'Users Created!'
 
 ########################
@@ -178,5 +194,19 @@ old_unused_scraping_code = [
 ]
 puts 'Offers Created!'
 
+
 ########################
-# API call to fetch records for Cultural Events in Paris
+# Meetups
+puts 'Creating Meetups'
+
+
+puts 'Meetups Created!'
+
+
+########################
+# Reviews
+puts 'Creating Reviews'
+
+
+
+puts 'Reviews Created!'
