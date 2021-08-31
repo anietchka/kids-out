@@ -46,6 +46,8 @@ import { initFlatPickr } from "../plugins/init_flatpickr";
 
 import { toggleTrashCard } from "../components/toggle_trash_card";
 
+import { toggleFavoriteCard } from "../components/toggle_favorite_card";
+
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
   // initSelect2();
@@ -55,6 +57,7 @@ document.addEventListener('turbolinks:load', () => {
   initStarRating();
   initFlatPickr();
   toggleTrashCard();
+  toggleFavoriteCard();
 
 })
 
