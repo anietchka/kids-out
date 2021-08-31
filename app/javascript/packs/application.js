@@ -35,6 +35,9 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import { initMapbox } from '../plugins/init_mapbox';
 import { initMeetupCable } from '../channels/meetup_channel'
 import { initCurrentPosition } from '../plugins/init_position';
+import { initStarRating } from '../plugins/init_star_rating';
+
+
 
 
 document.addEventListener('turbolinks:load', () => {
@@ -42,6 +45,7 @@ document.addEventListener('turbolinks:load', () => {
   // initSelect2();
   initMapbox();
   initMeetupCable();
+  initStarRating();
 })
 
 import "controllers"
