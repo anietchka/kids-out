@@ -92,10 +92,6 @@
   font-size: 14px;
 }
 
-.card-show-description{
-  font-weight: lighter;
-}
-
 .card-show-bold{
   font-weight: bold;
 }
@@ -111,6 +107,49 @@
 .card-show-meetup img{
   width: 30px;
 }
+
+
+//========== CARD SHOW OFFER=============== //
+.card-offer {
+  padding: 20px;
+  margin-bottom: 20px !important;
+}
+
+.card-offer h1 {
+  font-size: 24px;
+  font-weight: bolder;
+}
+
+.card-offer h5 {
+  font-size: 16px;
+  font-weight: normal;
+}
+
+// - Tag offer show -  //
+
+.tag-card-offer p {
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #F4F9F9;
+  color: #297F87;
+  padding: 4px 8px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.12);
+}
+
+.card-show-description{
+  color: #929292;
+  font-size: 16px;
+  font-weight: normal;
+}
+
+.card-show-description img {
+  height: 100%;
+  max-width: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+}
+// ================= INDEX MEETUPS =================== //
 
 .card-user-meetup{
   display: flex;
@@ -161,3 +200,4 @@
     }
   }
 }
+

@@ -3,6 +3,8 @@
 
 .flip-card {
   perspective: 1000px;
+  margin-top: -70px;
+
 }
 
 .flip-card-inner {
@@ -22,15 +24,6 @@
   backface-visibility: hidden;
 }
 
-/* Style the front side (fallback if image is missing) */
-.flip-card-front {
-  background-color: #bbb;
-  color: black;
-}
-
-/* Style the back side */
 .flip-card-back {
-  background-color: #bbb;
-  color: black;
   transform: rotateY(180deg);
 }

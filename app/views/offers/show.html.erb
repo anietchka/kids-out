@@ -1,145 +1,154 @@
-<div class="container">
-  <div class="card-show-offer">
-    <h1><%= @offer.name %></h1>
 
-    <div class="flip-card" data-controller="flip-card">
-      <div class="flip-card-inner">
-        <%# FRONT CARD %>
-        <div class="flip-card-front">
-          <div class="card-show bg-white py-3 my-3">
-            <div class="container">
-              <div class="card-show-image-favoris d-flex justify-content-between">
-                <div class="img-card mb-3">
-                  <%= image_tag(@offer.photo)%>
-                </div>
-                <div class="card-favoris">
-                  <% if current_user.bookmarks.where(offer: @offer).any? %>
-                    <%= link_to(offer_bookmark_path(@offer, current_user.bookmarks.where(offer: @offer).first), remote: true, method: :delete) do  %>
-                      <i class="fas fa-heart"></i>
-                    <% end %>
-                  <% else %>
-                    <%= link_to(offer_bookmarks_path(@offer), method: :post, remote: true) do  %>
-                      <i class="far fa-heart"></i>
-                    <% end %>
-                  <% end %>
-                  <div class="card-show-meetup">
-                    <button data-action="click->flip-card#flip">Les meetups</button>
-                  </div>
-                </div>
-              </div>
-              <div class="card-show-bold">
-                <% if @offer.min_age %>
-                  <% if @offer.max_age %>
-                    <p>Pour les <%= @offer.min_age %>-<%= @offer.max_age %>ans</p>
-                  <% else  %>
-                    <p>A partir de <%= @offer.min_age %>ans</p>
-                  <% end %>
-                <% end %>
-                <% if @offer.start_date && @offer.end_date %>
-                  <p> <%= image_tag("icons/calendar.png", class: "icons mr-2") %> Du <%= @offer.start_date.strftime("%d/%m/%y") %> au <%= @offer.end_date.strftime("%d/%m/%y") %></p>
-                <% end %>
-              </div>
-              <div class="card-show-description">
-                <% if @offer.description %>
-                  <div
-                    data-controller="read-more"
-                    data-read-more-more-text-value="Lire plus"
-                    data-read-more-less-text-value="Lire moins">
-                    <div class="read-more" data-read-more-target="content"><%= @offer.description.html_safe %></div>
+<%# FLIP CARD %>
+<div class="flip-card" data-controller="flip-card">
+  <div class="flip-card-inner">
+    <%# BEGGING FRONT CARD %>
+    <div class="flip-card-front mb-5">
+      <%# BANNER/HEADER %>
+      <div class="banner position-relative" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('<%= image_path @offer.photo %>');">
+        <%# FAVORIS %>
+        <div class="ban-favoris">
+          <% if current_user && current_user.bookmarks.where(offer: @offer).any? %>
+            <%= link_to(offer_bookmark_path(@offer, current_user.bookmarks.where(offer: @offer).first), remote: true, method: :delete) do  %>
+              <i class="fas fa-heart"></i>
+            <% end %>
+          <% else %>
+            <%= link_to(offer_bookmarks_path(@offer), method: :post, remote: true) do  %>
+              <i class="far fa-heart"></i>
+            <% end %>
+          <% end %>
+        </div><%# END FAVORIS %>
+      </div> <%#  END BANNER/HEADER %>
+      <%# CARD DETAILS%>
+      <div class="container text-align-left card-offer">
+        <%# TITLE OFFER %>
+        <h1><%= @offer.name %></h1>
+        <h5><%= @offer.address %></h2>
+        <%# AGE + DATE %>
+        <div class="d-flex justify-content-around tag-card-offer">
+          <% if @offer.min_age %>
+            <% if @offer.max_age %>
+              <p><%= @offer.min_age %>-<%= @offer.max_age %> ans et +</p>
+            <% elsif @offer.min_age == 0 %>
+              <p>Tous publics</p>
+            <% else  %>
+              <p><%= @offer.min_age %> ans et +</p>
+            <% end %>
+          <% end %>
+          <% if @offer.start_date && @offer.end_date %>
+            <p> <%= image_tag("icons/calendar.png", class: "icons mr-2") %> Du <%= @offer.start_date.strftime("%d/%m/%y") %> au <%= @offer.end_date.strftime("%d/%m/%y") %></p>
+          <% end %>
+        </div>
+        <%# BUTTON MEETUP FLIP %>
+        <div class=" d-flex justify-content-around mb-2 btn-meetup">
+          <%#= link_to "Voir les meetups", offer_meetups_path(@offer) %>
+          <a data-action="click->flip-card#flip" href="#">Voir les meetups</a>
+        </div>
+        <%# BUTTON MEETUP FLIP END %>
+        <%# DESCRIPTIF %>
+        <div class="card-show-description">
+          <% if @offer.description %>
+            <div
+            data-controller="read-more"
+            data-read-more-more-text-value="Lire plus"
+            data-read-more-less-text-value="Lire moins"
+            >
+              <div class="read-more" data-read-more-target="content"><%= @offer.description.html_safe %></div>
+                <a data-action="read-more#toggle" href="#">
+                Lire plus
 
-                    <a data-action="read-more#toggle" href="#">
-                      Lire plus
-                    </a>
-                  </div>
-                <% end %>
-              </div>
-              <div class="card-show-bold mt-2">
-                <p><%= image_tag("icons/address.png", class: "icons mr-2") %>Adresse : <%= @offer.address %></p>
-              </div>
-              <% if @offer.schedule %>
-                <p>Horaires d'ouverture :<%= @offer.schedule %></p>
-              <% end %>
-              <% if @offer.url %>
-                <%= link_to @offer.url, target: :_blank do %>
-                  <p>Plus d'informations</p>
-                <% end %>
-              <% end %>
-              <div>
-                <a class="" id="btn-review" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                  Commenter et noter l'activité
                 </a>
-                <div class="collapse" id="collapseExample">
-                  <div class="card card-body mb-5" >
-                    <%= simple_form_for([ @offer, @review ], remote: true) do |f| %>
-                      <%= f.input :comment %>
-                      <%= f.input :rating, collection: 1..5 %>
-                      <%= f.submit "Submit" %>
-                    <% end %>
-                  </div>
-                </div>
               </div>
-              <% @offer.reviews.each do |review| %>
-                <div class="card-review bg-white py-3 my-3" id="review-<%= review.id %>">
-                  <div class="container">
-                    <div class="card-nickname-rating d-flex justify-content-between">
-                      <div class="card-nickname">
-                        <h6><%= review.user.nickname %></h6>
-                        <p>Le <%= review.created_at.strftime("%d/%m/%y") %></p>
-                      </div>
-                      <div class="card-star">
-                        <% review.rating.times do%>
-                          <i class="fas fa-star"></i>
-                        <% end %>
-                        <% (5-review.rating).times do %>
-                          <i class="far fa-star"></i>
-                        <% end %>
-                      </div>
-                    </div>
-                      <p class="fst-italic"><%= review.comment %></p>
-                      <% if policy(review).destroy? %>
-                        <%= link_to(offer_review_path(@offer, review), method: :delete, remote: true) do %>
-                          <i class="far fa-trash-alt"></i>
-                        <% end %>
-                      <% end %>
-                  </div>
-                </div>
+          <% end %>
+        </div>
+        <%# END DESCRIPTIF %>
+        <%# MORE INFORMATION URL %>
+        <div class="link-info">
+          <% if @offer.url %>
+            <%= link_to @offer.url, target: :_blank do %>
+              <p>Plus d'informations</p>
+            <% end %>
+          <% end %>
+        </div>
+        <%# END MORE INFORMATION URL %>
+        <%# ADD NEW COMMENT BEGING %>
+        <div class="add-review">
+          <a class="" id="btn-review" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+            Laisser un avis
+          </a>
+          <div class="collapse" id="collapseExample">
+            <div class="card card-body mb-5" >
+              <%= simple_form_for([ @offer, @review ], remote: true) do |f| %>
+                <%= f.input :comment %>
+                <%= f.input :rating, collection: 1..5 %>
+                <%= f.submit "Submit" %>
               <% end %>
             </div>
           </div>
         </div>
-        <%# END FRONT CARD %>
-        <%# BACK CARD %>
-        <div class="flip-card-back">
-          <div class="card-show bg-white py-3 my-3 container">
+        <%# ADD NEW COMMENT END %>
+        <%# ALL COMMENTS BEGING %>
+        <% @offer.reviews.each do |review| %>
+          <div class="card-review bg-white py-3 my-3" id="review-<%= review.id %>">
             <div class="container">
-              <div class="img-card mb-3">
-                <%= link_to(new_offer_meetup_path(@offer)) do %>
-                <%= image_tag("icons/meetup.jpg") %>
-                <%= link_to "Retrouvez les meetups",(offer_meetups_path(@offer.id)) %>
-                <% end %>
-                <button data-action="click->flip-card#flip">Retour</button>
-              </div>
-               <%# INDEX MEETUP %>
-              <% @offer.meetups.each do |meetup| %>
-                <div class="card-review bg-white py-3 my-3" id="meetup-<%= meetup.id %>">
-                  <div class="container">
-                    <div class="card-nickname-rating d-flex justify-content-between">
-                      <div class="card-nickname">
-                          <h6><%= meetup.user.nickname %></h6>
-                          <p><%= meetup.participants.count %> participants</p>
-                          <p><%= meetup.description %></p>
-                          <%= meetup.date%>
-                          <%= link_to "Plus d'informations",  meetup_path(meetup.id) %>
-                      </div>
-                    </div>
-                  </div>
+
+              <div class="card-nickname-rating d-flex justify-content-between">
+                <div class="card-nickname">
+                  <h6><%= review.user.nickname %></h6>
+                  <p>Le <%= review.created_at.strftime("%d/%m/%y") %></p>
                 </div>
-              <% end %>
+                <div class="card-star">
+                  <% review.rating.times do%>
+                    <i class="fas fa-star"></i>
+                  <% end %>
+                  <% (5-review.rating).times do %>
+                    <i class="far fa-star"></i>
+                  <% end %>
+                </div>
+              </div>
+              <p class="fst-italic"><%= review.comment %></p>
+                <% if policy(review).destroy? %>
+                  <%= link_to(offer_review_path(@offer, review), method: :delete, remote: true) do %>
+                    <i class="far fa-trash-alt"></i>
+                  <% end %>
+                <% end %>
+
             </div>
           </div>
-        </div>
-        <%# END BACK CARD %>
+        <% end %>
+        <%# ALL COMMENTS END %>
+      </div> <%# END CARD DETAILS%>
+    </div><%# END FRONT CARD %>
+    <%# ============================= %>
+    <%# BEGGING BACK CARD %>
+    <div class="flip-card-back">
+      <div>
+        <button data-action="click->flip-card#flip">Retour</button>
+        <%= link_to(new_offer_meetup_path(@offer)) do %>
+          <p>Créer un nouveau meetup !</p>
+        <% end %>
       </div>
+      <%# LISTING MEETUPS BY OFFER %>
+      <div>
+        <% @offer.meetups.each do |meetup| %>
+          <div class="card-user-meetup" id="meetup-<%= meetup.id %>">
+            <div class="card-meetup-left">
+              <h3><%= meetup.offer.name %></h3>
+              <h4>par <strong><%= meetup.user.nickname %></strong></h4>
+              <div class="card-tags">
+                <span><%= meetup.participants.count %> participant(s)</span>
+              </div>
+            </div>
+            <div class="card-meetup-right">
+              <p><%= meetup.date.strftime('%d/%m/%Y') %></p>
+              <h2><%= meetup.date.strftime('%Hh%M') %></h2>
+            </div>
+           </div>
+        <% end %>
+      </div>
+      <%# END LISING MEETUPS %>
     </div>
-  </div>
+    <%# END BACK CARD %>
+  </div> <%# END FLIP CARD INNER %>
 </div>
+<%# END FLIP CARD %>
