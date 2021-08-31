@@ -1,55 +1,48 @@
-<div>
-  <div class="top">
-    <div class="container">
-      <div class="Title">
-        <h1>Kid's Out</h1>
-      </div>
-      <div class="d-flex justify-content-around align-items-center">
-
-        <div class="buttons">
-          <%= simple_form_for :search, url: offers_path, method: :get do |f| %>
-            <div class="bg-white">
-              <%= f.input :address %>
-              <%= f.input :min_age %>
-              <%= f.input :theme, as: :radio_buttons, collection: ["interieure", "exterieure"] %>
-              <%= f.input :longitude, :as => :hidden %>
-              <%= f.input :latitude, :as => :hidden %>
-              <div class="question">
-                <input type="submit" name="commit" value="Où souhaitez-vous aller ?"
-                  data-disable-with="Où souhaitez-vous allez ?"
-                  style="border-radius: 5px; background-color: #00B7BA; color: #F2C94B;">
-              </div>
-            </div>
-          <% end  %>
+    <div class="card-question-1">
+      <div class="container ml-3">
+        <h1>Trouver toutes les activités aux alentours <div class="blue-text">pour votre enfant</div></h1>
+        <div class="card-question-address">
+        <%= simple_form_for :search, url: offers_path, method: :get do |f| %>
+        <%= f.input :address, class: "btn-review-white", placeholder: "Indiquez votre adresse", label: false %>
+          <%= button_tag "Trouver autour de moi", id: "current-position", class: "btn-review-white" %>
         </div>
-
-        <div class="icon-position">
-          <%= link_to offers_path do %>
-            <i class="fas fa-map-marked-alt"></i>
-          <% end %>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
-  <div class="container">
-    <div class="suggestion">
-      <div class="bg-white border box-shadow-museum p-3 m-3" style="border-radius: 10px;height: 258px;">
-        <h3>Nos suggestions</h3>
-        <div class="d-flex align-items-center justify-content-start">
-          <div class="museum"> <%= image_tag ("museum.png") %></div>
-          <div class="text-padding">
-            <h5>Musée</h5>
-          </div>
-        </div>
-        <div class="d-flex align-items-center justify-content-start">
-          <div class="museum"> <%= image_tag ("trees.png") %></div>
-          <div class="text-padding">
-            <h5>Parc</h5>
-          </div>
+        <div class="card-btn-next-back">
+          <%= button_tag "", class: "btn-review-transparent" %>
+          <%= button_tag "Suivant", class: "btn-review-black" %>
         </div>
       </div>
     </div>
-  </div>
-</div>
+
+    <div class="card-question-2 ">
+      <div class="container">
+        <h1>Age de votre enfant :</h1>
+        <div class="age-selector d-flex" data-controller= "age-sellector">
+          <i class="fas fa-minus-circle" data-action="click->age-sellector#down"></i>
+          <div class="age-proposal" data-age-sellector-target = 'age'>
+            5 ans
+          </div>
+          <%= f.input :min_age, label: false, input_html: {value: 5, data: {age_sellector_target: 'input'}}, as: :hidden %>
+          <i class="fas fa-plus-circle" data-action="click->age-sellector#up"></i>
+        </div>
+      </div>
+      <div class="card-btn-next-back">
+        <%= button_tag "Retour", class: "btn-review-transparent" %>
+        <%= button_tag "Suivant", class: "btn-review-black" %>
+      </div>
+    </div>
+    <div class="card-question-3">
+      <div class="container">
+        <h1>Souhaitez vous une activité en </h1>
+        <%= f.input :theme, as: :radio_buttons, collection: ["interieure", "exterieure"] %>
+        <%= f.input :longitude, as: :hidden %>
+        <%= f.input :latitude, as: :hidden %>
+        <div class="card-btn-next-back">
+          <%= button_tag "Retour", class: "btn-review-transparent" %>
+          <input type="submit" name="commit" value="Suivant"
+               data-disable-with="Suivant"
+               class="btn-review-black">
+        </div>
+      </div>
+    </div>
+
+    <% end %>
