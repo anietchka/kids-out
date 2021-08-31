@@ -1,8 +1,12 @@
-<div class="container">
-  <p><%= @meetup.user.nickname %> à proposé un Meetup le <%= @meetup.date %></p>
-  <p><%= @meetup.description %></p>
+<div class="container" style="margin-top: 54px;background-color: white">
+  <div class="card-offer-meetup">
+    <p><strong><%= @meetup.offer.name %></strong></p>
+    <div class="size-date-heure-description"><p><%= @meetup.date %></p>
+    <p><%= @meetup.description %></p></div>
+  </div>
 
   <div class="card-participation">
+  <div class=""></div>
     <% if current_user.participants.where(meetup: @meetup).any? %>
       <%= link_to(participant_path( current_user.participants.where(meetup: @meetup).first), remote: true, method: :delete) do  %>
         <i class="fas fa-minus-circle"></i>
@@ -16,9 +20,9 @@
     <% end %>
   <ul>
     <% @meetup.participants.each do |participant| %>
-    <li><%= participant.user.nickname %></li>
+    <%# <li><%= participant.user.nickname </li> %>
     <% end %>
   </ul>
 
-  <%= link_to "Acceder au chat",  chat_meetup_path(@meetup) %>
+  <%= render 'chat', meetup: @meetup, message: Message.new %>
 </div>
