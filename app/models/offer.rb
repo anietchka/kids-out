@@ -16,7 +16,7 @@ class Offer < ApplicationRecord
   private
 
     def ensure_date_have_values
-      if permanent.true?
+      if permanent == true
         self.start_date = "31-12-2000"
         self.end_date = "31-12-2100"
       end
