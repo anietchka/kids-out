@@ -1,23 +1,27 @@
 <div class="container">
   <div class="d-flex justify-content-around align-items-center">
-
-    <div class="buttons">
-      <%= simple_form_for :search, url: offers_path, method: :get do |f| %>
-        <div class="bg-white">
-          <%= f.input :address %>
-          <%= f.input :min_age %>
-          <%= f.input :theme, as: :radio_buttons, collection: ["interieure", "exterieure"] %>
-          <%= f.input :categories, collection: Category.pluck(:name) %>
-          <%= f.input :date, as: :string, required: false, input_html: {class: "datepicker"} %>
-          <div class="question">
-            <input type="submit" name="commit" value="Où souhaitez-vous aller ?"
-              data-disable-with="Où souhaitez-vous allez ?"
-              style="border-radius: 5px; ">
+    <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+      Filtres
+    </a>
+    <div class="collapse" id="collapseExample">
+      <div class="card card-body">
+        <div class="buttons">
+          <%= simple_form_for :search, url: offers_path, method: :get do |f| %>
+            <div class="bg-white">
+              <%= f.input :address %>
+              <%= f.input :min_age %>
+              <%= f.input :theme, as: :radio_buttons, collection: ["interieure", "exterieure"] %>
+              <%= f.input :categories, collection: Category.pluck(:name) %>
+              <%= f.input :date, as: :string, required: false, input_html: {class: "datepicker"} %>
+              <div class="question">
+                <input type="submit" name="commit" value="Où souhaitez-vous aller ?"
+                  data-disable-with="Où souhaitez-vous allez ?"
+                  style="border-radius: 5px; ">
+              </div>
+            </div>
           </div>
         </div>
-      <% end  %>
-    </div>
-
+      
     <div class="icon-position">
       <%= link_to offers_path do %>
         <i class="fas fa-map-marked-alt"></i>
