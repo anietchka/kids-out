@@ -22,7 +22,7 @@
   width: 22px;
   height: 22px;
 }
-.card-favoris i {
+.card-favoris-heart i {
   color: #D94A64;
   font-size: 25px;
 }
@@ -149,6 +149,14 @@
   object-fit: cover;
   border-radius: 4px;
 }
+  // -- Back Flip card show offer --//
+
+.black-cross {
+  position: absolute;
+  top: 15px;
+  right: 25px;
+  font-size: 35px;
+  }
 // ================= INDEX MEETUPS =================== //
 
 .card-user-meetup{
@@ -378,6 +386,7 @@ div#messages {
     justify-content: center;
     a {
       color: #D94A64;
+      font-size: 24px;
     }
   }
 }
