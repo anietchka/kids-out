@@ -33,19 +33,27 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 
 // MapBox
 import { initMapbox } from '../plugins/init_mapbox';
-import { initMeetupCable } from '../channels/meetup_channel'
 import { initCurrentPosition } from '../plugins/init_position';
 import { initStarRating } from '../plugins/init_star_rating';
 
 
+
+// Meetup
+import { initMeetupCable } from '../channels/meetup_channel'
+
+// Date picker
+import { initFlatPickr } from "../plugins/init_flatpickr";
 
 
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
   // initSelect2();
   initMapbox();
+  // initCurrentPosition();
   initMeetupCable();
   initStarRating();
+  initFlatPickr();
+
 })
 
 import "controllers"
