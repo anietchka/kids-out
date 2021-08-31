@@ -8,6 +8,7 @@
           <%= f.input :min_age %>
           <%= f.input :theme, as: :radio_buttons, collection: ["interieure", "exterieure"] %>
           <%= f.input :categories, collection: Category.pluck(:name) %>
+          <%= f.input :date, as: :string, required: false, input_html: {class: "datepicker"} %>
           <div class="question">
             <input type="submit" name="commit" value="Où souhaitez-vous aller ?"
               data-disable-with="Où souhaitez-vous allez ?"
@@ -31,3 +32,5 @@
   data-markers="<%= @markers.to_json %>"
   data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>" >
 </div>
+
+<% console %>
