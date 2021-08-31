@@ -34,6 +34,11 @@ class OffersController < ApplicationController
       @offers = @offers.where('categories.name = ?', params[:search][:categories])
     end
 
+    # Date
+    # if params[:search] && params[:search][:categories].present?
+    #   @offers = @offers.where('categories.name = ?', params[:search][:categories])
+    # end
+
     # Create markers out of resulting offers from query
     # the `geocoded` method filters out offers that can't be geocoded
     @markers = @offers.geocoded.map do |offer|
