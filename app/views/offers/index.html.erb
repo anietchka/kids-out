@@ -1,7 +1,6 @@
 <div class="container">
   <div class="d-flex justify-content-around align-items-center">
 
-
     <div class="buttons">
       <%= simple_form_for :search, url: offers_path, method: :get do |f| %>
         <div class="bg-white">
@@ -33,3 +32,5 @@
   data-markers="<%= @markers.to_json %>"
   data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>" >
 </div>
+
+<% console %>
