@@ -40,7 +40,15 @@
     <div class="card-question-3 hidden" data-page-selector-target = 'page3'>
       <div class="container">
         <h1>Souhaitez vous une activité en </h1>
-        <%= f.input :theme, as: :radio_buttons, collection: ["interieure", "exterieure"] %>
+        <div class="theme-choice" data-controller="theme-selector">
+          <div class="card-theme" data-action="click->theme-selector#change1" data-theme-selector-target = 'theme1'>
+          Interieure
+          </div>
+          <div class="card-theme" data-action="click->theme-selector#change2" data-theme-selector-target = 'theme2'>
+          Exterieure
+          </div>
+        </div>
+        <%= f.input :theme, as: :radio_buttons, collection: ["interieure", "exterieure"], input_html: {data: {theme_selector_target: 'input'}} %>
         <%= f.input :longitude, as: :hidden %>
         <%= f.input :latitude, as: :hidden %>
         <div class="card-btn-next-back">

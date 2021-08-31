@@ -20,6 +20,4 @@ export default class extends Controller {
     this.page2Target.style.display = "none"
     this.page3Target.style.display = "none"
   }
-
-
 }
