@@ -1,9 +1,9 @@
 
 <%# FLIP CARD %>
-<div class="flip-card" data-controller="flip-card">
+<div class="flip-card <%= "flipped" if params[:card_flipped]%>"  data-controller="flip-card">
   <div class="flip-card-inner">
     <%# BEGGING FRONT CARD %>
-    <div class="flip-card-front mb-5">
+    <div class="flip-card-front pb-6">
       <%# BANNER/HEADER %>
       <div class="banner position-relative" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('<%= image_path @offer.photo %>');">
         <%# FAVORIS %>
@@ -30,7 +30,7 @@
             <% if @offer.max_age %>
               <p><%= @offer.min_age %>-<%= @offer.max_age %> ans et +</p>
             <% elsif @offer.min_age == 0 %>
-              <p>Tous publics</p>
+              <p>Tout public</p>
             <% else  %>
               <p><%= @offer.min_age %> ans et +</p>
             <% end %>
@@ -72,20 +72,19 @@
         </div>
         <%# END MORE INFORMATION URL %>
         <%# ADD NEW COMMENT BEGING %>
-        <div class="add-review">
-          <a class="" id="btn-review" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-            Laisser un avis
-          </a>
-          <div class="collapse" id="collapseExample">
-            <div class="card card-body mb-5" >
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-4">
               <%= simple_form_for([ @offer, @review ], remote: true) do |f| %>
-                <%= f.input :comment %>
-                <%= f.input :rating, collection: 1..5 %>
-                <%= f.submit "Submit" %>
+                <%= f.input :comment, label: "Commentez votre experience" %>
+                <%= f.input :rating, collection: (1..5).to_a, label: "Notez votre experience" %>
+                <%= f.submit "Envoyer" %>
               <% end %>
             </div>
           </div>
         </div>
+
+
         <%# ADD NEW COMMENT END %>
         <%# ALL COMMENTS BEGING %>
         <% @offer.reviews.each do |review| %>
@@ -122,32 +121,36 @@
     <%# ============================= %>
     <%# BEGGING BACK CARD %>
     <div class="flip-card-back">
-      <div>
-        <button data-action="click->flip-card#flip">Retour</button>
-        <%= link_to(new_offer_meetup_path(@offer)) do %>
-          <p>Créer un nouveau meetup !</p>
-        <% end %>
-      </div>
-      <%# LISTING MEETUPS BY OFFER %>
-      <div>
-        <% @offer.meetups.each do |meetup| %>
-          <div class="card-user-meetup" id="meetup-<%= meetup.id %>">
-            <div class="card-meetup-left">
-              <h3><%= meetup.offer.name %></h3>
-              <h4>par <strong><%= meetup.user.nickname %></strong></h4>
-              <div class="card-tags">
-                <span><%= meetup.participants.count %> participant(s)</span>
+      <div class="container">
+        <div>
+          <button data-action="click->flip-card#flip">Retour</button>
+          <%= link_to(new_offer_meetup_path(@offer)) do %>
+            <p>Créer un nouveau meetup !</p>
+          <% end %>
+        </div>
+        <%# LISTING MEETUPS BY OFFER %>
+        <div>
+          <% @offer.meetups.each do |meetup| %>
+            <%= link_to(meetup_path(meetup)) do%>
+              <div class="card-user-meetup" id="meetup-<%= meetup.id %>">
+                <div class="card-meetup-left">
+                  <h3><%= meetup.offer.name %></h3>
+                  <h4>par <strong><%= meetup.user.nickname %></strong></h4>
+                  <div class="card-tags">
+                    <span><%= meetup.participants.count %> participant(s)</span>
+                  </div>
+                </div>
+                <div class="card-meetup-right">
+                  <p><%= meetup.date.strftime('%d/%m/%Y') %></p>
+                  <h2><%= meetup.date.strftime('%Hh%M') %></h2>
+                </div>
               </div>
-            </div>
-            <div class="card-meetup-right">
-              <p><%= meetup.date.strftime('%d/%m/%Y') %></p>
-              <h2><%= meetup.date.strftime('%Hh%M') %></h2>
-            </div>
-           </div>
-        <% end %>
+            <% end %>
+          <% end %>
+        </div>
+        <%# END LISING MEETUPS %>
       </div>
-      <%# END LISING MEETUPS %>
-    </div>
+      </div>
     <%# END BACK CARD %>
   </div> <%# END FLIP CARD INNER %>
 </div>

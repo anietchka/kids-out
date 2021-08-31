@@ -156,6 +156,7 @@
   justify-content: space-between;
   border-radius: 6px;
   overflow: hidden;
+  height: 115px;
   margin-bottom: 15px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.12);
   .card-meetup-left{
@@ -187,7 +188,7 @@
     background-color: #F1C94B;
     color: white;
     width: 115px;
-    height: 115px;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -200,6 +201,7 @@
     }
   }
 }
+
 
 //============================= SHOW MEETUP =============================//
 .card-offer-meetup {
@@ -260,3 +262,47 @@ div#messages {
     align-items: flex-start;
     padding: 8px;
 }
+
+// ================= INDEX MEETUP-TRASH =================== //
+
+.card-meetup-with-trash{
+  position: relative;
+  height: 115px;
+  margin-bottom: 15px;
+  background-color: white;
+  border-radius: 6px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.12);
+  &.swipped {
+    .card-user-meetup {
+      transform: translateX(-50px);
+    }
+  }
+  .card-user-meetup {
+    position: absolute;
+    left: -1px;
+    top: -1px;
+    height: calc(100% + 2px);
+    width: calc(100% + 2px);
+    z-index: 10;
+    transition: all 0.7s ease;
+  }
+  .card-meetup-trash {
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 5;
+    width: 50px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    a {
+      color: #297F87;
+    }
+    a:hover {
+      font-weight: bold;
+    }
+
+  }
+}
+

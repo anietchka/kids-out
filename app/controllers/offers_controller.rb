@@ -34,6 +34,13 @@ class OffersController < ApplicationController
       @offers = @offers.where('categories.name = ?', params[:search][:categories])
     end
 
+    # Date
+    # FIXME: this query remove every permant offers, and it shouldn't...
+    if params[:search] && params[:search][:date].present?
+      @offers = @offers.where('start_date <= ?', params[:search][:date])
+      @offers = @offers.where('end_date <= ?', params[:search][:date])
+    end
+
     # Create markers out of resulting offers from query
     # the `geocoded` method filters out offers that can't be geocoded
     @markers = @offers.geocoded.map do |offer|
