@@ -18,9 +18,10 @@ user_3 = User.create!(email: 'estelle.cirilo@gmail.com', nickname: "ecirilo1", p
 user_4 = User.create!(email: 'barois.anne@orange.fr', nickname: "oslanne", password: '123456', first_name: 'Anne', last_name: 'Barois')
 user_5 = User.create!(email: 'ville-de-paris@gmail.com', nickname: "VilleDeParis", password: '123456', first_name: 'Ville', last_name: 'de Paris')
 
-file = URI.open('https://kitt.lewagon.com/placeholder/users/cveneziani')
+file = URI.open('https://i.skyrock.net/4416/47814416/pics/1946552767_small_1.jpg')
 user_1.photo.attach(io: file, filename: 'nes.png', content_type: 'image/png')
 user_1.save!
+
 
 puts 'Users Created!'
 
