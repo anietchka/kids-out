@@ -66,7 +66,7 @@
 }
 
 .titre-card {
-  color: #F2884B;
+  color: black;
 }
 
 .card-review{
@@ -202,7 +202,6 @@
   }
 }
 
-
 //============================= SHOW MEETUP =============================//
 .card-offer-meetup {
   color: #297F87;
@@ -233,6 +232,11 @@
   flex-direction: column;
   background-color: #F2F2F2;
   border-radius: 5px;
+}
+
+
+.card-send {
+ // Partie Estelle//
 }
 
 
@@ -312,6 +316,7 @@ div#messages {
   }
   .card-meetup-trash {
     position: absolute;
+    background-color: #FDF5DE;
     right: 0;
     top: 0;
     z-index: 5;
@@ -322,6 +327,7 @@ div#messages {
     justify-content: center;
     a {
       color: #297F87;
+      font-size: 24px;
     }
     a:hover {
       font-weight: bold;
@@ -329,3 +335,80 @@ div#messages {
 
   }
 }
+
+
+// === CARD FAVORIS == //
+
+.card-favoris {
+  position: relative;
+  height: 115px;
+  margin-bottom: 15px;
+  background-color: white;
+  border-radius: 6px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.12);
+  &.swiped {
+    .card-favoris-front {
+      transform: translateX(-50px);
+    }
+  }
+  .card-favoris-front {
+    position: absolute;
+    flex-flow: row wrap;
+    align-items: stretch;
+    left: -1px;
+    top: -1px;
+    height: calc(100% + 2px);
+    width: calc(100% + 2px);
+    z-index: 10;
+    transition: all 0.7s ease;
+    }
+    .card-favoris-description {
+    color: #297F87;
+    background-color: white;
+    flex-grow: 1;
+    max-width: calc(100% - 115px);
+    padding: 0 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    h1 {
+      font-size: 20px;
+      font-weight: bold;
+      }
+    a {
+      font-size: 16px;
+      font-weight: bold;
+      background-color: #F4F9F9;
+      color: #297F87;
+      padding: 4px 8px;
+      border-radius: 12px;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.12);
+      }
+    }
+  .card-favoris-img {
+    width: 115px;
+    height: 115px;
+    img {
+      height: 100%;
+      width: 115px;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+  }
+  .card-favoris-swip {
+    position: absolute;
+    background-color: #F4F9F9;
+    right: 0;
+    top: 0;
+    z-index: 5;
+    width: 50px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    a {
+      color: #D94A64;
+    }
+  }
+}
+

@@ -1,17 +1,23 @@
 <div class="container p-3">
   <h1 class="titre-card">Mes favoris</h1>
   <% @bookmarks.each do |bookmark| %>
-  <div class = "container card-index d-flex ">
-    <div class="img-card"><%= image_tag bookmark.offer.photo %></div>
-    <div class ="card-descript p-2" >
-        <div class="esp-card titre"><%= bookmark.offer.name %></div>
-        <div class="esp-card"><%= link_to "Plus d'info", (offer_path(bookmark.offer)) %></div>
+  <div class="card-favoris d-flex">
+    <div class="card-favoris-front d-flex">
+      <div class="card-favoris-img">
+        <%= image_tag bookmark.offer.photo %>
+      </div>
+      <div class="card-favoris-description">
+        <h1 class="card-favoris-titre"><%= bookmark.offer.name %></h1>
+        <div class="card-favoris-info"><%= link_to "Plus d'info", (offer_path(bookmark.offer)) %></div>
+      </div>
     </div>
-        <div class="esp-card ">
-          <%= link_to(offer_bookmark_path(bookmark.offer, bookmark), method: :delete, remote: true) do  %>
-              <i class="fas fa-heart"></i>
-          <% end %>
-        </div>
+    <div class="card-favoris-swip">
+      <%= link_to(offer_bookmark_path(bookmark.offer, bookmark), method: :delete, remote: true) do  %>
+        <i class="fas fa-heart"></i>
+      <% end %>
+    </div>
+
   </div>
   <% end %>
+
 </div>
