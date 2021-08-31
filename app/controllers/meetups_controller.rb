@@ -42,6 +42,10 @@ class MeetupsController < ApplicationController
     authorize @meetup
   end
 
+  def edit
+    @meetup = Meetup.find(params[:id])
+  end
+
   def user_meetups
     @meetups = current_user.meetups
     skip_authorization
