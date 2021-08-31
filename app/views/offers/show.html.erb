@@ -74,10 +74,14 @@
         <%# ADD NEW COMMENT BEGING %>
         <div class="container">
           <div class="row">
-            <div class="col-xs-4">
+            <div class="col-xs-4 w-100 form-label">
+              <h3>Laisser un avis</h3>
+              <% if @offer.reviews.size > 1%>
+                <p><i class="fas fa-star"></i> <%= @offer.reviews.average(:rating) %>/5 (<%= @offer.reviews.size %> commentaires) </p>
+              <% end %>
               <%= simple_form_for([ @offer, @review ], remote: true) do |f| %>
-                <%= f.input :comment, label: "Commentez votre experience" %>
-                <%= f.input :rating, collection: (1..5).to_a, label: "Notez votre experience" %>
+                <%= f.input :rating, collection: (1..5).to_a %>
+                <%= f.input :comment, placeholder: "Commentez votre experience" %>
                 <%= f.submit "Envoyer" %>
               <% end %>
             </div>
