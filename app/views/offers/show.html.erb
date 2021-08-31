@@ -1,6 +1,6 @@
 
 <%# FLIP CARD %>
-<div class="flip-card" data-controller="flip-card">
+<div class="flip-card <%= "flipped" if params[:card_flipped]%>"  data-controller="flip-card">
   <div class="flip-card-inner">
     <%# BEGGING FRONT CARD %>
     <div class="flip-card-front mb-5">
@@ -72,6 +72,18 @@
         </div>
         <%# END MORE INFORMATION URL %>
         <%# ADD NEW COMMENT BEGING %>
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-4">
+              <%= simple_form_for([ @offer, @review ], remote: true) do |f| %>
+                <%= f.input :comment, label: "Commentez votre experience" %>
+                <%= f.input :rating, collection: (1..5).to_a, label: "Notez votre experience" %>
+                <%= f.submit "Envoyer" %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+
         <div class="add-review">
           <a class="" id="btn-review" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
             Laisser un avis

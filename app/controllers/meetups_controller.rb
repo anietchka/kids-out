@@ -21,7 +21,7 @@ class MeetupsController < ApplicationController
     authorize @meetup
     @meetup.save
     @meetup.participants.create(user: current_user)
-    redirect_to offer_path(@offer)
+    redirect_to offer_path(@offer, card_flipped: true)
   end
 
   def show
