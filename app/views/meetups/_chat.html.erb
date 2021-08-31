@@ -4,9 +4,13 @@
         <%= render 'messages/message', message: message %>
       <% end %>
   </div>
+  <%= simple_form_for [ meetup, message ], html: { class: "chat-form"}, remote: true do |f| %>
+    <div class="input-message"><%= f.input :content, label: false, placeholder: "Message" %></div>
+    <div class="submit-valid">
+      <%= button_tag type: 'submit' do %>
+        <div class="icon-send"><i class='far fa-paper-plane'></i></div>
+      <% end %>
+    </div>
+  <% end %>
 </div>
 
-<%= simple_form_for [ meetup, message ], remote: true do |f| %>
-  <%= f.input :content, label: false, placeholder: "Message" %>
-  <%= f.submit "Valider" %>
-<% end %>

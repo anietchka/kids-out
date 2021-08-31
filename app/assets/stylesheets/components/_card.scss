@@ -235,9 +235,6 @@
   border-radius: 5px;
 }
 
-.card-send {
-  
-}
 
 .message-container {
   background-color: #C2C6CC;
@@ -253,6 +250,7 @@
   &.currentuser {
     background: #297F87;
     align-self: flex-end;
+    color:white;
   }
 }
 
@@ -261,6 +259,32 @@ div#messages {
     flex-direction: column;
     align-items: flex-start;
     padding: 8px;
+    height: 320px;
+    overflow-y: scroll;
+}
+
+.chat-form {
+  display: flex;
+  justify-content: space-around;
+  position: sticky;
+  background-color: #F2F2F2;
+  margin-top: 14px;
+  align-items: baseline;
+}
+
+.submit-valid {
+  button {
+    border-radius: 50%;
+    color: white;
+    background-color: #F1C94B;
+    border: transparent;
+  }
+}
+
+.form-control {
+  border-radius: 30px;
+  width: 318px;
+  background-color: #D5D5D5;
 }
 
 // ================= INDEX MEETUP-TRASH =================== //
@@ -305,4 +329,3 @@ div#messages {
 
   }
 }
-
