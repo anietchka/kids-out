@@ -128,11 +128,10 @@
     <%# BEGGING BACK CARD %>
     <div class="flip-card-back">
       <div class="container">
-        <div>
+        <div class="button-new-meetup">
           <button data-action="click->flip-card#flip">Retour</button>
-          <%= link_to(new_offer_meetup_path(@offer)) do %>
-            <p>Créer un nouveau meetup !</p>
-          <% end %>
+          <%= link_to "Créer un nouveau meetup !", (new_offer_meetup_path(@offer)) %>
+
         </div>
         <%# LISTING MEETUPS BY OFFER %>
         <div>

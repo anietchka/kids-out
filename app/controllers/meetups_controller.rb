@@ -34,7 +34,7 @@ class MeetupsController < ApplicationController
     @user = current_user
     authorize @meetup
     @meetup.destroy
-    redirect_to user_meetups_meetups(@user)
+    redirect_to user_meetups_meetups_path(@user)
   end
 
   def chat

@@ -31,3 +31,21 @@
 .btn-meetup a:hover {
   text-decoration: none;
 }
+
+// BUTTON NEW MEETUP IN OFFER SHOW //
+
+.button-new-meetup {
+  margin-top: 25vw;
+  position: relative;
+  a {
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: black;
+  color: white;
+  padding: 20px 84px;
+  border-radius: 30px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.12);
+  }
+
+}

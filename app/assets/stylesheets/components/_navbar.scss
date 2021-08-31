@@ -16,7 +16,9 @@
 }
 
 .margin-navbar{
-  margin-bottom: 70px;
+  height: calc(100vh - 80px);
+  overflow-y: scroll;
+  overflow-x: hidden;
   position: relative;
 }
 
