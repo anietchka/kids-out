@@ -31,3 +31,50 @@
 .btn-meetup a:hover {
   text-decoration: none;
 }
+
+.btn-review-white{
+  border: solid 0.1px white;
+  background-color: white;
+  border-radius: 30px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.12);
+  padding: 11px 0px;
+  width: 90%;
+  color: black;
+    a {
+   text-decoration: none;
+   font-size: 16px;
+   font-weight: bold;
+
+    }
+}
+
+.btn-review-black{
+  border: solid 0.1px black;
+  background-color: black;
+  border-radius: 30px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.12);
+  padding: 11px 0px;
+  width: 90%;
+  color: white;
+    a {
+   text-decoration: none;
+   font-size: 16px;
+   font-weight: bold;
+
+    }
+}
+
+.btn-review-transparent{
+  border-radius: 30px;
+  background-color: transparent;
+  border: none;
+  padding: 11px 0px;
+  width: 90%;
+  color: black;
+    a {
+   text-decoration: none;
+   font-size: 16px;
+   font-weight: bold;
+
+    }
+}
