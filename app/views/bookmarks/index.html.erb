@@ -1,3 +1,31 @@
+<div class="container">
+  <h1 class="titre-card">Mes favoris</h1>
+  <% @bookmarks.each do |bookmark| %>
+  <div class="card-favoris">
+    <div class="card-favoris-front">
+      <div class="card-favoris-img">
+        <%= image_tag bookmark.offer.photo %>
+      </div>
+      <div class="card-favoris-description">
+        <div class="card-favoris-titre"><%= bookmark.offer.name %></div>
+        <div class="card-favoris-info"><%= link_to "Plus d'info", (offer_path(bookmark.offer)) %></div>
+      </div>
+    </div>
+    <div class="card-favoris-swip">
+      <%= link_to(offer_bookmark_path(bookmark.offer, bookmark), method: :delete, remote: true) do  %>
+        <i class="fas fa-heart"></i>
+      <% end %>
+    </div>
+
+  </div>
+  <% end %>
+
+</div>
+
+
+
+
+
 <div class="container p-3">
   <h1 class="titre-card">Mes favoris</h1>
   <% @bookmarks.each do |bookmark| %>
