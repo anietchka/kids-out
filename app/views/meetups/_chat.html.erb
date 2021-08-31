@@ -1,0 +1,12 @@
+<div class="bg-grey card-chat"><h1><%= meetup.date.strftime("%d %B at %H:%M") %></h1>
+  <div id="messages" data-meetup-id="<%= meetup.id %>">
+      <% meetup.messages.each do |message| %>
+        <%= render 'messages/message', message: message %>
+      <% end %>
+  </div>
+</div>
+
+<%= simple_form_for [ meetup, message ], remote: true do |f| %>
+  <%= f.input :content, label: false, placeholder: "Message" %>
+  <%= f.submit "Valider" %>
+<% end %>

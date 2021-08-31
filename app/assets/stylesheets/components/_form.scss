@@ -1,3 +1,4 @@
+
 #search_address{
   background-color: black;
   color: white;
@@ -8,3 +9,28 @@
   height: 50px;
   text-align: center;
 }
+
+// ===  Form show odder == //
+.form-label {
+  h3 {
+    font-size: 20px;
+    font-weight: normal;
+    margin: 0;
+  }
+  label {
+  display: none;
+  }
+  .fa-star {
+    color: #F2C94B;
+  }
+  .br-widget {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+  }
+  a {
+    font-size: 40px !important;
+    margin-bottom: 6vw !important;
+  }
+

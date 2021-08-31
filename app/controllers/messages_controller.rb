@@ -6,15 +6,16 @@ class MessagesController < ApplicationController
     @message.user = current_user
     @message.meetup = @meetup
     authorize @message
+
     if @message.save
-      redirect_to chat_meetup_path(@meetup, anchor: "message-#{@message.id}")
+    #   redirect_to meetup_path(@meetup, anchor: "message-#{@message.id}")
+      MeetupChannel.broadcast_to(
+        @meetup,
+        render_to_string(partial: "message", locals: { message: @message })
+      )
     else
-      render "meetups/chat"
+    #   render "meetups/chat"
     end
-    MeetupChannel.broadcast_to(
-    @meetup,
-    render_to_string(partial: "message", locals: { message: @message })
-)
   end
 
   private
