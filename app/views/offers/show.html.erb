@@ -78,6 +78,8 @@
               <h3>Laisser un avis</h3>
               <% if @offer.reviews.size > 1%>
                 <p><i class="fas fa-star"></i> <%= @offer.reviews.average(:rating) %>/5 (<%= @offer.reviews.size %> commentaires) </p>
+              <% elsif @offer.reviews.size == 1 %>
+                <p><i class="fas fa-star"></i> <%= @offer.reviews.average(:rating) %>/5 (<%= @offer.reviews.size %> commentaire) </p>
               <% end %>
               <%= simple_form_for([ @offer, @review ], remote: true) do |f| %>
                 <%= f.input :rating, collection: (1..5).to_a %>

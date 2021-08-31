@@ -44,6 +44,7 @@ import { initMeetupCable } from '../channels/meetup_channel'
 // Date picker
 import { initFlatPickr } from "../plugins/init_flatpickr";
 
+import { toggleTrashCard } from "../components/toggle_trash_card";
 
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
@@ -53,6 +54,7 @@ document.addEventListener('turbolinks:load', () => {
   initMeetupCable();
   initStarRating();
   initFlatPickr();
+  toggleTrashCard();
 
 })
 
