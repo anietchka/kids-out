@@ -31,9 +31,10 @@ class MeetupsController < ApplicationController
 
   def destroy
     @meetup = Meetup.find(params[:id])
+    @user = current_user
     authorize @meetup
     @meetup.destroy
-    redirect_to offer_path(@offer)
+    redirect_to user_meetups_meetups_path(@user)
   end
 
   def chat
