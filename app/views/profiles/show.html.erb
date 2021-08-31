@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="d-flex username">
+    <h1> Bonjour <%= @user.nickname %> </h1>
+    <% if current_user.photo.attached? %>
+      <%= cl_image_tag @user.photo.key, width: 50, height: 50, style: 'border-radius: 50%;' %>
+    <% end %>
+  </div>
+  <div> 
+    <i class="fab fa-wpforms"></i>
+    <div><h2>Informations personnelles</h2>
+      <p>Prénom : <%= @user.first_name %></p>
+      <p>Nom : <%= @user.last_name %></p>
+      <p>Email : <%= @user.email %></p>
+    </div>
+    <hr>
+    <div class="d-flex event"><h3>Proposer un nouveu lieu à visiter</h3>
+      <i class="fas fa-map-marker-alt"></i>
+    </div>
+    <hr>
+    <div>
+    </div><h2>Les meet-ups</h2>
+    <div class="d-flex meet">
+     <i class="far fa-calendar-alt"></i>
+     <p>Organiser un meet-up</p>
+    </div>
+    <div class="d-flex gerer">
+      <i class="far fa-clipboard"></i>
+      <p>Gérer mon meet-up</p>
+    </div>
+    <hr>
+    <%= link_to "Se déconnecter", destroy_user_session_path, style: "border: solid 1px grey", method: "delete", class: "btn btn-ghost" %>
+  </div>
+</div>

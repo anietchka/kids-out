@@ -1,3 +1,4 @@
+
 <%# FLIP CARD %>
 <div class="flip-card" data-controller="flip-card">
   <div class="flip-card-inner">
@@ -55,6 +56,7 @@
               <div class="read-more" data-read-more-target="content"><%= @offer.description.html_safe %></div>
                 <a data-action="read-more#toggle" href="#">
                 Lire plus
+
                 </a>
               </div>
           <% end %>
@@ -89,6 +91,7 @@
         <% @offer.reviews.each do |review| %>
           <div class="card-review bg-white py-3 my-3" id="review-<%= review.id %>">
             <div class="container">
+
               <div class="card-nickname-rating d-flex justify-content-between">
                 <div class="card-nickname">
                   <h6><%= review.user.nickname %></h6>
@@ -109,6 +112,7 @@
                     <i class="far fa-trash-alt"></i>
                   <% end %>
                 <% end %>
+
             </div>
           </div>
         <% end %>

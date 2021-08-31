@@ -108,6 +108,7 @@
   width: 30px;
 }
 
+
 //========== CARD SHOW OFFER=============== //
 .card-offer {
   padding: 20px;
@@ -149,3 +150,54 @@
   border-radius: 4px;
 }
 // ================= INDEX MEETUPS =================== //
+
+.card-user-meetup{
+  display: flex;
+  justify-content: space-between;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 15px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.12);
+  .card-meetup-left{
+    color: #297F87;
+    background-color: white;
+    flex-grow: 1;
+    max-width: calc(100% - 115px);
+    padding: 0 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    h3{
+      font-size: 20px;
+      font-weight: bold;
+    }
+    h4{
+      font-size: 18px;
+    }
+    .card-tags{
+      span{
+        background-color: #F4F9F9;
+        padding: 4px 8px;
+        border-radius: 12px;
+      }
+      font-size: 16px;
+    }
+  }
+  .card-meetup-right{
+    background-color: #F1C94B;
+    color: white;
+    width: 115px;
+    height: 115px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    p{
+      font-size: 14px;
+    }
+    h2{
+      font-size: 22px;
+    }
+  }
+}
+
