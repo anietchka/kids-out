@@ -1,5 +1,6 @@
-    <div class="card-question-1">
-      <div class="container ml-3">
+  <div class="page-selector" data-controller="page-selector">
+    <div class="card-question-1" data-page-selector-target = 'page1'>
+      <div class="container ml-3" >
         <h1>Trouver toutes les activités aux alentours <div class="blue-text">pour votre enfant</div></h1>
         <div class="card-question-address">
         <%= simple_form_for :search, url: offers_path, method: :get do |f| %>
@@ -8,12 +9,14 @@
         </div>
         <div class="card-btn-next-back">
           <%= button_tag "", class: "btn-review-transparent" %>
-          <%= button_tag "Suivant", class: "btn-review-black" %>
+          <div class="btn-review-black" data-action="click->page-selector#next1">
+          Suivant
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="card-question-2 ">
+    <div class="card-question-2 hidden" data-page-selector-target = 'page2'>
       <div class="container">
         <h1>Age de votre enfant :</h1>
         <div class="age-selector d-flex" data-controller= "age-sellector">
@@ -25,19 +28,25 @@
           <i class="fas fa-plus-circle" data-action="click->age-sellector#up"></i>
         </div>
       </div>
-      <div class="card-btn-next-back">
-        <%= button_tag "Retour", class: "btn-review-transparent" %>
-        <%= button_tag "Suivant", class: "btn-review-black" %>
+      <div class="card-btn-next-back ">
+        <div class="btn-review-transparent" data-action="click->page-selector#back1">
+          Retour
+        </div>
+        <div class="btn-review-black" data-action="click->page-selector#next2">
+          Suivant
+        </div>
       </div>
     </div>
-    <div class="card-question-3">
+    <div class="card-question-3 hidden" data-page-selector-target = 'page3'>
       <div class="container">
         <h1>Souhaitez vous une activité en </h1>
         <%= f.input :theme, as: :radio_buttons, collection: ["interieure", "exterieure"] %>
         <%= f.input :longitude, as: :hidden %>
         <%= f.input :latitude, as: :hidden %>
         <div class="card-btn-next-back">
-          <%= button_tag "Retour", class: "btn-review-transparent" %>
+          <div class="btn-review-transparent" data-action="click->page-selector#next1">
+            Retour
+          </div>
           <input type="submit" name="commit" value="Suivant"
                data-disable-with="Suivant"
                class="btn-review-black">
@@ -46,3 +55,5 @@
     </div>
 
     <% end %>
+
+  </div>
