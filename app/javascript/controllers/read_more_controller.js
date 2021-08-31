@@ -7,9 +7,6 @@ export default class extends Controller {
     lessText: String
   }
 
-  connect() {
-    console.log('Hello, Stimulus!')
-  }
 
   toggle(event) {
     event.preventDefault()
