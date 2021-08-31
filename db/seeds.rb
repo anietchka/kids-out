@@ -13,7 +13,7 @@ User.destroy_all
 
 puts 'Creating a lot of User'
 user_1 = User.new(email: 'anna.bozio@gmail.com', nickname: "anietchka", password: '123456', first_name: 'Anna', last_name: 'Bozio')
-user_2 = User.create!(email: 'migatsar@gmail.com', nickname: "migasar", password: '123456', first_name: 'Mica', last_name: 'Gaspar')
+user_2 = User.create!(email: 'migatsar@gmail.com', nickname: "migasar", password: '123456', first_name: 'Mickael', last_name: 'Gaspar')
 user_3 = User.create!(email: 'estelle.cirilo@gmail.com', nickname: "ecirilo1", password: '123456', first_name: 'Estelle', last_name: 'Cirilo')
 user_4 = User.create!(email: 'barois.anne@orange.fr', nickname: "oslanne", password: '123456', first_name: 'Anne', last_name: 'Barois')
 user_5 = User.create!(email: 'ville-de-paris@gmail.com', nickname: "VilleDeParis", password: '123456', first_name: 'Ville', last_name: 'de Paris')
@@ -177,3 +177,6 @@ old_unused_scraping_code = [
   # end
 ]
 puts 'Offers Created!'
+
+########################
+# API call to fetch records for Cultural Events in Paris
