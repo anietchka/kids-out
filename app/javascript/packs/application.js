@@ -42,7 +42,8 @@ import { initStarRating } from '../plugins/init_star_rating';
 import { initMeetupCable } from '../channels/meetup_channel'
 
 // Date picker
-import { initFlatPickr } from "../plugins/init_flatpickr";
+import { initFlatpickr } from "../plugins/init_flatpickr";
+
 
 import { toggleTrashCard } from "../components/toggle_trash_card";
 
@@ -55,7 +56,7 @@ document.addEventListener('turbolinks:load', () => {
   // initCurrentPosition();
   initMeetupCable();
   initStarRating();
-  initFlatPickr();
+  initFlatpickr();
   toggleTrashCard();
   toggleFavoriteCard();
 

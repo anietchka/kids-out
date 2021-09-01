@@ -1,7 +1,12 @@
-<div class="container">
-  <%= simple_form_for [ @offer, @meetup ] do |f| %>
-      <%= f.input :date %>
-      <%= f.input :description %>
-      <%= f.submit "Envoyer" %>
-    <% end %>
+<div class="container p-2">
+  <div class="row justify-content-center">
+    <div class="col-12 col-sm-4 form-new-meetup">
+    <h2>Créer un nouveau Meetup</h1>
+      <%= simple_form_for [ @offer, @meetup ] do |f| %>
+          <%= f.input :date, as: :string, order: [:day, :month, :year], input_html: {class: "datepicker"}%>
+          <%= f.input :description, placeholder: "Détaillez votre proposition de Meetup. " %>
+          <%= f.submit "Envoyer", class: "btn" %>
+        <% end %>
+    </div>
+  </div>
 </div>
