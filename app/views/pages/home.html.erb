@@ -1,15 +1,18 @@
   <div class="page-selector" data-controller="page-selector">
     <div class="card-question-1" data-page-selector-target = 'page1'>
-      <div class="container ml-3" >
-        <h1>Trouver toutes les activités aux alentours <div class="blue-text">pour votre enfant</div></h1>
-        <div class="card-question-address">
-        <%= simple_form_for :search, url: offers_path, method: :get do |f| %>
-        <%= f.input :address, class: "btn-review-white", placeholder: "Indiquez votre adresse", label: false %>
-          <%= button_tag "Trouver autour de moi", id: "current-position", class: "btn-review-white" %>
+      <div class="container" >
+        <div class="card-title">
+          <h1>Trouver toutes les activités aux alentours <div class="blue-text">pour votre enfant</div></h1>
         </div>
-        <div class="card-btn-next-back">
+        <div class="card-question-address">
+          <%= simple_form_for :search, url: offers_path, method: :get do |f| %>
+            <%= button_tag "Trouver autour de moi", id: "current-position", class: "btn-review-black" %>
+            <h3 class="mt-4 text-center">ou</h3>
+            <%= f.input :address, placeholder: "Indiquez votre adresse", label: false %>
+        </div>
+        <div class="card-btn-next-back mt-4">
           <%= button_tag "", class: "btn-review-transparent" %>
-          <div class="btn-review-black" data-action="click->page-selector#next1">
+          <div class="btn-review-black" data-action="click->page-selector#next1" id="next">
           Suivant
           </div>
         </div>
@@ -18,7 +21,7 @@
 
     <div class="card-question-2 hidden" data-page-selector-target = 'page2'>
       <div class="container">
-        <h1>Age de votre enfant :</h1>
+        <h1 class="mb-4">Age de votre enfant</h1>
         <div class="age-selector d-flex" data-controller= "age-sellector">
           <i class="fas fa-minus-circle" data-action="click->age-sellector#down"></i>
           <div class="age-proposal" data-age-sellector-target = 'age'>
@@ -49,8 +52,6 @@
           </div>
         </div>
         <%= f.input :theme, input_html: {data: {theme_selector_target: 'input'}}, as: :hidden  %>
-        <%= f.input :longitude, as: :hidden %>
-        <%= f.input :latitude, as: :hidden %>
         <div class="card-btn-next-back">
           <div class="btn-review-transparent" data-action="click->page-selector#next1">
             Retour
