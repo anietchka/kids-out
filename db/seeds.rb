@@ -15,7 +15,8 @@ User.destroy_all
 
 ########################
 # Users
-puts 'Creating a lot of User'
+puts "
+Creating a lot of User"
 user_1 = User.new(email: 'anna.bozio@gmail.com', nickname: "anietchka", password: '123456', first_name: 'Anna', last_name: 'Bozio')
 user_2 = User.create!(email: 'migatsar@gmail.com', nickname: "migasar", password: '123456', first_name: 'Mickael', last_name: 'Gaspar')
 user_3 = User.create!(email: 'estelle.cirilo@gmail.com', nickname: "ecirilo1", password: '123456', first_name: 'Estelle', last_name: 'Cirilo')
@@ -47,7 +48,8 @@ puts 'Users Created!'
 
 ########################
 # Offers
-puts 'Creating a lot of Offers'
+puts "
+Creating a lot of Offers"
 old_static_records = [
   # Offer.create!(name: "Expo Harry Potter - Retour à Poudlard", theme: "interieure", address: "Rue du 8 Mai 1945, 75010 Paris" ,url: "https://www.facebook.com/events/521401079177879/",start_date: "2021-08-07" ,end_date: "2021-08-30", permanent: false, description: "Tous les ans, le 1er septembre signifie 'fin des vacances' pour les enfants. Mais pour les fans d'Harry Potter, c'est surtout le rendez-vous incontournable de la saga : le \"Retour à Poudlard\" !
   # En préambule, une exposition est organisée tout l'été dans les gares. Du 7 juillet au 30 août, l'expo Harry Potter des illustrations signées Jim Kay est en effet accessibles à Paris Gare de Lyon, Nice, Bordeaux, Poitiers et Limoges. Petits et grands retrouvent les magnifiques dessins des trois premiers tomes de la saga.
@@ -84,7 +86,7 @@ old_static_records = [
 
 ########################
 # API call to fetch records for Squares of Paris
-endpoint = 'https://opendata.paris.fr/api/records/1.0/search/?dataset=espaces_verts&q=&rows=200&facet=type_ev&facet=categorie&facet=adresse_codepostal&facet=presence_cloture&facet=ouvert_ferme&exclude.categorie=Talus&exclude.categorie=Arboretum&exclude.categorie=Archipel&exclude.categorie=Cimeti%C3%A8re&exclude.categorie=Decoration&exclude.categorie=Jardin+d%27immeubles&exclude.categorie=Jardin+partage&exclude.categorie=Jardiniere&exclude.categorie=Mail&exclude.categorie=Murs+vegetalises&exclude.categorie=Plate-bande&exclude.categorie=Terre-plein&exclude.categorie=Jardinet&exclude.categorie=Ile&exclude.categorie=Promenade&exclude.categorie=Pelouse'
+endpoint = 'https://opendata.paris.fr/api/records/1.0/search/?dataset=espaces_verts&q=&rows=100&facet=type_ev&facet=categorie&facet=adresse_codepostal&facet=presence_cloture&facet=ouvert_ferme&exclude.categorie=Talus&exclude.categorie=Arboretum&exclude.categorie=Archipel&exclude.categorie=Cimeti%C3%A8re&exclude.categorie=Decoration&exclude.categorie=Jardin+d%27immeubles&exclude.categorie=Jardin+partage&exclude.categorie=Jardiniere&exclude.categorie=Mail&exclude.categorie=Murs+vegetalises&exclude.categorie=Plate-bande&exclude.categorie=Terre-plein&exclude.categorie=Jardinet&exclude.categorie=Ile&exclude.categorie=Promenade&exclude.categorie=Pelouse'
 data = JSON.parse(URI.open(endpoint).read)
 
 data['records'].each do |record|
@@ -133,7 +135,7 @@ end
 
 ########################
 # API call to fetch records for Cultural Events in Paris
-url_sortir_a_paris = "https://opendata.paris.fr/api/records/1.0/search/?dataset=que-faire-a-paris-&q=&rows=200&facet=category&facet=tags&facet=address_name&facet=address_zipcode&facet=address_city&facet=pmr&facet=price_type&refine.tags=Enfants"
+url_sortir_a_paris = "https://opendata.paris.fr/api/records/1.0/search/?dataset=que-faire-a-paris-&q=&rows=400&facet=category&facet=tags&facet=address_name&facet=address_zipcode&facet=address_city&facet=pmr&facet=price_type&refine.tags=Enfants"
 data = JSON.parse(URI.open(url_sortir_a_paris).read)
 
 data['records'].each do |record|
@@ -208,29 +210,30 @@ puts 'Offers Created!'
 
 ########################
 # Meetups
-puts "Creating 300 Meetups and their Particpants"
-offers_sample = Offer.all.sample(300)
+puts "
+Creating 300 Meetups and their Particpants"
 
-offers_sample.each do |offer|
+300.times do
+
+  offer = Offer.all.sample
 
   # Meetup Date
   if offer.permanent == false
-    meetup_date = rand(offer.start_date..offer.end_date)
+    meetup_date = rand(offer.start_date..offer.end_date) + rand(10..18).hours
   else
-    meetup_date = rand(Date.today..(Date.today + 1.month))
+    meetup_date = rand(Date.today..(Date.today + 1.month)) + rand(10..18).hours
   end
 
   # Create Meetup
   meetup = Meetup.find_or_create_by!(
-    user: User.all.sample,
+    user: User.last(50).sample,
     offer: offer,
     date: meetup_date,
     description: Faker::Lorem.sentence
   )
 
   # Create Particpants to the Meetup
-  participants_number = rand(1..7)
-  users_sample = User.all.sample(participants_number)
+  users_sample = User.last(50).sample(rand(1..7))
 
   users_sample.each do |user|
     participant = Participant.find_or_create_by!(
