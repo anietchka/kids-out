@@ -30,9 +30,9 @@ puts 'Creating 50 fake users...'
   user = User.new(
     first_name: Faker::Name.first_name,
     last_name:  Faker::Name.last_name,
-    nickname: Faker::Internet.username,
-    email: Faker::Internet.email,
-    password: Faker::Internet.password
+    nickname: Faker::Internet.unique.username,
+    email: Faker::Internet.email(name: "#{:first_name} #{:last_name}", separators: '_'),
+    password: Faker::Internet.password(min_length: 8)
   )
   user.save!
 end
@@ -80,6 +80,7 @@ old_static_records = [
 # API call to fetch records for Squares of Paris
 endpoint = 'https://opendata.paris.fr/api/records/1.0/search/?dataset=espaces_verts&q=&rows=200&facet=type_ev&facet=categorie&facet=adresse_codepostal&facet=presence_cloture&facet=ouvert_ferme&exclude.categorie=Talus&exclude.categorie=Arboretum&exclude.categorie=Archipel&exclude.categorie=Cimeti%C3%A8re&exclude.categorie=Decoration&exclude.categorie=Jardin+d%27immeubles&exclude.categorie=Jardin+partage&exclude.categorie=Jardiniere&exclude.categorie=Mail&exclude.categorie=Murs+vegetalises&exclude.categorie=Plate-bande&exclude.categorie=Terre-plein&exclude.categorie=Jardinet&exclude.categorie=Ile&exclude.categorie=Promenade&exclude.categorie=Pelouse'
 data = JSON.parse(URI.open(endpoint).read)
+
 data['records'].each do |record|
   # Adress field
   address = "#{record['fields']['adresse_numero']}, #{record['fields']['adresse_typevoie']} #{record['fields']['adresse_libellevoie']} #{record['fields']['adresse_codepostal']}"
@@ -124,54 +125,56 @@ data['records'].each do |record|
   OfferCategory.create(offer: offer, category: category)
 end
 
+
 ########################
 # API call to fetch records for Cultural Events in Paris
 url_sortir_a_paris = "https://opendata.paris.fr/api/records/1.0/search/?dataset=que-faire-a-paris-&q=&rows=200&facet=category&facet=tags&facet=address_name&facet=address_zipcode&facet=address_city&facet=pmr&facet=price_type&refine.tags=Enfants"
 data = JSON.parse(URI.open(url_sortir_a_paris).read)
-data['records'].each do |record|
 
-  # Adress field
-  address = "#{record['fields']['address_street']}, #{record['fields']['address_city']}"
+# data['records'].each do |record|
 
-  if !record['fields']['title'].nil?
+#   # Adress field
+#   address = "#{record['fields']['address_street']}, #{record['fields']['address_city']}"
 
-    # Offer record
-    offer = Offer.new(
-      name: record['fields']['title'],
-      address: address,
-      url: record['fields']['contact_url'],
-      start_date: record['fields']['date_start'],
-      end_date: record['fields']['date_end'],
-      permanent: false,
-      description: record['fields']['description'],
-      #schedule: ,
-      photo: record['fields']['cover_url'],
-      theme: "interieure",
-      user: User.find_by(email: 'ville-de-paris@gmail.com')
-      )
+#   if !record['fields']['title'].nil?
 
-      # Offer extra fields
-      if !record['fields']['description'].nil? && record['fields']['description'].scan(/(partir de \d+ ans)/).first
-        offer.min_age = record['fields']['description'].scan(/(partir de \d+ ans)/).first.first.scan(/(\d+)/).first.first.to_i
-      elsif !record['fields']['description'].nil? && record['fields']['description'].scan(/(moins de \d+ ans)/).first
-        offer.max_age = record['fields']['description'].scan(/(moins de \d+ ans)/).first.first.scan(/(\d+)/).first.first.to_i
-      elsif !record['fields']['tags'].nil? && record['fields']['tags'].scan(/Plein air/i).first
-        offer.theme = "exterieure"
-      end
-      offer.save!
-      puts "Offer #{offer.name} created! youhou"
+#     # Offer record
+#     offer = Offer.new(
+#       name: record['fields']['title'],
+#       address: address,
+#       url: record['fields']['contact_url'],
+#       start_date: record['fields']['date_start'],
+#       end_date: record['fields']['date_end'],
+#       permanent: false,
+#       description: record['fields']['description'],
+#       #schedule: ,
+#       photo: record['fields']['cover_url'],
+#       theme: "interieure",
+#       user: User.find_by(email: 'ville-de-paris@gmail.com')
+#       )
 
-      # Category record
-      if !record['fields']['category'].nil?
-        category = Category.find_by(name: record['fields']['category'].split(" ").first)
-      unless category
-        category = Category.create(name: record['fields']['category'].split(" ").first)
-      end
-    end
+#       # Offer extra fields
+#       if !record['fields']['description'].nil? && record['fields']['description'].scan(/(partir de \d+ ans)/).first
+#         offer.min_age = record['fields']['description'].scan(/(partir de \d+ ans)/).first.first.scan(/(\d+)/).first.first.to_i
+#       elsif !record['fields']['description'].nil? && record['fields']['description'].scan(/(moins de \d+ ans)/).first
+#         offer.max_age = record['fields']['description'].scan(/(moins de \d+ ans)/).first.first.scan(/(\d+)/).first.first.to_i
+#       elsif !record['fields']['tags'].nil? && record['fields']['tags'].scan(/Plein air/i).first
+#         offer.theme = "exterieure"
+#       end
+#       offer.save!
+#       puts "Offer #{offer.name} created! youhou"
 
-    OfferCategory.create(offer: offer, category: category)
-  end
-end
+#       # Category record
+#       if !record['fields']['category'].nil?
+#         category = Category.find_by(name: record['fields']['category'].split(" ").first)
+#       unless category
+#         category = Category.create(name: record['fields']['category'].split(" ").first)
+#       end
+#     end
+
+#     OfferCategory.create(offer: offer, category: category)
+#   end
+# end
 
 old_unused_scraping_code = [
   # url_ile_de_france = "https://data.iledefrance.fr/api/records/1.0/search/?dataset=evenements-publics-cibul&q=&rows=200&facet=tags&facet=placename&facet=department&facet=region&facet=city&facet=date_start&facet=date_end&facet=pricing_info&facet=updated_at&facet=city_district&refine.tags=jeune+public&refine.tags=enfant&refine.tags=enfants&refine.tags=Jeune+public&refine.tags=spectacle+pour+enfants&refine.tags=danse&exclude.date_end=2020&exclude.date_end=2019&exclude.date_end=2018&exclude.date_end=2017&exclude.date_end=2016&exclude.date_end=2015&exclude.date_end=2014&exclude.date_end=2013&exclude.date_end=2021-08&exclude.date_end=2021-02&exclude.date_end=2021-03&exclude.date_end=2021-04&exclude.date_end=2021-05&exclude.date_end=2021-06&exclude.date_end=2021-07&exclude.date_end=2012&exclude.date_end=2011&exclude.date_start=2021-01"
