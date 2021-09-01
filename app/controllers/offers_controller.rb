@@ -29,13 +29,17 @@ class OffersController < ApplicationController
     if params[:search] && params[:search][:theme].present?
       @offers = @offers.where('theme = ?', params[:search][:theme])
     end
+    # with Meetup
+    if params[:search] && (params[:search][:meetup] == "1")
+      @offers = @offers.joins(:meetups)
+    end
     # Categories
     if params[:search] && params[:search][:categories].present?
       @offers = @offers.where('categories.name = ?', params[:search][:categories])
     end
 
     # Date
-    # FIXME: this query remove every permant offers, and it shouldn't...
+    # FIXME: this query remove every permanent offers, and it shouldn't...
     if params[:search] && params[:search][:date].present?
       @offers = @offers.where('start_date <= ?', params[:search][:date])
       @offers = @offers.where('end_date <= ?', params[:search][:date])
@@ -43,6 +47,7 @@ class OffersController < ApplicationController
 
     # Create markers out of resulting offers from query
     # the `geocoded` method filters out offers that can't be geocoded
+    # TODO: add a conditional filtering out markers with lat/lon away of Paris
     @markers = @offers.geocoded.map do |offer|
       icon_filename = 'marker.png'
       if offer.categories.any?
@@ -101,71 +106,4 @@ class OffersController < ApplicationController
   def offers_params
     params.require(:offer).permit(:name, :theme, :address, :start_date, :end_date, :url, :permanent, :description, :min_age, :max_age, :schedule, :longitude, :latitude, :user_id)
   end
-
-  # TODO: define the method `custom_search` to represent the different contexts of the search
-  # Conditional branching to custom queries depending of the parameteres / filters /contextes of execution
-  # def custom_search(params)
-  #   @offers = Offer.all
-  #   # address
-  #   if params[:address].present?
-  #     @offers = @offers.search_address(params[:address])
-  #   end
-  #   # theme
-  #   if params[:theme].present?
-  #     @offers = @offers.search_theme(params[:theme])
-  #   end
-  #   # min_age
-  #   if params[:min_age].present?
-  #     @offers = @offers.search_min_age(params[:min_age])
-  #   end
-  #   # max_age
-  #   if params[:max_age].present?
-  #     if @offers == nil
-  #       @offers = Offer.search_max_age(params[:max_age])
-  #     else
-  #       @offers = @offers.search_max_age(params[:max_age])
-  #     end
-  #   end
-  #   # name
-  #   if params[:name].present?
-  #     if @offers == nil
-  #       @offers = Offer.search_name(params[:name])
-  #     else
-  #       @offers = @offers.search_name(params[:name])
-  #     end
-  #   end
-  #   # url
-  #   if params[:url].present?
-  #     if @offers == nil
-  #       @offers = Offer.search_url(params[:url])
-  #     else
-  #       @offers = @offers.search_url(params[:url])
-  #     end
-  #   end
-  #   # fields_offer = [
-  #   #   "address",
-  #   #   "theme",
-  #   #   "min_age",
-  #   #   "max_age",
-  #   #   "name",
-  #   #   "url",
-  #   #   "description",
-  #   #   "start_date",
-  #   #   "end_date",
-  #   #   "permanent",
-  #   #   "schedule",
-  #   #   "created_at",
-  #   #   "updated_at",
-  #   #   "latitude",
-  #   #   "longitude",
-  #   #   # "user_id",
-  #   #   # "photo",
-  #   # ]
-  #   return @offers
-  #   # @offers = Offer.search_name(params[:name]) if params[:name].present?
-  #   # @offers = search_address(params[:address]) if params[:address].present?
-  #   # return Offer.search(args)
-  #   # return Offer.search_name(args)
-  # end
-
 end
