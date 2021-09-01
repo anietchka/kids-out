@@ -29,6 +29,10 @@ class OffersController < ApplicationController
     if params[:search] && params[:search][:theme].present?
       @offers = @offers.where('theme = ?', params[:search][:theme])
     end
+    # with Meetup
+    if params[:search] && (params[:search][:meetup] == "1")
+      @offers = @offers.joins(:meetups)
+    end
     # Categories
     if params[:search] && params[:search][:categories].present?
       @offers = @offers.where('categories.name = ?', params[:search][:categories])
