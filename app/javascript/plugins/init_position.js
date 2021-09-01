@@ -1,18 +1,21 @@
 const initCurrentPosition = () => {
-  const inputLongitude = document.querySelector("#search_longitude")
-  const inputLatitude = document.querySelector("#search_latitude")
-  const form = document.querySelector("form")
+  const input = document.querySelector('#search_address')
+  const next = document.querySelector('#next')
 
-  navigator.geolocation.getCurrentPosition((data) => {
-    inputLongitude.value = data.coords.longitude;
-    inputLatitude.value = data.coords.latitude;
-    document.getElementById('search_address').value = '';
-    form.submit();
+  navigator.geolocation.getCurrentPosition(async (data) => {
+    const longitude = data.coords.longitude
+    const latitude = data.coords.latitude
+    const response = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${longitude}%2C%20${latitude}.json?access_token=pk.eyJ1Ijoib3NsYW5uZSIsImEiOiJja3NweXQ5eDQwN3N1MnBucTRpczY1dXAyIn0.OsggNoy1h_GzZk5ndqunKQ`)
+    const payload = await response.json()
+    const address = payload.features[0].place_name
+    input.value = address
+    next.click()
   });
 };
 
 var pos = document.querySelector("#current-position");
-if(pos){
+
+if (pos) {
   pos.addEventListener("click", (ev) => {
     ev.preventDefault();
     initCurrentPosition();
