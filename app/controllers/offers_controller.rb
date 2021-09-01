@@ -47,19 +47,21 @@ class OffersController < ApplicationController
 
     # Create markers out of resulting offers from query
     # the `geocoded` method filters out offers that can't be geocoded
-    # TODO: add a conditional filtering out markers with lat/lon away of Paris
     @markers = @offers.geocoded.map do |offer|
       icon_filename = 'marker.png'
       if offer.categories.any?
         category_filename = "#{offer.categories.first.name.parameterize}.png"
         icon_filename = category_filename if asset_present?(category_filename)
       end
-      {
-        lat: offer.latitude,
-        lng: offer.longitude,
-        info_window: render_to_string(partial: "info_window", locals: { offer: offer }),
-        icon: helpers.asset_url(icon_filename)
-      }
+      # conditional to remove outliers
+      if (offer.latitude >= 48.5 && offer.latitude <= 49.5) && (offer.longitude >= 1.7 && offer.longitude <= 2.9)
+        {
+          lat: offer.latitude,
+          lng: offer.longitude,
+          info_window: render_to_string(partial: "info_window", locals: { offer: offer }),
+          icon: helpers.asset_url(icon_filename)
+        }
+      end
     end
   end
 
