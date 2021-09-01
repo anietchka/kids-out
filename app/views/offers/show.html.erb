@@ -41,8 +41,7 @@
         </div>
         <%# BUTTON MEETUP FLIP %>
         <div class=" d-flex justify-content-around mb-2 btn-meetup">
-          <%#= link_to "Voir les meetups", offer_meetups_path(@offer) %>
-          <a data-action="click->flip-card#flip" href="#">Voir les meetups</a>
+          <a data-action="click->flip-card#flip" href="#">Voir les meetups (<%=@offer.meetups.size %>)</a>
         </div>
         <%# BUTTON MEETUP FLIP END %>
         <%# DESCRIPTIF %>
@@ -74,7 +73,7 @@
         <%# ADD NEW COMMENT BEGING %>
         <div class="container">
           <div class="row">
-            <div class="col-xs-4 w-100 form-label">
+            <div class="col-xs-4 w-100 mt-2 form-label">
               <h3>Laisser un avis</h3>
               <% if @offer.reviews.size > 1%>
                 <p><i class="fas fa-star"></i> <%= @offer.reviews.average(:rating) %>/5 (<%= @offer.reviews.size %> commentaires) </p>
@@ -127,7 +126,7 @@
     <%# ============================= %>
     <%# BEGGING BACK CARD %>
     <div class="flip-card-back">
-      <div class="container position-relative p-3">
+      <div class="container position-relative d-flex justify-content-center flex-column p-3">
         <div class ="black-cross"> <i data-action="click->flip-card#flip" class="fas fa-times"></i></div>
         <div class="button-new-meetup">
           <%= link_to "Créer un nouveau meetup !", (new_offer_meetup_path(@offer)) %>
