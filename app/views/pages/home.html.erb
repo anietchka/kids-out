@@ -9,6 +9,8 @@
             <%= button_tag "Trouver autour de moi", id: "current-position", class: "btn-review-black" %>
             <h3 class="mt-4 text-center">ou</h3>
             <%= f.input :address, placeholder: "Indiquez votre adresse", label: false %>
+            <%= f.input :latitude, as: :hidden, input_html: {id:"latitude"} %>
+            <%= f.input :longitude, as: :hidden, input_html: {id:"longitude"} %>
         </div>
         <div class="card-btn-next-back mt-4">
           <%= button_tag "", class: "btn-review-transparent" %>

@@ -14,9 +14,8 @@ class OffersController < ApplicationController
     # Geocordinates from text
     if params[:search] && params[:search][:latitude].present?
       @offers = @offers.near([params[:search][:latitude], params[:search][:longitude]], 5)
-    end
     # Geocordinates from button
-    if params[:search] && params[:search][:address].present?
+    elsif params[:search] && params[:search][:address].present?
       @offers = @offers.near(params[:search][:address], 5)
     end
 
