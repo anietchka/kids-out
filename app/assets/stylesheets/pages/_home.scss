@@ -86,4 +86,7 @@
   font-size: 18;
   font-weight: bold;
   color: #297F87;
+  &.active{
+    border: 2px solid #297F87;
+  }
 }
