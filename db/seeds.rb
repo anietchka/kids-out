@@ -131,50 +131,50 @@ end
 url_sortir_a_paris = "https://opendata.paris.fr/api/records/1.0/search/?dataset=que-faire-a-paris-&q=&rows=200&facet=category&facet=tags&facet=address_name&facet=address_zipcode&facet=address_city&facet=pmr&facet=price_type&refine.tags=Enfants"
 data = JSON.parse(URI.open(url_sortir_a_paris).read)
 
-# data['records'].each do |record|
+data['records'].each do |record|
 
-#   # Adress field
-#   address = "#{record['fields']['address_street']}, #{record['fields']['address_city']}"
+  # Adress field
+  address = "#{record['fields']['address_street']}, #{record['fields']['address_city']}"
 
-#   if !record['fields']['title'].nil?
+  if !record['fields']['title'].nil?
 
-#     # Offer record
-#     offer = Offer.new(
-#       name: record['fields']['title'],
-#       address: address,
-#       url: record['fields']['contact_url'],
-#       start_date: record['fields']['date_start'],
-#       end_date: record['fields']['date_end'],
-#       permanent: false,
-#       description: record['fields']['description'],
-#       #schedule: ,
-#       photo: record['fields']['cover_url'],
-#       theme: "interieure",
-#       user: User.find_by(email: 'ville-de-paris@gmail.com')
-#       )
+    # Offer record
+    offer = Offer.new(
+      name: record['fields']['title'],
+      address: address,
+      url: record['fields']['contact_url'],
+      start_date: record['fields']['date_start'],
+      end_date: record['fields']['date_end'],
+      permanent: false,
+      description: record['fields']['description'],
+      #schedule: ,
+      photo: record['fields']['cover_url'],
+      theme: "interieure",
+      user: User.find_by(email: 'ville-de-paris@gmail.com')
+      )
 
-#       # Offer extra fields
-#       if !record['fields']['description'].nil? && record['fields']['description'].scan(/(partir de \d+ ans)/).first
-#         offer.min_age = record['fields']['description'].scan(/(partir de \d+ ans)/).first.first.scan(/(\d+)/).first.first.to_i
-#       elsif !record['fields']['description'].nil? && record['fields']['description'].scan(/(moins de \d+ ans)/).first
-#         offer.max_age = record['fields']['description'].scan(/(moins de \d+ ans)/).first.first.scan(/(\d+)/).first.first.to_i
-#       elsif !record['fields']['tags'].nil? && record['fields']['tags'].scan(/Plein air/i).first
-#         offer.theme = "exterieure"
-#       end
-#       offer.save!
-#       puts "Offer #{offer.name} created! youhou"
+      # Offer extra fields
+      if !record['fields']['description'].nil? && record['fields']['description'].scan(/(partir de \d+ ans)/).first
+        offer.min_age = record['fields']['description'].scan(/(partir de \d+ ans)/).first.first.scan(/(\d+)/).first.first.to_i
+      elsif !record['fields']['description'].nil? && record['fields']['description'].scan(/(moins de \d+ ans)/).first
+        offer.max_age = record['fields']['description'].scan(/(moins de \d+ ans)/).first.first.scan(/(\d+)/).first.first.to_i
+      elsif !record['fields']['tags'].nil? && record['fields']['tags'].scan(/Plein air/i).first
+        offer.theme = "exterieure"
+      end
+      offer.save!
+      puts "Offer #{offer.name} created! youhou"
 
-#       # Category record
-#       if !record['fields']['category'].nil?
-#         category = Category.find_by(name: record['fields']['category'].split(" ").first)
-#       unless category
-#         category = Category.create(name: record['fields']['category'].split(" ").first)
-#       end
-#     end
+      # Category record
+      if !record['fields']['category'].nil?
+        category = Category.find_by(name: record['fields']['category'].split(" ").first)
+      unless category
+        category = Category.create(name: record['fields']['category'].split(" ").first)
+      end
+    end
 
-#     OfferCategory.create(offer: offer, category: category)
-#   end
-# end
+    OfferCategory.create(offer: offer, category: category)
+  end
+end
 
 old_unused_scraping_code = [
   # url_ile_de_france = "https://data.iledefrance.fr/api/records/1.0/search/?dataset=evenements-publics-cibul&q=&rows=200&facet=tags&facet=placename&facet=department&facet=region&facet=city&facet=date_start&facet=date_end&facet=pricing_info&facet=updated_at&facet=city_district&refine.tags=jeune+public&refine.tags=enfant&refine.tags=enfants&refine.tags=Jeune+public&refine.tags=spectacle+pour+enfants&refine.tags=danse&exclude.date_end=2020&exclude.date_end=2019&exclude.date_end=2018&exclude.date_end=2017&exclude.date_end=2016&exclude.date_end=2015&exclude.date_end=2014&exclude.date_end=2013&exclude.date_end=2021-08&exclude.date_end=2021-02&exclude.date_end=2021-03&exclude.date_end=2021-04&exclude.date_end=2021-05&exclude.date_end=2021-06&exclude.date_end=2021-07&exclude.date_end=2012&exclude.date_end=2011&exclude.date_start=2021-01"
@@ -197,19 +197,3 @@ old_unused_scraping_code = [
 ]
 puts 'Offers Created!'
 
-
-########################
-# Meetups
-puts 'Creating Meetups'
-
-
-puts 'Meetups Created!'
-
-
-########################
-# Reviews
-puts 'Creating Reviews'
-
-
-
-puts 'Reviews Created!'
