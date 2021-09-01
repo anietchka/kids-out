@@ -7,6 +7,7 @@ const initMeetupCable = () => {
     consumer.subscriptions.create({ channel: "MeetupChannel", id: id }, {
       received(data) {
         messagesContainer.insertAdjacentHTML('beforeend', data);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
         document.querySelector("#message_content").value = "";
       },
     });
