@@ -7,7 +7,8 @@
         <%= image_tag bookmark.offer.photo %>
       </div>
       <div class="card-favoris-description">
-        <h1 class="card-favoris-titre"><%= bookmark.offer.name %></h1>
+        <h3 class="card-favoris-titre"><%= bookmark.offer.name %></h3>
+        <h4><i class="fas fa-map-marker-alt"></i> <strong><%= bookmark.offer.address %></strong></h4>
         <div class="card-favoris-info"><%= link_to "Plus d'info", (offer_path(bookmark.offer)) %></div>
       </div>
     </div>
