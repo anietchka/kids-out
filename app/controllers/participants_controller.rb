@@ -16,6 +16,7 @@ class ParticipantsController < ApplicationController
     @participant = Participant.find(params[:id])
     authorize @participant
     @participant.destroy
-    redirect_to meetup_path(@participant.meetup)
+    redirect_back(fallback_location: user_meetups_meetups_path)
+
   end
 end
