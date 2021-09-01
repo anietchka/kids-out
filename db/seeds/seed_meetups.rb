@@ -3,8 +3,6 @@ require 'json'
 require 'nokogiri'
 require 'faker'
 
-require 'time'
-
 Meetup.destroy_all
 Participant.destroy_all
 Review.destroy_all
@@ -17,7 +15,7 @@ puts offers_sample.count
 # Meetup.find_or_create_by!(user: User.last, offer: Offer.last, date: "09-09-2021", description: "foo")
 
 puts "Creating 5 meetups"
-# offers_sample.each do |offer|
+
 5.times do
 
   offer = Offer.all.sample
@@ -49,28 +47,3 @@ puts "Creating 5 meetups"
 
 end
 
-
-########################
-# Meetups
-# puts 'Creating fake Meetups...'
-
-# 10.times do
-
-#   user = User.new(
-#     first_name: Faker::Name.first_name,
-#     last_name:  Faker::Name.last_name,
-#     nickname: Faker::Internet.unique.username,
-#     email: Faker::Internet.email(name: "#{:first_name} #{:last_name}", separators: '_'),
-#     password: Faker::Internet.password(min_length: 8)
-#   )
-#   user.save!
-# end
-
-# puts 'Meetups Created!'
-
-
-########################
-# Reviews
-# puts 'Creating Reviews'
-
-# puts 'Reviews Created!'
