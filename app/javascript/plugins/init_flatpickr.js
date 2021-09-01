@@ -1,7 +1,10 @@
 import flatpickr from "flatpickr";
 
-const initFlatPickr = () => {
-  flatpickr(".datepicker", {});
+const initFlatpickr = () => {
+  flatpickr(".datepicker", {
+    enableTime: true,
+    dateFormat: "Y-m-d H:i",
+  });
 }
 
-export { initFlatPickr };
+export { initFlatpickr };

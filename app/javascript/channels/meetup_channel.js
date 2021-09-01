@@ -1,6 +1,7 @@
 import consumer from "./consumer";
 const initMeetupCable = () => {
   const messagesContainer = document.getElementById('messages');
+  if (messagesContainer) {
   const userId = document.querySelector('.card-chat').dataset.userId
 
   if (messagesContainer) {
@@ -20,11 +21,12 @@ const initMeetupCable = () => {
           // console.log(lastMessage)
           lastMessage.classList.remove('currentuser')
           lastMessage.classList.add('otheruser')
-        } 
+        }
 
         document.querySelector("#message_content").value = "";
       },
     });
+  }
   }
 }
 
