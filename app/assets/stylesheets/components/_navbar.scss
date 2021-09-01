@@ -1,6 +1,6 @@
 .navbar-lewagon {
   justify-content: space-between;
-  background: white;
+  background:#F2C94B;
 }
 
 .navbar-lewagon .navbar-collapse {
@@ -16,14 +16,14 @@
 }
 
 .margin-navbar{
-  height: calc(100vh - 80px);
+  height: calc(100vh - 16vw);
   overflow-y: scroll;
   overflow-x: hidden;
   position: relative;
 }
 
 .navbar {
-  height: 16vw !important;
+  height: 19vw !important;
   padding: 5px !important;
 }
 
@@ -48,5 +48,12 @@
   }
   .fas{
     font-size: 24px;
+  }
+  p {
+    margin-top: -2vw;
+    margin-bottom: 1rem;
+  }
+  li {
+    margin-left: 4vw;
   }
 }
