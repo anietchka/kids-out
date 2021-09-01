@@ -1,4 +1,4 @@
-<div class="bg-grey card-chat" data-user-id="<%= current_user.id %>"><h1><%= meetup.date.strftime("%d %B at %H:%M") %></h1>
+<div class="bg-grey card-chat" data-user-id="<%= current_user.id %>">
   <div id="messages" data-meetup-id="<%= meetup.id %>">
       <% meetup.messages.each do |message| %>
         <%= render 'messages/message', message: message %>
