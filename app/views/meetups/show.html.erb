@@ -1,7 +1,7 @@
 <div class="container" style="margin-top: 54px;background-color: white">
   <div class="card-offer-meetup">
     <p><strong><%= @meetup.offer.name %></strong></p>
-    <div class="size-date-heure-description"><p><%= @meetup.date %></p>
+    <div class="size-date-heure-description"><p>le <%= @meetup.date.strftime("%d.%m.%Y") %> à <%= @meetup.date.strftime("%Hh%M") %></p>
     <p><%= @meetup.description %></p></div>
   </div>
 
@@ -9,13 +9,12 @@
   <div class=""></div>
     <% if current_user.participants.where(meetup: @meetup).any? %>
       <%= link_to(participant_path( current_user.participants.where(meetup: @meetup).first), remote: true, method: :delete) do  %>
-        <i class="fas fa-minus-circle"></i>
-        <p>Participation</p>
+        <p class = btn-review-transparent>Ne plus participer</p>
       <% end %>
     <% else %>
       <%= link_to(meetup_participants_path(@meetup), method: :post, remote: true) do  %>
-        <i class="fas fa-plus-circle"></i>
-        <p>Participation</p>
+
+        <p class = btn-review-black>Participer</p>
       <% end %>
     <% end %>
   <ul>
