@@ -12,6 +12,9 @@ Category.destroy_all
 Offer.destroy_all
 User.destroy_all
 
+
+########################
+# Users
 puts 'Creating a lot of User'
 user_1 = User.new(email: 'anna.bozio@gmail.com', nickname: "anietchka", password: '123456', first_name: 'Anna', last_name: 'Bozio')
 user_2 = User.create!(email: 'migatsar@gmail.com', nickname: "migasar", password: '123456', first_name: 'Mickael', last_name: 'Gaspar')
@@ -36,11 +39,14 @@ puts 'Creating 50 fake users...'
   )
   user.save!
 end
-
 puts 'Users Created!'
 
 ########################
+########################
 
+
+########################
+# Offers
 puts 'Creating a lot of Offers'
 old_static_records = [
   # Offer.create!(name: "Expo Harry Potter - Retour à Poudlard", theme: "interieure", address: "Rue du 8 Mai 1945, 75010 Paris" ,url: "https://www.facebook.com/events/521401079177879/",start_date: "2021-08-07" ,end_date: "2021-08-30", permanent: false, description: "Tous les ans, le 1er septembre signifie 'fin des vacances' pour les enfants. Mais pour les fans d'Harry Potter, c'est surtout le rendez-vous incontournable de la saga : le \"Retour à Poudlard\" !
@@ -125,7 +131,6 @@ data['records'].each do |record|
   OfferCategory.create(offer: offer, category: category)
 end
 
-
 ########################
 # API call to fetch records for Cultural Events in Paris
 url_sortir_a_paris = "https://opendata.paris.fr/api/records/1.0/search/?dataset=que-faire-a-paris-&q=&rows=200&facet=category&facet=tags&facet=address_name&facet=address_zipcode&facet=address_city&facet=pmr&facet=price_type&refine.tags=Enfants"
@@ -197,3 +202,47 @@ old_unused_scraping_code = [
 ]
 puts 'Offers Created!'
 
+########################
+########################
+
+
+########################
+# Meetups
+puts "Creating 300 Meetups and their Particpants"
+offers_sample = Offer.all.sample(300)
+
+offers_sample.each do |offer|
+
+  # Meetup Date
+  if offer.permanent == false
+    meetup_date = rand(offer.start_date..offer.end_date)
+  else
+    meetup_date = rand(Date.today..(Date.today + 1.month))
+  end
+
+  # Create Meetup
+  meetup = Meetup.find_or_create_by!(
+    user: User.all.sample,
+    offer: offer,
+    date: meetup_date,
+    description: Faker::Lorem.sentence
+  )
+
+  # Create Particpants to the Meetup
+  participants_number = rand(1..7)
+  users_sample = User.all.sample(participants_number)
+
+  users_sample.each do |user|
+    participant = Participant.find_or_create_by!(
+      user: user,
+      meetup: meetup
+    )
+  end
+end
+puts 'Meetups and Participants Created!'
+
+puts "
+########
+DB Seed Completed!
+
+"
