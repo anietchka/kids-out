@@ -4,64 +4,94 @@
   <title>The change you wanted was rejected (422)</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <style>
-  .rails-default-error-page {
-    background-color: #EFEFEF;
-    color: #2E2F30;
-    text-align: center;
-    font-family: arial, sans-serif;
-    margin: 0;
+    .rails-default-error-page {
+  background-color: #F2C94B;
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
   }
 
-  .rails-default-error-page div.dialog {
-    width: 95%;
-    max-width: 33em;
-    margin: 4em auto 0;
+  .center-422 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%)
+
   }
 
-  .rails-default-error-page div.dialog > div {
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #BBB;
-    border-top: #B00100 solid 4px;
-    border-top-left-radius: 9px;
-    border-top-right-radius: 9px;
-    background-color: white;
-    padding: 7px 12% 0;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
+  .circle-422 {
+  width: 20px;
+  height: 20px;
+  background-color: #FFF;
+  border-radius: 50%;
+  margin: 0 auto;
+  box-shadow: 0 0 1px rgba(0,0,0,.3)
   }
 
-  .rails-default-error-page h1 {
-    font-size: 100%;
-    color: #730E15;
-    line-height: 1.5em;
+  .line-422 {
+  content: '';
+  display: block;
+  height: 300px;
+  width: 2px;
+  background-color: #FFF;
+  margin: 0 auto;
+  transform-origin: center;
+  animation: animate 3s linear infinite;
   }
 
-  .rails-default-error-page div.dialog > p {
-    margin: 0 0 1em;
-    padding: 1em;
-    background-color: #F7F7F7;
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #999;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    border-top-color: #DADADA;
-    color: #666;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
+  .banner-422 {
+  width: 270px;
+  height: 90px;
+  background-color: #FFF;
+  /* taransform-origine: top; */
+  animation: animate 2.9s linear infinite;
+  }
+
+  .h1-422 {
+  text-align: center;
+  font-size: 3em;
+  margin: 0;
+  padding: 0;
+  line-height: 90px;
+  color: #D9A708;
+  }
+
+  .h2-422 {
+  color: #FFF;
+  text-align: center;
+  }
+
+  @keyframes animate {
+  0% {
+  transform: rotate(-2deg);
+  }
+
+  50% {
+  transform: rotate(2deg);
+  }
+
+  100% {
+  transform: rotate(-2deg);
+  }
   }
   </style>
-</head>
+  </head>
 
-<body class="rails-default-error-page">
-  <!-- This file lives in public/422.html -->
-  <div class="dialog">
-    <div>
-      <h1>The change you wanted was rejected.</h1>
-      <p>Maybe you tried to change something you didn't have access to.</p>
+  <body class="rails-default-error-page">
+    <div class="center-422">
+      <div class="circle-422">
+      </div>
+      <div class="line-422">
+      </div>
+      <div class="banner-422">
+        <h1 class="h1-422">
+          Oops!
+        </h1>
+      </div>
+      <h2 class="h2-422">
+        Erreur 422
+      </h2>
+
     </div>
-    <p>If you are the application owner check the logs for more information.</p>
-  </div>
-</body>
+    </body>
 </html>

@@ -14,7 +14,7 @@
 .form-label {
   h3 {
     font-size: 20px;
-    font-weight: normal;
+    font-weight: bold;
     margin: 0;
   }
   label {
@@ -27,12 +27,19 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-
+    width: 90%;
+    margin: 3vw 3vw 6vw;
   }
   a {
     font-size: 40px !important;
     margin-bottom: 6vw !important;
   }
+}
+
+.form-control {
+  border-radius: 20px;
+  width: 100%;
+  background-color: #d5d5d503;
 }
 
 .hidden{

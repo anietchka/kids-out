@@ -11,7 +11,7 @@ class MessagesController < ApplicationController
     #   redirect_to meetup_path(@meetup, anchor: "message-#{@message.id}")
       MeetupChannel.broadcast_to(
         @meetup,
-        render_to_string(partial: "message", locals: { message: @message })
+        { html: render_to_string(partial: "message", locals: { message: @message }), user_id: @message.user.id.to_s }
       )
     else
     #   render "meetups/chat"
