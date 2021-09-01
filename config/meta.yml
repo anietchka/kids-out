@@ -1,0 +1,5 @@
+meta_product_name: "Kid's Out"
+meta_title: "Kid's Out - Des activités à proximité pour vos enfants"
+meta_description: "Enfin un moyen rapide pour trouver toutes les activités adaptées à votre enfant !"
+meta_image: "app/assests/images/photofb.jpg" # should exist in `app/assets/images/`
+twitter_account: "@KidsOut4"   # required for Twitter Cards
