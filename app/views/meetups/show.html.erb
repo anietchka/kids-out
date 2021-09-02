@@ -8,6 +8,9 @@
     <p><strong><%= @meetup.offer.name %></strong></p>
     <div class="size-date-heure-description">
       <div class="time-meetup"><p>le <%= @meetup.date.strftime("%d.%m.%Y") %> à <%= @meetup.date.strftime("%Hh%M") %></p></div>
+      <div class="card-tags mb-3">
+        <span><%= @meetup.participants.count %> participant(s)</span>
+      </div>
       <p><%= @meetup.description %></p>
     </div>
   </div>
