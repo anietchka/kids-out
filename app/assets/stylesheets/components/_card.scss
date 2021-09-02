@@ -143,6 +143,8 @@
 }
 
 .link-info {
+  margin: 20px 0;
+  text-align: center;
   a {
     font-size: 16px;
     font-weight: bold;
@@ -355,7 +357,7 @@ div#messages {
   position: sticky;
   background-color: #F2F2F2;
   margin-top: 14px;
-  align-items: baseline;
+  align-items: center;
 }
 
 .submit-valid {
