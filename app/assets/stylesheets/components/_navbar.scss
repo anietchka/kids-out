@@ -1,18 +1,6 @@
-.navbar-lewagon {
-  justify-content: space-between;
-  background:#F2C94B;
-}
-
-.navbar-lewagon .navbar-collapse {
-  flex-grow: 0;
-}
-
-.navbar-lewagon .navbar-brand img {
-  width: 40px;
-}
-
 .nav-link {
   font-size: 12px;
+  padding: 0;
 }
 
 .margin-navbar{
@@ -23,8 +11,12 @@
 }
 
 .navbar {
-  height: 19vw !important;
-  padding: 5px !important;
+  height: 80px !important;
+  padding: 10px 0;
+  display: flex;
+  justify-content: space-evenly;
+  background:#F2C94B;
+  margin-top: 5px !important;
 }
 
 .navbar-nav {
@@ -43,6 +35,10 @@
 
 .navbar-icon{
   font-size: 16px;
+  color: rgb(128, 126, 126);
+  &.active{
+    color: rgb(0, 0, 0);
+  }
   .far{
     font-size: 24px;
   }
