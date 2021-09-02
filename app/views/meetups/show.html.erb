@@ -1,4 +1,9 @@
-<div class="container" style="margin-top: 54px;background-color: white">
+<div class="container position-relative" style="margin-top: 5vh ;background-color: white">
+  <div class ="black-cross-meetup">
+    <%= link_to offer_path(@meetup.offer.id, card_flipped: true) do%>
+      <i class="fas fa-times"></i>
+    <% end %>
+  </div>
   <div class="card-offer-meetup">
     <p><strong><%= @meetup.offer.name %></strong></p>
     <div class="size-date-heure-description"><p>le <%= @meetup.date.strftime("%d.%m.%Y") %> à <%= @meetup.date.strftime("%Hh%M") %></p>

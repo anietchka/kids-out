@@ -48,7 +48,7 @@
       font-weight: bold;
     }
   h3 {
-      font-size: 4vw;
+      font-size: 3vw;
       color: grey;
       i {
         color:#F2C94B;
@@ -173,6 +173,19 @@
   top: 15px;
   right: 25px;
   font-size: 35px;
+  }
+
+  // -- Return card show meetup --//
+
+.black-cross-meetup {
+  position: absolute;
+  top: -5vh;
+  right: 3vw;
+  font-size: 35px;
+  a {
+    color: black;
+    text-decoration: none;
+    }
   }
 // ================= INDEX MEETUPS =================== //
 
@@ -409,7 +422,7 @@ div#messages {
       color: #297F87;
     }
     h4{
-      font-size: 4vw;
+      font-size: 3vw;
       color: grey;
       i {
         color:#F2C94B;
