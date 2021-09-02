@@ -67,8 +67,8 @@
         <%# MORE INFORMATION URL %>
         <div class="link-info">
           <% if @offer.url %>
-            <%= link_to @offer.url, target: :_blank do %>
-            <i class="fas fa-sign-out-alt"><span> Voir le site officiel</span> </i>
+            <%= link_to @offer.url, target: :_blank, class: 'link-info' do %>
+            <i class="fas fa-sign-out-alt"><span> Voir le site officiel</span></i>
             <% end %>
           <% end %>
         </div>
