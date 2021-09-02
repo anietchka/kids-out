@@ -223,8 +223,16 @@
     text-decoration: none;
     }
   }
-// ================= INDEX MEETUPS =================== //
+  // ================= INDEX MEETUPS =================== //
 
+  .card-tags{
+    span{
+      background-color: #F4F9F9;
+      padding: 4px 8px;
+      border-radius: 12px;
+    }
+    font-size: 16px;
+  }
 .card-user-meetup{
   display: flex;
   justify-content: space-between;
@@ -249,14 +257,6 @@
     h4{
       font-size: 4vw;
       color: grey;
-    }
-    .card-tags{
-      span{
-        background-color: #F4F9F9;
-        padding: 4px 8px;
-        border-radius: 12px;
-      }
-      font-size: 16px;
     }
   }
   .card-meetup-right{
@@ -321,13 +321,14 @@
 .message-container {
   background-color: #C2C6CC;
   border-radius: 15px;
-  padding: 5px;
+  padding: 5px 15px;
   margin-bottom: 14px;
   max-width: 70%;
 
   p {
     word-break: break-all;
     padding: 2px;
+    margin-bottom: 0;
   }
 
   &.currentuser {
@@ -363,18 +364,34 @@ div#messages {
   position: sticky;
   background-color: #F2F2F2;
   margin-top: 14px;
-  align-items: center;
-}
-
-.submit-valid {
-  button {
-    border-radius: 50%;
-    color: white;
-    background-color: #F1C94B;
-    border: transparent;
-    box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.25);
+  align-items: stretch;
+  .form-group {
+    flex-grow: 1;
+    padding: 0 15px;
+  }
+  .form-control {
+    margin-top: 0;
+  }
+button {
+  border-radius: 20px;
+  color: white;
+  background-color: #F1C94B;
+  border: transparent;
+  box-shadow: none;
+  margin-bottom: 1rem;
+  margin-right: 15px;
+  width: 50px;
   }
 }
+
+button {
+  border-radius: 50%;
+  color: white;
+  background-color: #F1C94B;
+  border: transparent;
+  box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.25);
+}
+
 
 
 // ================= INDEX MEETUP-TRASH =================== //
