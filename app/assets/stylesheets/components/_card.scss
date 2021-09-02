@@ -237,6 +237,11 @@
   line-height: 19px;
 }
 
+.time-meetup p {
+  color: grey;
+  font-weight: bold;
+}
+
 .back {
   position: absolute;
   top: -34px;
@@ -273,6 +278,7 @@
 
   p {
     word-break: break-all;
+    padding: 2px;
   }
 
   &.currentuser {
