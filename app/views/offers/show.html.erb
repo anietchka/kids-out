@@ -56,7 +56,7 @@
             data-read-more-less-text-value="Lire moins"
             >
               <div class="read-more" data-read-more-target="content"><%= @offer.description.html_safe %></div>
-                <a data-action="read-more#toggle" href="#">
+                <a  id="link-lire" data-action="read-more#toggle" href="#">
                 Lire plus
 
                 </a>
@@ -67,8 +67,8 @@
         <%# MORE INFORMATION URL %>
         <div class="link-info">
           <% if @offer.url %>
-            <%= link_to @offer.url, target: :_blank do %>
-              <p>Plus d'informations</p>
+            <%= link_to @offer.url, target: :_blank, class: 'link-info' do %>
+            <i class="fas fa-sign-out-alt"><span> Voir le site officiel</span></i>
             <% end %>
           <% end %>
         </div>
