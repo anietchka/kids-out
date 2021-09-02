@@ -50,6 +50,21 @@ puts 'Users Created!'
 # Offers
 puts "
 Creating a lot of Offers"
+offer_demoday = Offer.new(name: "Changez de vie, vos enfants apprennent à coder", theme: "interieure", address: "16 villa Gaudelet, 75011 Paris", url:"https://www.lewagon.com", start_date:"2021-08-30", end_date: "2021-09-03", permanent: false, description: "Vous ne savez pas quoi faire de vos enfants avant la rentrée ? Notre super équipe composée de <strong>Thanh</strong>, <strong>Dimitri</strong>, <strong>Julien</strong> et <strong>Germain</strong> seront ravis de vous les garder pour leur apprendre à coder! Grâce à ces professeurs hors du communs, vos enfants seront incollable en HTML, CSS et seront capable de pirater votre ordinateur en quelques minutes.<br>
+Au programme :<br>
+<ul><li>dégustation quotidienne d'empanadas</li>
+<li>grand jeux de code and drink avec des bières sans alcool 500% bio fabriquée dans la cave du Wagon par <strong>Lamiaa</strong></li>
+<li>olympiades de corde a sauter au dessus d'un ravin (sécurité assurée par <strong>Jeremy</strong>)</li>
+</ul><br>
+Cet événement est entièrement accessible aux publics sourds et malentendants, grâce à la présence d’<strong>Édouard</strong>, interprète Langue des signes française / français ", min_age: 6, photo: "https://www.makeblock.com/wp-content/uploads/2019/05/Coding-for-kids-through-playing-300x200.jpg", user: User.all.sample)
+offer_demoday.save!
+category = Category.create(name: "Animations")
+OfferCategory.create(offer: offer_demoday, category: category)
+Review.create(offer: offer_demoday, user: User.all.sample, rating: 2, comment: "Activité sympatique pour mon fils malgré le fait que Thomas l'ai fait pleuré pour le choix de la couleur jaune")
+Review.create(offer: offer_demoday, user: User.all.sample, rating: 5, comment: "Depuis qu'elle a rencontré Romain, ma fille ne me parle plus que de Stimulus!")
+Review.create(offer: offer_demoday, user: User.all.sample, rating: 5, comment: "Mes enfants ont adoré les designs paillettes licornes de Diane")
+
+
 old_static_records = [
   # Offer.create!(name: "Expo Harry Potter - Retour à Poudlard", theme: "interieure", address: "Rue du 8 Mai 1945, 75010 Paris" ,url: "https://www.facebook.com/events/521401079177879/",start_date: "2021-08-07" ,end_date: "2021-08-30", permanent: false, description: "Tous les ans, le 1er septembre signifie 'fin des vacances' pour les enfants. Mais pour les fans d'Harry Potter, c'est surtout le rendez-vous incontournable de la saga : le \"Retour à Poudlard\" !
   # En préambule, une exposition est organisée tout l'été dans les gares. Du 7 juillet au 30 août, l'expo Harry Potter des illustrations signées Jim Kay est en effet accessibles à Paris Gare de Lyon, Nice, Bordeaux, Poitiers et Limoges. Petits et grands retrouvent les magnifiques dessins des trois premiers tomes de la saga.
