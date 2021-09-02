@@ -1,38 +1,33 @@
-<div class="container">
-  <div class="d-flex justify-content-around align-items-center">
+<div class="container button-bars-position">
+  <div class="expand-filters">
     <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-      Filtres
+      <i class="fas fa-bars"></i>
     </a>
-    <div class="collapse" id="collapseExample">
-      <div class="card card-body">
-        <div class="buttons">
-          <%= simple_form_for :search, url: offers_path, method: :get do |f| %>
-            <div class="bg-white">
-              <%= f.input :address %>
-              <%= f.input :min_age %>
-              <%= f.input :theme, as: :radio_buttons, collection: ["interieure", "exterieure"] %>
-              <%= f.input :meetup, as: :boolean %>
-              <%= f.input :categories, collection: Category.pluck(:name) %>
-              <%= f.input :date, as: :string, required: false, input_html: {class: "datepicker"} %>
-              <div class="question">
-                <input type="submit" name="commit" value="Où souhaitez-vous aller ?"
-                  style="border-radius: 5px; ">
-              </div>
+  </div>
+  <div class="collapse" id="collapseExample">
+    <div class="card card-body">
+      <div class="buttons">
+        <%= simple_form_for :search, url: offers_path, method: :get do |f| %>
+          <div class="bg-white">
+            <%= f.input :address %>
+            <%= f.input :min_age %>
+            <%= f.input :theme, as: :radio_buttons, collection: ["interieure", "exterieure"] %>
+            <%= f.input :meetup, as: :boolean %>
+            <%= f.input :categories, collection: Category.pluck(:name) %>
+            <%= f.input :date, as: :string, required: false, input_html: {class: "datepicker"} %>
+            <div class="question">
+              <input type="submit" name="commit" value="Où souhaitez-vous aller ?"
+                style="border-radius: 5px; ">
             </div>
-          <% end %>
-        </div>
+          </div>
+        <% end %>
       </div>
-
-    <div class="icon-position">
-      <%= link_to offers_path do %>
-        <i class="fas fa-map-marked-alt"></i>
-      <% end %>
     </div>
-
   </div>
 </div>
 
 <div
+  class="map-position"
   id="map" style="width: 100%; height: 670px;"
   data-markers="<%= @markers.to_json %>"
   data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>" >
