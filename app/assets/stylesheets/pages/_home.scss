@@ -94,13 +94,13 @@
   background-color: transparent;
   border: 2px solid white;
   border-radius: 8px;
-  text-align: center;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  padding: 40px 5%;
+  justify-content: center;
   font-size: 18;
   font-weight: bold;
+  width: 30vw;
+  height: 30vw;
   color: #297F87;
   &.active{
     border: 2px solid #297F87;
@@ -112,19 +112,6 @@
   font-size: 18;
   font-weight: bold;
   text-align: center;
-}
-
-.card-theme-location {
-    background-color: transparent;
-    border: 2px solid white;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18;
-    font-weight: bold;
-    width: 30vw;
-    height: 30vw;
 }
 
 .card-icon{
