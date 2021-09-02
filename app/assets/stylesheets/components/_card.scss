@@ -142,6 +142,32 @@
   font-weight: normal;
 }
 
+.link-info {
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #F4F9F9;
+  text-decoration: none;
+  padding: 4px 8px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.12);
+  padding: 1vh 2vw;
+  border-radius: 12px;
+  margin: 2vh 0vw 2vh 0vw;
+  text-align: center;
+  a {
+    text-decoration: none;
+    color: #297F87;
+    text-align: center;
+    font-family: "Work Sans" ;
+  }
+}
+
+ #link-lire {
+    text-decoration: none;
+    color: #297F87;
+    font-weight: bold;
+}
+
 // - Tag offer show -  //
 
 .tag-card-offer p {
