@@ -21,10 +21,29 @@
 
 // ===  Form show odder == //
 .form-label {
+  form {
+    display: flex;
+    flex-direction: column;
+  }
   h3 {
     font-size: 20px;
     font-weight: bold;
     margin: 0;
+  }
+  input {
+  font-size: 4vw;
+  font-weight: bold;
+  background-color: #297F87;
+  border: 1px solid #297F87;
+  color: white;
+  padding: 1vh 12vw;
+  border-radius: 30px;
+  display: block;
+  width: 53%;
+  margin: auto;
+  /* right: 0; */
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.12);
+  text-align: center;
   }
   label {
   display: none;
@@ -37,7 +56,7 @@
     justify-content: space-around;
     align-items: center;
     width: 90%;
-    margin: 3vw 3vw 6vw;
+    margin: 3vh 3vw 0vh;
   }
   a {
     font-size: 40px !important;
