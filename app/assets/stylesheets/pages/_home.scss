@@ -5,17 +5,18 @@
   background-color: #F1C94B;
   justify-content: center;
   font-size: 16px;
-  .card-title{
-    display: block;
-    margin: auto;
-    width: 90%;
-    margin-bottom: 20px;
-  }
   h1{
     font-weight: bold;
     font-size: 38px;
-
+    
   }
+}
+
+.card-title{
+  display: block;
+  margin: auto;
+  width: 90%;
+  margin-bottom: 20px;
 }
 
 .card-question-2{
@@ -33,6 +34,7 @@
     align-items: center;
     color: #297F87;
     padding: 0 10px;
+    margin-top: 10vh;
     .fas{
       font-size: 40px;
     }
@@ -67,18 +69,25 @@
 }
 
 .card-btn-next-back{
+  position: absolute;
+  bottom: 10vh;
+  right: 1vh;
+  width: 100%;
   display: flex;
   padding: 0 20px;
   margin-top: 20px;
 }
 
+.page-selector{
+  position: relative;
+}
 //============================= THEME CHOICE =============================//
 
 .theme-choice{
   display: flex;
   justify-content: space-between;
   padding: 0 30px;
-  margin-top: 20px;
+  margin-top: 10vh;
 }
 
 .card-theme{
@@ -96,4 +105,29 @@
   &.active{
     border: 2px solid #297F87;
   }
+}
+
+.card-theme-container {
+  color: #297F87;
+  font-size: 18;
+  font-weight: bold;
+  text-align: center;
+}
+
+.card-theme-location {
+    background-color: transparent;
+    border: 2px solid white;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18;
+    font-weight: bold;
+    width: 30vw;
+    height: 30vw;
+}
+
+.card-icon{
+  width: 80%;
+  height: 80%;
 }
