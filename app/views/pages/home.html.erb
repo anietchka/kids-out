@@ -55,14 +55,14 @@
         <h1>Souhaitez vous <div class="blue-text">une activité</div> </h1>
       </div>
       <div class="theme-choice" >
-        <div class="card-theme-container">
-          <div class="card-theme" data-action="click->theme-selector#change1" data-theme-selector-target = 'theme1'>
+        <div class="card-theme-container "data-theme-selector-target = 'text1'>
+          <div class="card-theme" data-action="click->theme-selector#change1" data-theme-selector-target = 'border1'>
             <%= image_tag "school.png", class: 'card-icon' %>
           </div>
           <span>Interieure</span>
         </div>
-        <div class="card-theme-container">
-          <div class="card-theme" data-action="click->theme-selector#change2" data-theme-selector-target = 'theme2'>
+        <div class="card-theme-container" data-theme-selector-target = 'text2'>
+          <div class="card-theme" data-action="click->theme-selector#change2" data-theme-selector-target = 'border2'>
             <%= image_tag "forest.png", class: 'card-icon' %>
           </div>
           <span>Exterieure</span>
