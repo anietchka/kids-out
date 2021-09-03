@@ -8,7 +8,7 @@
   h1{
     font-weight: bold;
     font-size: 38px;
-    
+
   }
 }
 
@@ -101,17 +101,21 @@
   font-weight: bold;
   width: 30vw;
   height: 30vw;
-  color: #297F87;
+
   &.active{
     border: 2px solid #297F87;
+
   }
 }
 
 .card-theme-container {
-  color: #297F87;
+  color: white;
   font-size: 18;
   font-weight: bold;
   text-align: center;
+  &.active{
+    color: #297F87;
+  }
 }
 
 .card-icon{
