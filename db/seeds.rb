@@ -257,9 +257,9 @@ Cet événement est entièrement accessible aux publics sourds et malentendants,
 offer_demoday.save!
 category = Category.find_by(name: "Animations")
 OfferCategory.create(offer: offer_demoday, category: category)
-Review.create(offer: offer_demoday, user: User.all.sample, rating: 2, comment: "Activité sympatique pour mon fils malgré le fait que Thomas l'ai fait pleuré pour le choix de la couleur jaune")
-Review.create(offer: offer_demoday, user: User.all.sample, rating: 5, comment: "Depuis qu'elle a rencontré Romain, ma fille ne me parle plus que de Stimulus!")
-Review.create(offer: offer_demoday, user: User.all.sample, rating: 5, comment: "Mes enfants ont adoré les designs paillettes licornes de Diane")
+Review.create(offer: offer_demoday, user: User.last(50).sample, rating: 2, comment: "Activité sympatique pour mon fils malgré le fait que Thomas l'ai fait pleuré pour le choix de la couleur jaune")
+Review.create(offer: offer_demoday, user: User.last(50).sample, rating: 5, comment: "Depuis qu'elle a rencontré Romain, ma fille ne me parle plus que de Stimulus!")
+Review.create(offer: offer_demoday, user: User.last(50).sample, rating: 5, comment: "Mes enfants ont adoré les designs paillettes licornes de Diane")
 
 
 puts "
