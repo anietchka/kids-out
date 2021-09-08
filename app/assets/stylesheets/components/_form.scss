@@ -102,6 +102,9 @@
 #new_user{
   margin-top: 100px;
   vertical-align: middle;
+  .form-control{
+    background-color: #f2c84b4d;
+  }
   .btn{
     width: 100%;
     margin-bottom: 20px;
@@ -113,7 +116,7 @@
   .form-inputs{
     margin-top: 10px;
   }
-  #user_email, #user_password{
+  #user_email, #user_password, #user_nickname, #user_password_confirmation{
     margin-top: 2px;
   }
 }
