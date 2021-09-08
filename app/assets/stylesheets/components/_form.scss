@@ -96,3 +96,33 @@
     border-radius: 30px;
   }
 }
+
+//==========  form new user ======= //
+
+#new_user{
+  margin-top: 100px;
+  vertical-align: middle;
+  .btn{
+    width: 100%;
+    margin-bottom: 20px;
+    font-weight: bold;
+    background-color: black;
+    color: white;
+    border-radius: 30px;
+  }
+  .form-inputs{
+    margin-top: 10px;
+  }
+  #user_email, #user_password{
+    margin-top: 2px;
+  }
+}
+
+.forgot-link{
+  margin-top: 10px;
+  text-align: center;
+  text-decoration: none;
+  a{
+    margin-bottom: 10px;
+  }
+}
