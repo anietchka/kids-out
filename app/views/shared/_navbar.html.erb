@@ -33,17 +33,29 @@
       <% end %>
     </div>
   <% else %>
-    <li class="nav-item d-flex flex-column align-items-center active ">
-        <i class="fas fa-search"></i>
-        <%= link_to "Explorer", "#", class: "nav-link" %>
-     </li>
-    <li class="nav-item d-flex flex-column align-items-center">
-      <i class="fas fa-user-plus"></i>
-      <%= link_to "Inscription",  new_user_registration_path, class: "nav-link" %>
-    </li>
-    <li class="nav-item d-flex flex-column align-items-center">
-      <i class="fas fa-sign-in-alt"></i>
-      <%= link_to "Connection", new_user_session_path, class: "nav-link" %>
-    </li>
+    <div class="nav-item d-flex flex-column align-items-center ">
+      <%= link_to root_path, class: "nav-link", data: {turbolinks: false} do%>
+        <div class="navbar-icon d-flex flex-column align-items-center <%= 'active' if current_page?(root_path) ||  current_page?(offers_path)%>">
+          <i class="fas fa-search pt-2"></i>
+          <p class="pt-2">Explorer</p>
+        </div>
+      <% end %>
+    </div>
+    <div class="nav-item d-flex flex-column align-items-center ">
+      <%= link_to new_user_registration_path, class: "nav-link" do%>
+          <div class="navbar-icon d-flex flex-column align-items-center <%= 'active' if current_page?(new_user_registration_path) %>">
+            <i class="fas fa-user-plus pt-2"></i>
+            <p class="pt-2">Inscription</p>
+          </div>
+      <% end %>
+    </div>
+    <div class="nav-item d-flex flex-column align-items-center ">
+      <%= link_to new_user_session_path, class: "nav-link" do%>
+          <div class="navbar-icon d-flex flex-column align-items-center <%= 'active' if current_page?(new_user_session_path) %>">
+            <i class="fas fa-sign-in-alt pt-2"></i>
+            <p class="pt-2">Connection</p>
+          </div>
+      <% end %>
+    </div>
   <% end %>
 </div>
