@@ -1,11 +1,15 @@
-<div style ="background-color: #F1C94B;color: #008989;" class="container">
-  <div class="d-flex username">
-    <h1> Bonjour <%= @user.nickname %> </h1>
+<div class="container p-3">
+  <div class="d-flex justify-content-space-between username">
+    <div class="title-meetups-bookmarks">
+      <h1 class="mb-3"><%= @user.nickname %></h1>
+    </div>
     <% if current_user.photo.attached? %>
-      <%= cl_image_tag @user.photo.key, width: 50, height: 50, style: 'border-radius: 50%;' %>
+      <%= cl_image_tag @user.photo.key, width: 60, height: 60, style: 'border-radius: 50%;' %>
     <% end %>
   </div>
-  <div> 
+  <div>
+    <%= link_to "Modifier les informations personnelles", edit_user_registration_path %>
+    <%= link_to "Modifier ma photo de profil", edit_user_registration_path %>
     <i class="fab fa-wpforms"></i>
     <div><h2>Informations personnelles</h2>
       <p>Prénom : <%= @user.first_name %></p>

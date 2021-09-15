@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   end
 
   resources :bookmarks, only: [:index]
-  resource :profile, only: [:show, :edit, :update]
+  resource :profile, only: [:show]
   resources :participants, only: [:destroy]
   resources :meetups, only: [:show, :destroy, :edit] do
     resources :messages, only: :create
