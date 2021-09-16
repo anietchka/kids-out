@@ -184,7 +184,7 @@ data['records'].each do |record|
 end
 ########################
 # API call to fetch records for Cultural Events in Paris
-url_sortir_a_paris = "https://opendata.paris.fr/api/records/1.0/search/?dataset=que-faire-a-paris-&q=&rows=600&facet=category&facet=tags&facet=address_name&facet=address_zipcode&facet=address_city&facet=pmr&facet=blind&facet=deaf&facet=access_type&facet=price_type&refine.tags=Enfants"
+url_sortir_a_paris = "https://opendata.paris.fr/api/records/1.0/search/?dataset=que-faire-a-paris-&q=&rows=650&facet=category&facet=tags&facet=address_name&facet=address_zipcode&facet=address_city&facet=pmr&facet=blind&facet=deaf&facet=access_type&facet=price_type&refine.tags=Enfants"
 data = JSON.parse(URI.open(url_sortir_a_paris).read)
 
 data['records'].each do |record|
