@@ -122,3 +122,19 @@
   width: 80%;
   height: 80%;
 }
+
+
+#content-desktop{
+  background-color: #F1C94B;
+  display: flex;
+  height: 100vh;
+}
+
+#content-mobile {display: none;}
+#content-navbar {display: none;}
+
+@media screen and (max-width: 768px) {
+  #content-desktop {display: none;}
+  #content-mobile {display: block;}
+  #content-navbar {display: block;}
+}

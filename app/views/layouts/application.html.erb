@@ -2,23 +2,23 @@
 <html>
   <head>
 
-    <title><%= meta_title %></title> 
-    <meta name="description" content="<%= meta_description %>"> 
+    <title><%= meta_title %></title>
+    <meta name="description" content="<%= meta_description %>">
 
-    <!-- Facebook Open Graph data --> 
-    <meta property="og:title " content="<%= meta_title %>" /> 
-    <meta property="og:type" content="website" /> 
-    <meta property="og:url" content="<%= request.original_url %>" /> 
-    <meta property="og:image" content="<%= meta_image %>" /> 
-    <meta property="og:description" content="<%= meta_description %>" /> 
-    <meta property="og :site_name" content="<%= meta_title %>" /> 
+    <!-- Facebook Open Graph data -->
+    <meta property="og:title " content="<%= meta_title %>" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="<%= request.original_url %>" />
+    <meta property="og:image" content="<%= meta_image %>" />
+    <meta property="og:description" content="<%= meta_description %>" />
+    <meta property="og :site_name" content="<%= meta_title %>" />
 
-    <!-- Données de la carte Twitter --> 
-    <meta name="twitter:card" content="summary_large_image"> 
+    <!-- Données de la carte Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="<%= DEFAULT_META["twitter_account"] %>">
-    <meta name="twitter:title" content="<%= meta_title %>"> 
-    <meta name="twitter:description" content="<%= meta_description %>"> 
-    <meta name="twitter:creator" contenu ="<%= DEFAULT_META["twitter_account"] %>"> 
+    <meta name="twitter:title" content="<%= meta_title %>">
+    <meta name="twitter:description" content="<%= meta_description %>">
+    <meta name="twitter:creator" contenu ="<%= DEFAULT_META["twitter_account"] %>">
     <meta name="twitter:image:src" content="<%= meta_image %>">
 
     <title>KidsOut</title>
@@ -29,7 +29,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
-    
+
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 
     <%= stylesheet_pack_tag 'application' %>
@@ -40,19 +40,33 @@
   </head>
 
   <body>
-
-    <%#= render 'shared/flashes' %>
-    <div class="margin-navbar">
-      <% unless request.url == "#{request.base_url}/" %>
-        <div class="back">
-          <%= link_to :back do %>
-            <i class="fas fa-arrow-left"></i>
-          <% end %>
+    <div id="content-desktop">
+      <div class="container mt-5">
+        <div class="row justify-content-center">
+          <div class="col-12 col-lg-6 row justify-content-center">
+            <p>
+              Bonjour!
+              <br>
+              <br>
+              Le site <strong>Kid's out</strong>  est accessible uniquement sur mobile pour le moment.
+              <br>
+              <br>
+              Nous vous invitons à utiliser votre téléphone (ou l'inspecteur de votre navigateur) pour trouver l'activité parfaite pour votre enfant!
+              <br>
+              <br>
+            </p>
+            <%= image_tag "pngfind.com-telephone-png-1203297.png", size: "160x160" %>
+          </div>
         </div>
-      <% end %>
-      <%= yield %>
+      </div>
     </div>
-    <%= render 'shared/navbar' %>
+    <%#= render 'shared/flashes' %>
+    <div id="content-mobile">
+      <div class="margin-navbar">
+        <%= yield %>
+      </div>
+      <%= render 'shared/navbar' %>
+    </div>
 
   </body>
 </html>
