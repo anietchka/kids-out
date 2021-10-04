@@ -9,9 +9,9 @@ class Offer < ApplicationRecord
   validates :theme, inclusion: { in: THEME }
   has_many :offer_categories
   has_many :categories, through: :offer_categories
-  has_many :reviews
-  has_many :meetups
-  has_many :bookmarks
+  has_many :reviews, dependent: :destroy
+  has_many :meetups, dependent: :destroy
+  has_many :bookmarks, dependent: :destroy
 
   private
 

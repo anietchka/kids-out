@@ -4,7 +4,6 @@ class BookmarksController < ApplicationController
     @bookmarks = policy_scope(Bookmark)
   end
 
-
   def create
     @offer = Offer.find(params[:offer_id])
     @bookmark = Bookmark.new
@@ -13,7 +12,6 @@ class BookmarksController < ApplicationController
     authorize @bookmark
     @bookmark.save
     redirect_to  offer_path(@offer)
-
   end
 
   def destroy
