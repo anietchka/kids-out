@@ -9,7 +9,6 @@ class MeetupsController < ApplicationController
   def index
     @meetups = policy_scope(Meetup)
     @offer = Offer.find(params[:offer_id])
-
   end
 
   def create

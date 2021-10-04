@@ -9,8 +9,8 @@ class User < ApplicationRecord
   validates :nickname, presence: true, uniqueness: true
   has_many :bookmarks, dependent: :destroy
   has_many :offers
-  has_many :reviews, dependent: :destroy
-  has_many :participants
+  has_many :reviews
+  has_many :participants, dependent: :destroy
   has_many :meetups, through: :participants
   has_many :owned_meetups, class_name: 'Meetup'
   has_many :messages
