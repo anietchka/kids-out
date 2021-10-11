@@ -5,13 +5,12 @@ class OffersController < ApplicationController
 
   # GET /offers
   def index
-    @offers = policy_scope(Offer)
     unless mandatory_fields_present?(search_params)
       flash[:alert] = "Merci de remplir tous les champs"
-      render 'pages/home'
+      render 'pages/home' and return
     end
 
-    @offers = Offer.search(search_params[:search])
+    @offers = policy_scope(Offer.search(search_params))
     # @markers = @offers.as_markers
     # @markers = @offers.map { |offer| MarkerPresenter.new(offer) }
 
@@ -102,10 +101,9 @@ class OffersController < ApplicationController
   end
 
   def mandatory_fields_present?(search_params)
-    return false unless search_params[:search].present?
-    return false unless %i(min_age theme).all? { |param| search_params[:search][param].present? }
+    return false unless %i(min_age theme).all? { |param| search_params[param].present? }
 
-    (search_params[:search][:latitude].present? && search_params[:search][:longitude].present?) ||
-      search_params[:search][:address].present?
+    (search_params[:latitude].present? && search_params[:longitude].present?) ||
+      search_params[:address].present?
   end
 end

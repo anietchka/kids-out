@@ -25,7 +25,7 @@ class Offer < ApplicationRecord
     return Offer.all if filters.nil?
 
     # Start by fetching all records and filter out records
-    query = Offer.joins(:categories)
+    query = Offer.joins(:categories).includes(:categories)
 
     # Filter to results near given coordinates
     # Geocordinates from text
