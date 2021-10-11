@@ -5,44 +5,15 @@ class OffersController < ApplicationController
 
   # GET /offers
   def index
-    @offers = policy_scope(Offer)
-
-    # Start by fetching all records and filter out records
-    @offers = Offer.joins(:categories).all
-
-    # Filter to results near given coordinates
-    # Geocordinates from text
-    if params[:search] && params[:search][:latitude].present?
-      @offers = @offers.near([params[:search][:latitude], params[:search][:longitude]], 5)
-    # Geocordinates from button
-    elsif params[:search] && params[:search][:address].present?
-      @offers = @offers.near(params[:search][:address], 5)
+    unless mandatory_fields_present?(search_params)
+      flash[:alert] = "Merci de remplir tous les champs"
+      render 'pages/home' and return
     end
 
-    # Filter to results equal to user input on fields
-    # Minimum Age
-    if params[:search] && params[:search][:min_age].present?
-      @offers = @offers.where('min_age <= ?', params[:search][:min_age])
-    end
-    # Indoor / Outdoor
-    if params[:search] && params[:search][:theme].present?
-      @offers = @offers.where('theme = ?', params[:search][:theme])
-    end
-    # with Meetup
-    if params[:search] && (params[:search][:meetup] == "1")
-      @offers = @offers.joins(:meetups)
-    end
-    # Categories
-    if params[:search] && params[:search][:categories].present?
-      @offers = @offers.where('categories.name = ?', params[:search][:categories])
-    end
+    @offers = policy_scope(Offer.search(search_params))
+    # @markers = @offers.as_markers
+    # @markers = @offers.map { |offer| MarkerPresenter.new(offer) }
 
-    # Date
-    # FIXME: this query remove every permanent offers, and it shouldn't...
-    if params[:search] && params[:search][:date].present?
-      @offers = @offers.where('start_date <= ?', params[:search][:date])
-      @offers = @offers.where('end_date <= ?', params[:search][:date])
-    end
 
     # Create markers out of resulting offers from query
     # the `geocoded` method filters out offers that can't be geocoded
@@ -78,12 +49,20 @@ class OffersController < ApplicationController
 
   # POST /offers
   def create
-    @offer = Offer.new(offers_params)
-    @offer.user = current_user
-    authorize @offer
+    # @offer = Offer.new(offers_params)
+    # @offer.user = current_user
+    # authorize @offer
 
-    @offer.save
-    redirect_to offer_path(@offer)
+    # @offer.save
+
+    @offer = Offer.new(offers_params.to_h.merge({ user: current_user }))
+
+    if @offer.save!
+      # redirect_to offer_path(@offer)
+      render json: @offer.as_json
+    else
+      render :new
+    end
   end
 
   private
@@ -106,5 +85,25 @@ class OffersController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def offers_params
     params.require(:offer).permit(:name, :theme, :address, :start_date, :end_date, :url, :permanent, :description, :min_age, :max_age, :schedule, :longitude, :latitude, :user_id)
+  end
+
+  def search_params
+    params.require(:search).permit(
+      :latitude,
+      :longitude,
+      :address,
+      :min_age,
+      :theme,
+      :meetups,
+      :categories,
+      :date
+    )
+  end
+
+  def mandatory_fields_present?(search_params)
+    return false unless %i(min_age theme).all? { |param| search_params[param].present? }
+
+    (search_params[:latitude].present? && search_params[:longitude].present?) ||
+      search_params[:address].present?
   end
 end
